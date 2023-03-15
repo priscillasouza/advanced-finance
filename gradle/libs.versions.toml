@@ -1,0 +1,59 @@
+[versions]
+application = "7.2.2"
+kotlin = "1.7.10"
+corektx = "1.7.0"
+appcompat = "1.6.1"
+material = "1.8.0"
+constraintlayout = "2.1.4"
+junit = "4.13.2"
+android-junit = "1.1.5"
+expresso = "3.5.1"
+navigation = "2.4.2"
+coroutines = "1.6.4"
+lifecycle = "2.5.1"
+koin = "3.3.0"
+okhttp = "4.9.3"
+retrofit = "2.9.0"
+gson = "2.9.0"
+room = "2.4.3"
+
+[libraries]
+androidx-corektx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"}
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout"}
+android-material = { module = "com.google.android.material:material", version.ref = "material"}
+android-test-expresso = { module = "androidx.test.espresso:espresso-core", version.ref = "expresso"}
+android-test-junit = { module = "androidx.test.ext:junit", version.ref = "android-junit"}
+test-junit = { module = "junit:junit", version.ref = "junit"}
+androidx-navigation-fragmentktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-fragmentuiktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+androidx-navigation-fragmentruntimektx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigation" }
+androidx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+
+[bundles]
+navigation = ["androidx-navigation-fragmentktx", "androidx-navigation-fragmentuiktx", "androidx-navigation-fragmentruntimektx"]
+android-test = ["android-test-expresso", "android-test-junit"]
+coroutines = ["androidx-coroutines-android", "androidx-coroutines-core"]
+lifecycle = ["androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-common-java8", "androidx-lifecycle-runtime-ktx"]
+networking = ["retrofit-converter-gson", "retrofit", "okhttp-logging-interceptor", "okhttp", "gson" ]
+room = ["androidx-room-runtime", "androidx-room-compiler", "androidx-room-ktx"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "application" }
+android-library = { id = "com.android.library", version.ref = "application" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
