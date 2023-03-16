@@ -7,13 +7,11 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.advancedfinance"
         minSdk 23
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -45,4 +43,9 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.android.material
     implementation libs.androidx.constraintlayout
+    implementation libs.bundles.coroutines
+    implementation libs.bundles.lifecycle
+    implementation libs.koin.android
+    implementation libs.bundles.networking
+    implementation libs.bundles.room
 }
