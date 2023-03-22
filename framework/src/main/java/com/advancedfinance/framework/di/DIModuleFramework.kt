@@ -1,4 +1,7 @@
 package com.advancedfinance.framework.di
 
-class DIModuleFramework {
+import org.koin.dsl.module
+
+val frameworkModule = module {
+
 }

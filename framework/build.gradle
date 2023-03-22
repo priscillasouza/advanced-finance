@@ -4,7 +4,6 @@ plugins {
 }
 
 android {
-    namespace 'com.advancedfinance.framework'
     compileSdk 33
 
     defaultConfig {
@@ -39,4 +38,8 @@ dependencies {
     implementation libs.koin.android
     implementation libs.bundles.networking
     implementation libs.bundles.room
+}
+
+configurations.implementation {
+    exclude group: 'com.intellij', module: 'annotations'
 }

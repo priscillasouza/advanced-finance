@@ -49,3 +49,7 @@ dependencies {
     implementation libs.bundles.networking
     implementation libs.bundles.room
 }
+
+configurations.implementation {
+    exclude group: 'com.intellij', module: 'annotations'
+}

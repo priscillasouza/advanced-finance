@@ -32,9 +32,13 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 
 dependencies {
+
+    implementation(project(path: ':entrance'))
+    implementation(project(path: ':framework'))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test
@@ -45,4 +49,11 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.android.material
     implementation libs.androidx.constraintlayout
+
+    implementation libs.koin.android
+}
+
+
+configurations.implementation {
+    exclude group: 'com.intellij', module: 'annotations'
 }
