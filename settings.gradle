@@ -11,11 +11,14 @@ enableFeaturePreview("VERSION_CATALOGS")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
     }
 }
+
 rootProject.name = "Advanced Finance"
 include ':app'
 include ':entrance'
 include ':framework'
+include ':core'

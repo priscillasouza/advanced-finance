@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'com.advancedfinance.core'
     compileSdk 33
 
     defaultConfig {
@@ -28,7 +29,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-
     lint {
         quiet false
         abortOnError true
@@ -39,10 +39,7 @@ android {
 
 dependencies {
 
-    implementation(project(path: ':core'))
-
     testImplementation libs.test.junit
-    androidTestImplementation libs.bundles.android.test
     androidTestImplementation libs.androidx.room.testing
 
     implementation libs.androidx.corektx
@@ -54,6 +51,7 @@ dependencies {
     implementation libs.bundles.lifecycle
     implementation libs.koin.android
     implementation libs.bundles.networking
+    implementation libs.bundles.room
     implementation libs.bundles.room
 }
 
