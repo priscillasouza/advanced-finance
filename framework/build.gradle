@@ -25,10 +25,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11
     }
-    buildFeatures {
-        viewBinding true
-    }
-
     lint {
         quiet false
         abortOnError true
@@ -39,19 +35,10 @@ android {
 
 dependencies {
 
-    implementation(project(path: ':core'))
-
     testImplementation libs.test.junit
-    androidTestImplementation libs.bundles.android.test
     androidTestImplementation libs.androidx.room.testing
 
-    implementation libs.androidx.corektx
-    implementation libs.bundles.navigation
-    implementation libs.androidx.appcompat
-    implementation libs.android.material
-    implementation libs.androidx.constraintlayout
     implementation libs.bundles.coroutines
-    implementation libs.bundles.lifecycle
     implementation libs.koin.android
     implementation libs.bundles.networking
     implementation libs.bundles.room

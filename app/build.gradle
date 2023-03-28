@@ -2,7 +2,6 @@ plugins {
     alias libs.plugins.android.application
     alias libs.plugins.kotlin.android
 }
-
 android {
     compileSdk 33
 
@@ -18,23 +17,44 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            versionNameSuffix '-Dev'
+            applicationIdSuffix '.dev'
+
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17
+        jvmTarget = JavaVersion.VERSION_11
     }
     buildFeatures {
         viewBinding true
     }
+
+    lint {
+        quiet false
+        abortOnError true
+        checkDependencies true
+    }
+    resourcePrefix "${project.name.replace("-", "_")}_"
 }
 
 dependencies {
+
+    implementation(project(path: ':entrance'))
+    implementation(project(path: ':framework'))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test
@@ -45,4 +65,11 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.android.material
     implementation libs.androidx.constraintlayout
+
+    implementation libs.koin.android
+
+}
+
+configurations.implementation {
+    exclude group: 'com.intellij', module: 'annotations'
 }
