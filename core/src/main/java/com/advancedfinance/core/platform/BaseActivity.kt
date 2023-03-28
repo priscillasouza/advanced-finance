@@ -33,7 +33,6 @@ abstract class BaseActivity : AppCompatActivity() {
             Snackbar.LENGTH_INDEFINITE
         )
     }
-    //private var dialogFragmen: DialogFragmentBox? = null
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -52,47 +51,6 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (enableBackButton) super.onBackPressed()
     }
-
-   /* fun showAlert(
-        title: String,
-        message: String,
-        isCancelable: Boolean,
-        positiveButton: DialogFragmentBox.OnClickListener? = null,
-        negativeButton: DialogFragmentBox.OnClickListener? = null
-    ) {
-        instanceDialog(
-            title,
-            message,
-            isCancelable,
-            positiveButton,
-            negativeButton
-        )
-    }
-
-    fun hideAlert() {
-        dialogFragmen?.run {
-            dismiss()
-
-        }
-    }
-
-    private fun instanceDialog(
-        title: String,
-        message: String,
-        isCancelable: Boolean,
-        positiveButton: DialogFragmentBox.OnClickListener? = null,
-        negativeButton: DialogFragmentBox.OnClickListener? = null
-    ) {
-        dialogFragmen = DialogFragmentBox.newInstance(
-            title,
-            message,
-            isCancelable,
-            positiveButton = positiveButton,
-            negativeButton = negativeButton
-        )
-
-        dialogFragmen?.show(supportFragmentManager, "Teste")
-    }*/
 
     private val navControler: NavController by lazy {
         findNavController(getNavHostFragmentRes())
