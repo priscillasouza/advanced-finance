@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.advancedfinance">
 
-
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
     <application
         android:name=".AdvancedFianceApplication"
         android:allowBackup="true"

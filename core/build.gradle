@@ -3,6 +3,10 @@ plugins {
     alias libs.plugins.kotlin.android
 }
 
+def apiKeyPropertiesFile = rootProject.file("apikey.properties")
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+
 android {
     namespace 'com.advancedfinance.core'
     compileSdk 33
@@ -16,8 +20,13 @@ android {
     }
 
     buildTypes {
-        release
-        debug
+        release {
+            buildConfigField("String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH"])
+        }
+
+        debug {
+            buildConfigField("String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH_DEBUG"])
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11

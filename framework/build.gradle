@@ -3,7 +3,12 @@ plugins {
     alias libs.plugins.kotlin.android
 }
 
+def remotePropertiesFile = rootProject.file("remote.properties")
+def remoteProperties = new Properties()
+remoteProperties.load(new FileInputStream(remotePropertiesFile))
+
 android {
+    namespace 'com.advancedfinance.framework'
     compileSdk 33
 
     defaultConfig {
@@ -15,8 +20,15 @@ android {
     }
 
     buildTypes {
-        release
-        debug
+        release {
+            //buildConfigField("String", "BASE_API_URL", remotePropertiesFile["BASE_API_FINANCE"])
+            buildConfigField("String", "BASE_API_URL", "https://6425d6dd556bad2a5b44501f.mockapi.io/api/v1/")
+        }
+
+        debug {
+            //buildConfigField("String", "BASE_API_URL", remotePropertiesFile["BASE_API_FINANCE_DEBUG"])
+            buildConfigField("String", "BASE_API_URL", "https://6425d6dd556bad2a5b44501f.mockapi.io/api/v1/")
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
