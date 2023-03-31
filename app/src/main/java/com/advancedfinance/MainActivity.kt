@@ -1,20 +1,25 @@
 package com.advancedfinance
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import com.advancedfinance.databinding.AppActivityMainBinding
 import com.advancedfinance.entrance.presentation.screen.login.LoginFragment
 
+private const val REQ_ONE_TAP = 2
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: AppActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.app_activity_main)
+        binding = AppActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val container = findViewById<FrameLayout>(R.id.container_fragment)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val fragment = LoginFragment()
 
-        fragmentTransaction.add(R.id.container_fragment, fragment)
+        fragmentTransaction.add(binding.appContainerFragment.id, fragment)
         fragmentTransaction.commit()
     }
 }

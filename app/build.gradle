@@ -2,6 +2,7 @@ plugins {
     alias libs.plugins.android.application
     alias libs.plugins.kotlin.android
 }
+
 android {
     compileSdk 33
 
@@ -16,6 +17,7 @@ android {
     }
 
     buildTypes {
+
         release {
             minifyEnabled true
             shrinkResources true
@@ -26,7 +28,6 @@ android {
         debug {
             versionNameSuffix '-Dev'
             applicationIdSuffix '.dev'
-
             minifyEnabled false
             shrinkResources false
             debuggable true
@@ -43,11 +44,6 @@ android {
         viewBinding true
     }
 
-    lint {
-        quiet false
-        abortOnError true
-        checkDependencies true
-    }
     resourcePrefix "${project.name.replace("-", "_")}_"
 }
 

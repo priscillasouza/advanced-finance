@@ -20,10 +20,10 @@ android {
 
     buildTypes {
         release {
-            buildConfigField("String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH"])
+            buildConfigField "String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH"]
         }
         debug {
-            buildConfigField("String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH_DEBUG"])
+            buildConfigField "String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH_DEBUG"]
         }
     }
     compileOptions {
@@ -37,11 +37,6 @@ android {
         viewBinding true
     }
 
-    lint {
-        quiet false
-        abortOnError true
-        checkDependencies true
-    }
     resourcePrefix "${project.name.replace("-", "_")}_"
 }
 

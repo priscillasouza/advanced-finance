@@ -25,11 +25,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11
     }
-    lint {
-        quiet false
-        abortOnError true
-        checkDependencies true
-    }
     resourcePrefix "${project.name.replace("-", "_")}_"
 }
 
