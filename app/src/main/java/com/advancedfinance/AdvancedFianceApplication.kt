@@ -1,6 +1,7 @@
 package com.advancedfinance
 
 import android.app.Application
+import com.advancedfinance.entrance.di.entranceModule
 import com.advancedfinance.framework.di.apiModule
 import com.advancedfinance.framework.di.daoModule
 import com.advancedfinance.framework.di.frameworkModule
@@ -20,7 +21,8 @@ class AdvancedFianceApplication: Application() {
             modules(
                 daoModule,
                 apiModule,
-                frameworkModule
+                frameworkModule,
+                entranceModule
             )
         }
     }

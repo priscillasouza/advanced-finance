@@ -1,18 +1,17 @@
 package com.advancedfinance.entrance.presentation.screen.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.advancedfinance.entrance.R
+import com.advancedfinance.core.platform.BaseFragment
+import com.advancedfinance.entrance.databinding.EntranceFragmentLoginBinding
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>(
+    EntranceFragmentLoginBinding::inflate,
+    LoginViewModel::class
+) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.entrance_fragment_login, container, false)
+
+
+    override fun prepareView(savedInstanceState: Bundle?) {
+        
     }
 }

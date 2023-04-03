@@ -1,11 +1,11 @@
 package com.advancedfinance.framework.di
 
+import com.advancedfinance.framework.BuildConfig
 import com.advancedfinance.framework.infrastruture.cloud.api.AdvancedFinanceAPI
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,17 +13,16 @@ import java.util.concurrent.TimeUnit
 
 val apiModule = module {
 
+    single { providerServiceAdvancedFinanceApi(get()) }
 
     single { provideGson() }
 
     single { provideOkHttpCliente() }
 
-    single { provideConverterFactory(get<Gson>()) }
+    single { provideConverterFactory(get()) }
 
-    single() { provideRetrofit(BuildConfig.BASE_UR, get<OkHttpClient>(), get<GsonConverterFactory>(), get<RxJava2CallAdapterFactory>()) }
-
+    single { provideRetrofit(BuildConfig.BASE_API_URL, get(), get()) }
 }
-
 
 private fun provideGson(): Gson {
     return GsonBuilder()
@@ -60,6 +59,6 @@ private fun provideRetrofit(url : String,
 }
 
 
-private fun providerServiceGEOApi(retrofit: Retrofit): AdvancedFinanceAPI {
+private fun providerServiceAdvancedFinanceApi(retrofit: Retrofit): AdvancedFinanceAPI {
     return retrofit.create(AdvancedFinanceAPI::class.java)
 }
