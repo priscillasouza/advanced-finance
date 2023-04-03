@@ -16,6 +16,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+apikey.properties
+remote.properties
 # Built application files
 *.apk
 *.ap_

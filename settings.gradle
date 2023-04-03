@@ -18,6 +18,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Advanced Finance"
 include ':app'
-include ':entrance'
-include ':framework'
 include ':core'
+include ':framework'
+include ':entrance'
