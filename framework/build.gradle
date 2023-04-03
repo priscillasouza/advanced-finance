@@ -18,16 +18,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
-
     buildTypes {
         release {
-            //buildConfigField("String", "BASE_API_URL", remotePropertiesFile["BASE_API_FINANCE"])
-            buildConfigField("String", "BASE_API_URL", "https://6425d6dd556bad2a5b44501f.mockapi.io/api/v1/")
+            buildConfigField "String", "BASE_API_URL", remoteProperties['BASE_API_FINANCE']
         }
 
         debug {
-            //buildConfigField("String", "BASE_API_URL", remotePropertiesFile["BASE_API_FINANCE_DEBUG"])
-            buildConfigField("String", "BASE_API_URL", "https://6425d6dd556bad2a5b44501f.mockapi.io/api/v1/")
+            buildConfigField "String", "BASE_API_URL", remoteProperties["BASE_API_FINANCE_DEBUG"]
         }
     }
     compileOptions {
@@ -50,10 +47,21 @@ dependencies {
     testImplementation libs.test.junit
     androidTestImplementation libs.androidx.room.testing
 
+    implementation libs.androidx.corektx
+    implementation libs.bundles.navigation
+    implementation libs.androidx.appcompat
+    implementation libs.android.material
+    implementation libs.androidx.constraintlayout
     implementation libs.bundles.coroutines
+    implementation libs.bundles.lifecycle
     implementation libs.koin.android
     implementation libs.bundles.networking
     implementation libs.bundles.room
+
+    implementation libs.androidx.paging
+    implementation libs.androidx.recycler.selection
+    implementation libs.bundles.coroutines
+    implementation libs.bundles.lifecycle
 }
 
 configurations.implementation {

@@ -1,4 +1,7 @@
 package com.advancedfinance.entrance.presentation.screen.login
 
-class LoginViewModel {
+import com.advancedfinance.core.platform.BaseViewModel
+
+class LoginViewModel: BaseViewModel() {
+
 }

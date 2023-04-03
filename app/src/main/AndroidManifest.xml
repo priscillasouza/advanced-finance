@@ -8,13 +8,13 @@
     <application
         android:name=".AdvancedFianceApplication"
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:dataExtractionRules="@xml/app_data_extraction_rules"
+        android:fullBackupContent="@xml/app_backup_rules"
+        android:icon="@mipmap/app_ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AdvancedFinance">
+        android:theme="@style/app_Theme.AdvancedFinance">
         <activity
             android:name=".MainActivity"
             android:exported="true">
