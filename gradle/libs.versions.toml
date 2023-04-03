@@ -16,17 +16,18 @@ okhttp = "4.9.3"
 retrofit = "2.9.0"
 gson = "2.9.0"
 room = "2.4.3"
+google = "20.4.1"
 recycler-paging = "3.1.1"
 recycler-selection = "1.1.0"
 
 [libraries]
 androidx-corektx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"}
-androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout"}
-android-material = { module = "com.google.android.material:material", version.ref = "material"}
-android-test-expresso = { module = "androidx.test.espresso:espresso-core", version.ref = "expresso"}
-android-test-junit = { module = "androidx.test.ext:junit", version.ref = "android-junit"}
-test-junit = { module = "junit:junit", version.ref = "junit"}
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+android-material = { module = "com.google.android.material:material", version.ref = "material" }
+android-test-expresso = { module = "androidx.test.espresso:espresso-core", version.ref = "expresso" }
+android-test-junit = { module = "androidx.test.ext:junit", version.ref = "android-junit" }
+test-junit = { module = "junit:junit", version.ref = "junit" }
 androidx-navigation-fragmentktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-fragmentuiktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 androidx-navigation-fragmentruntimektx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigation" }
@@ -45,6 +46,7 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+google-play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google" }
 androidx-paging = { module = "androidx.paging:paging-runtime", version.ref = "recycler-paging" }
 androidx-paging-testing = { module = "androidx.paging:paging-common", version.ref = "recycler-paging" }
 androidx-recycler-selection = { module = "androidx.recyclerview:recyclerview-selection", version.ref = "recycler-selection" }
@@ -54,7 +56,7 @@ navigation = ["androidx-navigation-fragmentktx", "androidx-navigation-fragmentui
 android-test = ["android-test-expresso", "android-test-junit"]
 coroutines = ["androidx-coroutines-android", "androidx-coroutines-core"]
 lifecycle = ["androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-common-java8", "androidx-lifecycle-runtime-ktx"]
-networking = ["retrofit-converter-gson", "retrofit", "okhttp-logging-interceptor", "okhttp", "gson" ]
+networking = ["retrofit-converter-gson", "retrofit", "okhttp-logging-interceptor", "okhttp", "gson"]
 room = ["androidx-room-runtime", "androidx-room-compiler", "androidx-room-ktx"]
 
 [plugins]

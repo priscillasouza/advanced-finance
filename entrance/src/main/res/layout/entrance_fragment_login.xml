@@ -6,16 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".presentation.screen.login.LoginFragment">
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/entrance_image_view_login"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/image_app" />
 
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/tv_name"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/entrance_text_view_login"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/entrance_hello_blank_fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/entrance_text_view_login"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/entrance_image_view_login" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
+        android:hint="@string/entrance_text_hint_email_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/entrance_text_view_login">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_edit_text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/entrance_text_input_layout_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/entrance_text_hint_password_login"
+        app:layout_constraintEnd_toEndOf="@id/text_input_layout_email"
+        app:layout_constraintStart_toStartOf="@id/text_input_layout_email"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/entrance_text_input_edit_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/entrance_text_view_reset_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/entrance_text_view_reset_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/entrance_text_input_layout_password" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/entrance_button_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/entrance_text_view_button_enter_login"
+        app:cornerRadius="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/entrance_text_view_reset_password" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/entrance_button_login_google"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/entrance_text_view_button_enter_login_google"
+        app:cornerRadius="40dp"
+        app:icon="@drawable/ic_google"
+        app:iconPadding="8dp"
+        app:layout_constraintEnd_toEndOf="@id/entrance_button_login"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/entrance_button_login"
+        app:layout_constraintTop_toBottomOf="@id/entrance_button_login" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entrance_button_login_google">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entrance_text_view_not_a_user" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/entrance_text_view_register_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entrance_text_view_register_user"
+            android:textColor="@color/core_md_theme_light_surfaceTint"
+            android:textStyle="bold"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

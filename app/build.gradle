@@ -26,7 +26,6 @@ android {
         debug {
             versionNameSuffix '-Dev'
             applicationIdSuffix '.dev'
-
             minifyEnabled false
             shrinkResources false
             debuggable true
@@ -53,8 +52,9 @@ android {
 
 dependencies {
 
-    implementation(project(":entrance"))
-    implementation(project(":framework"))
+    implementation(project(path: ':core'))
+    implementation(project(path: ':entrance'))
+    implementation(project(path: ':framework'))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test
@@ -67,18 +67,6 @@ dependencies {
     implementation libs.androidx.constraintlayout
 
     implementation libs.koin.android
-
-    implementation libs.bundles.coroutines
-    implementation libs.bundles.lifecycle
-    implementation libs.koin.android
-    implementation libs.bundles.networking
-    implementation libs.bundles.room
-
-    implementation libs.androidx.paging
-    implementation libs.androidx.recycler.selection
-    implementation libs.bundles.coroutines
-    implementation libs.bundles.lifecycle
-
 }
 
 configurations.implementation {

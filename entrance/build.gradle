@@ -3,6 +3,10 @@ plugins {
     alias libs.plugins.kotlin.android
 }
 
+def apiKeyPropertiesFile = rootProject.file("apikey.properties")
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+
 android {
     namespace 'com.advancedfinance.entrance'
     compileSdk 33
@@ -16,8 +20,12 @@ android {
     }
 
     buildTypes {
-        release
-        debug
+        release {
+            buildConfigField "String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH"]
+        }
+        debug {
+            buildConfigField "String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH_DEBUG"]
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -56,11 +64,7 @@ dependencies {
     implementation libs.koin.android
     implementation libs.bundles.networking
     implementation libs.bundles.room
-
-    implementation libs.androidx.paging
-    implementation libs.androidx.recycler.selection
-    implementation libs.bundles.coroutines
-    implementation libs.bundles.lifecycle
+    implementation libs.google.play.services.auth
 }
 
 configurations.implementation {

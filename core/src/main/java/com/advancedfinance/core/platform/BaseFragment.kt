@@ -14,20 +14,20 @@ import kotlin.reflect.KClass
 
 abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     private val inflate: Inflate<VB>,
-    viewModeClass: KClass<VM>
+    viewModeClass: KClass<VM>,
 ) : Fragment() {
 
-    protected var viewBinding: VB? = null
+    protected lateinit var viewBinding: VB
     protected val viewModel by viewModelForClass(viewModeClass)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         viewBinding = inflate.invoke(inflater, container, false)
 
-        return viewBinding?.root
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,9 +58,9 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     abstract fun prepareView(savedInstanceState: Bundle?)
 
     private fun saveInstanceStateAllTextsInScreen(outState: Bundle) {
-        viewBinding?.root?.let { root ->
+        viewBinding.root.let { root ->
             val countViews = (root as ViewGroup).childCount
-            for(i in 0..countViews) {
+            for (i in 0..countViews) {
                 root.getChildAt(i).takeIf {
                     it is EditText
                 }?.let {
@@ -72,10 +72,10 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     }
 
     private fun restoreInstanceStateAllTextsInScreen(outState: Bundle?) {
-        viewBinding?.root?.let { root ->
+        viewBinding.root.let { root ->
             outState?.let { bundle ->
                 val countViews = (root as ViewGroup).childCount
-                for(i in 0..countViews) {
+                for (i in 0..countViews) {
                     root.getChildAt(i).takeIf {
                         it is EditText
                     }?.let {
