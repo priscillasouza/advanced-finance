@@ -8,10 +8,5 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
     EntranceFragmentLoginBinding::inflate,
     LoginViewModel::class
 ) {
-
-
-
-    override fun prepareView(savedInstanceState: Bundle?) {
-
-    }
+    override fun prepareView(savedInstanceState: Bundle?) {}
 }
