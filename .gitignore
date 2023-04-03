@@ -20,6 +20,7 @@ local.properties
 *.apk
 *.ap_
 apikey.properties
+remote.properties
 # Files for the ART/Dalvik VM
 *.dex
 
