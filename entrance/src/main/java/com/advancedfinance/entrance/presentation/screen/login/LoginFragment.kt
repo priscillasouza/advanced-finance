@@ -3,13 +3,11 @@ package com.advancedfinance.entrance.presentation.screen.login
 import android.content.IntentSender
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.advancedfinance.core.platform.BaseFragment
 import com.advancedfinance.entrance.BuildConfig
 import com.advancedfinance.entrance.databinding.EntranceFragmentLoginBinding
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
@@ -19,8 +17,6 @@ import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.material.snackbar.Snackbar
-import com.advancedfinance.core.platform.BaseFragment
-import com.advancedfinance.entrance.databinding.EntranceFragmentLoginBinding
 
 class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>(
     EntranceFragmentLoginBinding::inflate,
@@ -39,10 +35,10 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
                 when {
                     idToken != null -> {
                         val msg = "idToken: $idToken"
-                        Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(viewBinding.root, msg, Snackbar.LENGTH_SHORT).show()
                     }
                     else -> {
-                        Snackbar.make(binding.root, "No ID token!", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(viewBinding.root, "No ID token!", Snackbar.LENGTH_SHORT)
                             .show()
                     }
                 }
@@ -50,21 +46,21 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
                 when (e.statusCode) {
                     CommonStatusCodes.CANCELED -> {
                         Snackbar.make(
-                            binding.root,
+                            viewBinding.root,
                             "A caixa de diálogo de um toque foi fechada.",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
                     CommonStatusCodes.NETWORK_ERROR -> {
                         Snackbar.make(
-                            binding.root,
+                            viewBinding.root,
                             "Login com um toque encontrou um erro de rede.",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
                     else -> {
                         Snackbar.make(
-                            binding.root,
+                            viewBinding.root,
                             "Não foi possível obter a credencial do resultado.\" +\n" +
                                     " (${e.localizedMessage})",
                             Snackbar.LENGTH_SHORT
@@ -82,7 +78,7 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
 
     private fun settingWidgetListener() {
         activity?.let { fragmentActivity ->
-            binding.entranceButtonLoginGoogle.setOnClickListener {
+            viewBinding.entranceButtonLoginGoogle.setOnClickListener {
                 signInRequest?.let {
                     oneTapClient?.beginSignIn(it)
                         ?.addOnSuccessListener(fragmentActivity) { result ->
