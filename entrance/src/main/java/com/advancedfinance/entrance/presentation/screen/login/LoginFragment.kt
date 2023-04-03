@@ -10,7 +10,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.advancedfinance.entrance.BuildConfig
 import com.advancedfinance.entrance.databinding.EntranceFragmentLoginBinding
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
@@ -20,9 +19,13 @@ import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.material.snackbar.Snackbar
+import com.advancedfinance.core.platform.BaseFragment
+import com.advancedfinance.entrance.databinding.EntranceFragmentLoginBinding
 
-class LoginFragment : Fragment() {
-    private lateinit var binding: EntranceFragmentLoginBinding
+class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>(
+    EntranceFragmentLoginBinding::inflate,
+    LoginViewModel::class
+)  {
 
     private var oneTapClient: SignInClient? = null
     private var signInRequest: BeginSignInRequest? = null
@@ -71,16 +74,7 @@ class LoginFragment : Fragment() {
             }
         }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = EntranceFragmentLoginBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun prepareView(savedInstanceState: Bundle?) {
         settingWidgetListener()
         settingOneTap()
         settingActivityResult()

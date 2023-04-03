@@ -8,6 +8,7 @@ def apiKeyProperties = new Properties()
 apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
 
 android {
+    namespace 'com.advancedfinance.entrance'
     compileSdk 33
 
     defaultConfig {
@@ -37,12 +38,17 @@ android {
         viewBinding true
     }
 
+    lint {
+        quiet false
+        abortOnError true
+        checkDependencies true
+    }
     resourcePrefix "${project.name.replace("-", "_")}_"
 }
 
 dependencies {
 
-    implementation(project(path: ':core'))
+    implementation(project(":core"))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test
