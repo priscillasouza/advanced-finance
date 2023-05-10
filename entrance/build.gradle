@@ -65,6 +65,7 @@ dependencies {
     implementation libs.bundles.networking
     implementation libs.bundles.room
     implementation libs.google.play.services.auth
+    implementation libs.androidx.biometric
 }
 
 configurations.implementation {

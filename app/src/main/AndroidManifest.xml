@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/app_Theme.AdvancedFinance">
+        android:theme="@style/CoreTheme.AdvancedFinance">
         <activity
             android:name=".MainActivity"
             android:exported="true">
