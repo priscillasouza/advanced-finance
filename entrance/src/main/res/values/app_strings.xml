@@ -9,4 +9,14 @@
     <string name="entrance_text_view_button_enter_login_google">ENTRAR COM O GOOGLE</string>
     <string name="entrance_text_view_not_a_user">Não é usuário?</string>
     <string name="entrance_text_view_register_user">Cadastre-se</string>
+    <string name="entrance_text_on_tap_result_no_id_token">Nenhum token de identificação!</string>
+    <string name="entrance_text_on_tap_result_one_touch_dialog_has_been_closed">A caixa de diálogo de um toque foi fechada.</string>
+    <string name="entrance_text_on_tap_result_network_error">Login com um toque encontrou um erro de rede.</string>
+    <string name="entrance_text_no_biometric_feature_available">Nenhum recurso biométrico disponível neste dispositivo</string>
+    <string name="entrance_text_biometric_success">Autenticação biometríca realizada com sucesso</string>
+    <string name="entrance_text_biometric_autentication_success">Autenticação realizada com sucesso</string>
+    <string name="entrance_text_biometric_autentication_failed">Falha na autenticação</string>
+    <string name="entrance_text_title_prompt_biometric">Login biométrico para Advanced Finance</string>
+    <string name="entrance_text_subtitle_prompt_biometric">Faça login usando sua credencial biométrica</string>
+    <string name="entrance_text_set_negative_button_prompt_biometric">Usar senha da conta</string><string name="entrance_text_on_tap_result_unable_to_get_credential">Não foi possível obter a credencial do resultado.</string>
 </resources>

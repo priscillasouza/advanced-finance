@@ -19,6 +19,7 @@ room = "2.4.3"
 google = "20.4.1"
 recycler-paging = "3.1.1"
 recycler-selection = "1.1.0"
+biometric="1.2.0-alpha05"
 
 [libraries]
 androidx-corektx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
@@ -50,6 +51,7 @@ google-play-services-auth = { module = "com.google.android.gms:play-services-aut
 androidx-paging = { module = "androidx.paging:paging-runtime", version.ref = "recycler-paging" }
 androidx-paging-testing = { module = "androidx.paging:paging-common", version.ref = "recycler-paging" }
 androidx-recycler-selection = { module = "androidx.recyclerview:recyclerview-selection", version.ref = "recycler-selection" }
+androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 
 [bundles]
 navigation = ["androidx-navigation-fragmentktx", "androidx-navigation-fragmentuiktx", "androidx-navigation-fragmentruntimektx"]
