@@ -28,4 +28,30 @@
         <item name="colorSurfaceInverse">@color/core_md_theme_light_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/core_md_theme_light_inversePrimary</item>
     </style>
+
+    <style name="CoreStyleTextSize24Bold" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/core_seed</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CoreStyleTextSize12Bold" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/core_md_theme_light_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CoreStyleTextSize16Regular" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/core_md_theme_light_shadow</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CoreStyleButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/core_md_theme_light_onPrimary</item>
+        <item name="cornerRadius">40dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+    </style>
+
+
+
 </resources>
