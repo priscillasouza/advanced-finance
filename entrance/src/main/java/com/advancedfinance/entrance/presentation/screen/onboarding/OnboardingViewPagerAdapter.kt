@@ -22,19 +22,19 @@ class OnboardingViewPagerAdapter(
         return title.size
     }
 
-    inner class ViewPagerHolder(
-        layout: EntrancePagerViewOnboardingItemBinding
-    ) : RecyclerView.ViewHolder(layout.root) {
-        val itemTitle = layout.textViewTitleOnboarding
-        val itemSubtitle = layout.textViewSubtitleOnboarding
-        val itemImage = layout.imageOnboarding
-    }
-
     override fun onBindViewHolder(holder: ViewPagerHolder, position: Int) {
         holder.apply {
             itemTitle.text = title[position]
             itemSubtitle.text = subtitle[position]
             itemImage.setImageResource(images[position])
         }
+    }
+
+    inner class ViewPagerHolder(
+        layout: EntrancePagerViewOnboardingItemBinding
+    ) : RecyclerView.ViewHolder(layout.root) {
+        val itemTitle = layout.textViewTitleOnboarding
+        val itemSubtitle = layout.textViewSubtitleOnboarding
+        val itemImage = layout.imageOnboarding
     }
 }
