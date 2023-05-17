@@ -66,6 +66,8 @@ dependencies {
     implementation libs.bundles.room
     implementation libs.google.play.services.auth
     implementation libs.androidx.biometric
+    implementation libs.androidx.viewpager2
+    implementation libs.relex.circleindicator
 }
 
 configurations.implementation {

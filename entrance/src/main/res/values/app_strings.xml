@@ -1,6 +1,5 @@
 <resources>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="entrance_hello_blank_fragment">Hello blank fragment</string>
     <string name="entrance_text_view_login">Sign In</string>
     <string name="entrance_text_hint_email_login">Email</string>
     <string name="entrance_text_hint_password_login">Senha</string>
@@ -18,5 +17,15 @@
     <string name="entrance_text_biometric_autentication_failed">Falha na autenticação</string>
     <string name="entrance_text_title_prompt_biometric">Login biométrico para Advanced Finance</string>
     <string name="entrance_text_subtitle_prompt_biometric">Faça login usando sua credencial biométrica</string>
-    <string name="entrance_text_set_negative_button_prompt_biometric">Usar senha da conta</string><string name="entrance_text_on_tap_result_unable_to_get_credential">Não foi possível obter a credencial do resultado.</string>
+    <string name="entrance_text_set_negative_button_prompt_biometric">Usar senha da conta</string>
+    <string name="entrance_text_on_tap_result_unable_to_get_credential">Não foi possível obter a credencial do resultado.</string>
+    <string name="entrance_text_title_first_page_onboarding">Organize sua vida financeira</string>
+    <string name="entrance_text_subtitle_first_page_onboarding">O Advanced Finance te ajuda a organizar e controlar seu orçamento de forma simples e objetiva</string>
+    <string name="entrance_text_title_second_page_onboarding">Despesas</string>
+    <string name="entrance_text_subtitle_second_page_onboarding">Adicione as suas despesas diárias em dinheiro, crédito e débito</string>
+    <string name="entrance_text_title_third_page_onboarding">Receitas</string>
+    <string name="entrance_text_subtitle_third_page_onboarding">Adicione suas receitas e vizualise seu saldo total</string>
+    <string name="entrance_text_title_fourth_page_onboarding">Tire fotos de seus recibos</string>
+    <string name="entrance_text_subtitle_fourth_page_onboarding">Você pode tirar foto de seu recibo de despesa ou receita e terá os dados atualizados com apenas um clique</string>
+    <string name="entrance_text_button_onboarding">Começar</string>
 </resources>

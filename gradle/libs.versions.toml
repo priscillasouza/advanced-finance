@@ -19,7 +19,9 @@ room = "2.4.3"
 google = "20.4.1"
 recycler-paging = "3.1.1"
 recycler-selection = "1.1.0"
-biometric="1.2.0-alpha05"
+biometric = "1.2.0-alpha05"
+viewpager2 = "1.0.0"
+circleindicator = "2.1.6"
 
 [libraries]
 androidx-corektx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
@@ -52,6 +54,8 @@ androidx-paging = { module = "androidx.paging:paging-runtime", version.ref = "re
 androidx-paging-testing = { module = "androidx.paging:paging-common", version.ref = "recycler-paging" }
 androidx-recycler-selection = { module = "androidx.recyclerview:recyclerview-selection", version.ref = "recycler-selection" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
+relex-circleindicator = { module = "me.relex:circleindicator", version.ref = "circleindicator" }
 
 [bundles]
 navigation = ["androidx-navigation-fragmentktx", "androidx-navigation-fragmentuiktx", "androidx-navigation-fragmentruntimektx"]

@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_entrance"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/entrance_onboardingfragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.advancedfinance.entrance.presentation.screen.login.LoginFragment"
         android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/entrance_onboardingfragment"
+        android:name="com.advancedfinance.entrance.presentation.screen.onboarding.OnboardingFragment"
+        android:label="entrance_fragment_onboarding"
+        tools:layout="@layout/entrance_fragment_onboarding">
+        <action
+            android:id="@+id/entrance_action_entrance_onboardingfragment_to_loginfragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 </navigation>
