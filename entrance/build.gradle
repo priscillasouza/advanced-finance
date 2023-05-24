@@ -49,6 +49,7 @@ android {
 dependencies {
 
     implementation(project(":core"))
+    implementation(project(":account_finance"))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test
