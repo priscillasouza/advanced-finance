@@ -6,13 +6,9 @@ import java.math.BigDecimal
 
 @Entity(tableName = "account")
 data class AccountEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
-    val createdAt: String,
     val startedBalance: BigDecimal,
-    val accountLimit: BigDecimal,
-    val accountDefault: Boolean,
-    val accountCategory: String,
-    val showSummaryScreen: Boolean
+    val accountCategory: String
 )

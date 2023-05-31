@@ -1,4 +1,10 @@
 package com.advancedfinance.account_finance.presentation.model
 
-class AccountModel {
-}
+import java.math.BigDecimal
+
+data class AccountModel(
+    val id: Int,
+    val name: String,
+    val startedBalance: BigDecimal,
+    val accountCategory: String
+)

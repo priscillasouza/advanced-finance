@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account_finance_navigation"
+    app:startDestination="@id/account_finance_accountlistfragment">
+
+    <fragment
+        android:id="@+id/account_finance_accountlistfragment"
+        android:name="com.advancedfinance.account_finance.presentation.screen.account_list.AccountListFragment"
+        android:label="account_finance_fragment_account_list"
+        tools:layout="@layout/account_finance_fragment_account_list">
+        <action
+            android:id="@+id/account_finance_action_account_finance_accountlistfragment_to_account_finance_accountfragment"
+            app:destination="@id/account_finance_accountfragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/account_finance_accountfragment"
+        android:name="com.advancedfinance.account_finance.presentation.screen.account.AccountFragment"
+        android:label="account_finance_fragment_account"
+        tools:layout="@layout/account_finance_fragment_account">
+        <action
+            android:id="@+id/account_finance_action_account_finance_accountfragment_to_account_finance_accountlistfragment"
+            app:destination="@id/account_finance_accountlistfragment" />
+    </fragment>
+
+</navigation>

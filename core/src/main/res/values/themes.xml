@@ -34,6 +34,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="CoreStyleTextSize32Bold" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="CoreStyleTextSize12Bold" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/core_md_theme_light_primary</item>
         <item name="android:textStyle">bold</item>

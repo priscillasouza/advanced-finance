@@ -8,7 +8,17 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.advancedfinance.entrance.presentation.screen.login.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment"
+        tools:layout="@layout/entrance_fragment_login">
+
+        <action
+            android:id="@+id/entrance_action_loginfragment_to_account_finance_navigation"
+            app:destination="@id/account_finance_navigation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/entrance_onboardingfragment"
         android:name="com.advancedfinance.entrance.presentation.screen.onboarding.OnboardingFragment"
@@ -22,4 +32,5 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <include app:graph="@navigation/account_finance_navigation" />
 </navigation>

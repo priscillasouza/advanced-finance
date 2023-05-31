@@ -63,9 +63,10 @@ android-test = ["android-test-expresso", "android-test-junit"]
 coroutines = ["androidx-coroutines-android", "androidx-coroutines-core"]
 lifecycle = ["androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-common-java8", "androidx-lifecycle-runtime-ktx"]
 networking = ["retrofit-converter-gson", "retrofit", "okhttp-logging-interceptor", "okhttp", "gson"]
-room = ["androidx-room-runtime", "androidx-room-compiler", "androidx-room-ktx"]
+room = ["androidx-room-runtime", "androidx-room-ktx"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "application" }
 android-library = { id = "com.android.library", version.ref = "application" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }

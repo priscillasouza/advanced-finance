@@ -1,4 +1,14 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="account_finance_text_toolbar_account">Contas</string>
+    <string name="account_finance_text_view_new_account_value">Valor</string>
+    <string name="account_finance_text_hint_new_account_value">R$ 0,00</string>
+    <string name="account_finance_text_hint_new_account_name">Nome da conta</string>
+    <string name="account_finance_text_view_new_account_description">Conta é todo lugar que você guarda seu dinheiro (carteira, banco, porquinho)</string>
+    <string name="account_finance_text_view_new_account_title">Nova conta</string>
+    <string name="account_finance_text_category_money">Dinheiro</string>
+    <string name="account_finance_text_category_current_account">Conta Corrente</string>
+    <string name="account_finance_text_category_savings">Poupança</string>
+    <string name="account_finance_text_category_others">Outros</string>
+    <string name="account_finance_text_toast_add_success">Conta adicionada com sucesso</string>
+    <string name="account_finance_text_menu_item_save">Salvar</string>
 </resources>

@@ -11,10 +11,11 @@ const val DB_NAME = "account_db"
 @Database(
     entities = [AccountEntity::class],
     version = 1,
-    exportSchema = true
+    exportSchema = false
 )
 
 @TypeConverters(BigDecimalConverter::class)
 abstract class AdvancedFinanceDatabase: RoomDatabase() {
+
     abstract fun accountDao(): AccountDAO
 }
