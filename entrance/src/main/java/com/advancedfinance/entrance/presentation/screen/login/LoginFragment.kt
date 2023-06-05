@@ -17,8 +17,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.advancedfinance.core.platform.BaseFragment
-import com.advancedfinance.entrance.BuildConfig
+import com.advancedfinance.entrance.BuildConfig.GOOGLE_API_OAUTH
 import com.advancedfinance.entrance.R
 import com.advancedfinance.entrance.databinding.EntranceFragmentLoginBinding
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
@@ -95,28 +96,27 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
         setBiometricPrompt()
         setButtonBiometric()
         settingObservable()
+        setButtonLogin()
     }
 
     private fun settingObservable() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.stateFlowBiometric.collect { state ->
+                viewModel.listViewState.collect { state ->
                     when (state) {
-                        LoginViewModel.StateBiometric.Loading -> {
-
-                        }
-                        LoginViewModel.StateBiometric.BiometricSuccess -> {
+                        LoginViewModel.BiometricViewState.Loading -> {}
+                        LoginViewModel.BiometricViewState.BiometricViewStateSuccess -> {
                             biometricPrompt.authenticate(promptInfo)
                             Toast.makeText(requireContext(),
                                 getString(R.string.entrance_text_biometric_success),
                                 Toast.LENGTH_SHORT).show()
                         }
-                        LoginViewModel.StateBiometric.BiometricErrorNoHardware -> {
+                        LoginViewModel.BiometricViewState.BiometricViewStateErrorNoHardware -> {
                             Toast.makeText(requireContext(),
                                 getString(R.string.entrance_text_no_biometric_feature_available),
                                 Toast.LENGTH_SHORT).show()
                         }
-                        LoginViewModel.StateBiometric.BiometricErrorNoneEnrolled -> {
+                        LoginViewModel.BiometricViewState.BiometricViewStateErrorNoneEnrolled -> {
                             Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
                                 putExtra(Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
                                     BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
@@ -166,7 +166,7 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
             .setGoogleIdTokenRequestOptions(
                 GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
-                    .setServerClientId(BuildConfig.GOOGLE_API_OAUTH)
+                    .setServerClientId(GOOGLE_API_OAUTH)
                     .setFilterByAuthorizedAccounts(false)
                     .build()
             )
@@ -205,7 +205,6 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
                 }
             }
     }
-
     private fun setBiometricPrompt() {
         executor = ContextCompat.getMainExecutor(requireContext())
         biometricPrompt =
@@ -251,6 +250,19 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
         viewBinding.entranceButtonLogin.setOnClickListener {
             val state = from(requireContext()).canAuthenticate(BIOMETRIC_WEAK)
             viewModel.checkStateBiometric(state)
+
         }
+    }
+
+    private fun setButtonLogin() {
+        viewBinding.entranceButtonLogin.setOnClickListener {
+            fromLoginToAccountList()
+        }
+    }
+
+    private fun fromLoginToAccountList() {
+        findNavController().navigate(
+            R.id.entrance_action_loginfragment_to_account_finance_navigation
+        )
     }
 }

@@ -12,4 +12,7 @@ interface AccountDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addAccount(accountEntity: AccountEntity)
+
+    @Query("SELECT * FROM account")
+    fun getAccounts(): Flow<List<AccountEntity>>
 }

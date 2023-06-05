@@ -63,14 +63,14 @@ class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, Accou
     }
 
     private fun saveNewAccount() {
-        val value = viewBinding.editTextInputNewAccountValue.text.toString().toBigDecimal()
+        val startedBalance = viewBinding.editTextInputNewAccountValue.text.toString().toBigDecimal()
         val name = viewBinding.editTextInputNewAccountName.text.toString()
         val category = viewBinding.autocompleteCategory.text.toString()
 
         val newAccount = AccountModel(
             0,
             name,
-            value,
+            startedBalance,
             category
         )
         viewModel.dispatchViewAction(AccountViewAction.AddAccount(accountModel = newAccount))

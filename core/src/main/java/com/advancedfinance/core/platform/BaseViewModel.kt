@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 abstract class BaseViewModel<T, A> : ViewModel() {
 
-    abstract val viewState: StateFlow<T>
+    abstract val listViewState: StateFlow<T>
 
     abstract fun dispatchViewAction(viewAction: A)
 }

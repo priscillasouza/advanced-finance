@@ -9,8 +9,4 @@ val entranceModule = module {
     viewModel {
         LoginViewModel()
     }
-
-
-
-
 }

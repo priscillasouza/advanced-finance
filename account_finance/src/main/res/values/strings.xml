@@ -11,4 +11,6 @@
     <string name="account_finance_text_category_others">Outros</string>
     <string name="account_finance_text_toast_add_success">Conta adicionada com sucesso</string>
     <string name="account_finance_text_menu_item_save">Salvar</string>
+    <string name="account_finance_text_total_balance">Saldo total</string>
+    <string name="account_finance_text_description_float_action_button">Adicionar</string>
 </resources>

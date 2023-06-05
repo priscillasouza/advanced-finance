@@ -9,18 +9,17 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class AccountViewModel(
-    private val repository: IAccountRepository,
+    private val repository: IAccountRepository
 ) : BaseViewModel<AccountViewState, AccountViewAction>() {
 
     private val viewStateMutable = MutableStateFlow<AccountViewState>(AccountViewState.Loading)
-    override val viewState: StateFlow<AccountViewState> = viewStateMutable
+    override val listViewState: StateFlow<AccountViewState> = viewStateMutable
 
     override fun dispatchViewAction(viewAction: AccountViewAction) {
         when (viewAction) {
             is AccountViewAction.AddAccount -> {
                 addAccount(viewAction.accountModel)
             }
-            else -> {}
         }
     }
 
