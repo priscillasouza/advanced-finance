@@ -25,7 +25,16 @@
         tools:layout="@layout/account_finance_fragment_account">
         <action
             android:id="@+id/account_finance_action_account_finance_accountfragment_to_account_finance_accountlistfragment"
-            app:destination="@id/account_finance_accountlistfragment" />
+            app:destination="@id/account_finance_accountlistfragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+        <argument
+            android:name="account"
+            app:argType="com.advancedfinance.account_finance.presentation.model.AccountModel"
+            android:defaultValue="@null"
+            app:nullable="true" />
     </fragment>
 
 </navigation>

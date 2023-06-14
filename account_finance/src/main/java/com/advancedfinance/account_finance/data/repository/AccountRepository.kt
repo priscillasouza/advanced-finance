@@ -14,10 +14,16 @@ class AccountRepository(
     private var mapEntityToModel: MapEntityToModel,
 ) : IAccountRepository {
 
-    override suspend fun addAccount(accountModel: AccountModel) {
+    override suspend fun saveAccount(accountModel: AccountModel) {
         mapModelToEntity.transform(accountModel).also {
             accountDAO.addAccount(it)
         }
+    }
+
+    override suspend fun updateAccount(accountModel: AccountModel) {
+       mapModelToEntity.transform(accountModel).also {
+           accountDAO.updateAccount(it)
+       }
     }
 
     override fun getAccounts(): Flow<List<AccountModel>> {

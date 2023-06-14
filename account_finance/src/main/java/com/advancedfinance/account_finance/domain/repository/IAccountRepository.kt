@@ -5,7 +5,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface IAccountRepository {
 
-    suspend fun addAccount(accountModel: AccountModel)
+    suspend fun saveAccount(accountModel: AccountModel)
+
+    suspend fun updateAccount(accountModel: AccountModel)
 
     fun getAccounts(): Flow<List<AccountModel>>
+
 }

@@ -3,9 +3,9 @@ package com.advancedfinance.account_finance.presentation.screen.account_list
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.advancedfinance.account_finance.R
 import com.advancedfinance.account_finance.databinding.AccountFinanceFragmentAccountListBinding
 import com.advancedfinance.account_finance.presentation.adapter.AccountListAdapter
 import com.advancedfinance.account_finance.presentation.model.AccountModel
@@ -24,9 +24,9 @@ class AccountListFragment :
 
     override fun prepareView(savedInstanceState: Bundle?) {
         viewModel.dispatchViewAction(AccountListViewAction.GetListAccount)
-        setClickFloatingActionAddAccount()
-        setAdapterListAccount()
         settingObservable()
+        setAdapterListAccount()
+        setClickFloatingActionAddAccount()
     }
 
     private fun settingObservable() {
@@ -35,10 +35,37 @@ class AccountListFragment :
                 when (it) {
                     is AccountListViewState.Loading -> showLoading()
                     is AccountListViewState.Error -> showError(it.message)
-                    is AccountListViewState.Success -> listAdapterAccount(it.listAccount, it.totalBalance)
+                    is AccountListViewState.Success -> listAdapterAccount(it.listAccount, it.total)
                     else -> {}
                 }
             }
+        }
+    }
+
+    private fun setAdapterListAccount() {
+        viewBinding.recyclerViewAccountList.apply {
+            accountListAdapter = AccountListAdapter() { account ->
+                val action =
+                    AccountListFragmentDirections.accountFinanceActionAccountFinanceAccountlistfragmentToAccountFinanceAccountfragment(
+                        account)
+                findNavController().navigate(action)
+            }
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = accountListAdapter
+
+        }
+    }
+
+    private fun listAdapterAccount(list: List<AccountModel>, total: BigDecimal) {
+        accountListAdapter.setList(list)
+        viewBinding.textViewValueTotalBalance.text = total.formatCurrencyToBr()
+    }
+
+    private fun setClickFloatingActionAddAccount() {
+        viewBinding.accountFinanceFloatingActionButton.setOnClickListener {
+            val action =
+                AccountListFragmentDirections.accountFinanceActionAccountFinanceAccountlistfragmentToAccountFinanceAccountfragment()
+            findNavController().navigate(action)
         }
     }
 
@@ -50,23 +77,4 @@ class AccountListFragment :
 
     private fun showLoading() {}
 
-    private fun setClickFloatingActionAddAccount() {
-        viewBinding.accountFinanceFloatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.account_finance_action_account_finance_accountlistfragment_to_account_finance_accountfragment)
-        }
-    }
-
-    private fun setAdapterListAccount() {
-        viewBinding.recyclerViewAccountList.apply {
-            accountListAdapter = AccountListAdapter()
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            setHasFixedSize(true)
-            adapter = accountListAdapter
-        }
-    }
-
-    private fun listAdapterAccount(list: List<AccountModel>, totalBalance: BigDecimal) {
-        accountListAdapter.setList(list)
-        viewBinding.textViewValueTotalBalance.text = totalBalance.formatCurrencyToBr()
-    }
 }

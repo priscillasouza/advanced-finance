@@ -21,7 +21,7 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
-            app:title="@string/account_finance_text_toolbar_account"
+            app:title="@string/account_finance_text_toolbar_account_list"
             app:titleTextColor="@color/core_md_theme_light_onPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 

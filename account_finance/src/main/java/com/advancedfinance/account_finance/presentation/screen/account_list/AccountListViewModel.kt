@@ -1,6 +1,7 @@
 package com.advancedfinance.account_finance.presentation.screen.account_list
 
 import androidx.lifecycle.viewModelScope
+import com.advancedfinance.account_finance.R
 import com.advancedfinance.account_finance.domain.repository.IAccountRepository
 import com.advancedfinance.account_finance.presentation.model.AccountModel
 import com.advancedfinance.core.platform.BaseViewModel
@@ -30,7 +31,8 @@ class AccountListViewModel(
             repository.getAccounts()
                 .catch { exception ->
                     exception.printStackTrace()
-                    listViewStateMutable.value = AccountListViewState.Error("Ocorreu uma falha ao listar as contas")
+                    listViewStateMutable.value =
+                        AccountListViewState.Error(R.string.account_finance_text_account_list_error.toString())
                 }.collect {
                     if (it.isEmpty()) {
                         listViewStateMutable.value = AccountListViewState.Empty
@@ -48,7 +50,9 @@ sealed class AccountListViewAction {
 }
 
 sealed class AccountListViewState {
-    class Success(val listAccount: List<AccountModel>, val totalBalance: BigDecimal) : AccountListViewState()
+    class Success(val listAccount: List<AccountModel>, val total: BigDecimal) :
+        AccountListViewState()
+
     class Error(val message: String) : AccountListViewState()
     object Loading : AccountListViewState()
     object Empty : AccountListViewState()

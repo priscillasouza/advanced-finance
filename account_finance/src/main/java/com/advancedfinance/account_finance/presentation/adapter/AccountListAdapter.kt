@@ -8,7 +8,7 @@ import com.advancedfinance.account_finance.databinding.AccountFinanceAccountList
 import com.advancedfinance.account_finance.presentation.model.AccountModel
 import com.advancedfinance.core.extensions.formatCurrencyToBr
 
-class AccountListAdapter : RecyclerView.Adapter<AccountListAdapter.AccountListViewHolder>() {
+class AccountListAdapter(val onClickItem: (AccountModel) -> Unit) : RecyclerView.Adapter<AccountListAdapter.AccountListViewHolder>() {
 
     private var accountList = arrayListOf<AccountModel>()
 
@@ -37,7 +37,7 @@ class AccountListAdapter : RecyclerView.Adapter<AccountListAdapter.AccountListVi
         }
     }
 
-    class AccountListViewHolder(
+    inner class AccountListViewHolder(
         private val layout: AccountFinanceAccountListItemBinding,
     ) :
         RecyclerView.ViewHolder(layout.root) {
@@ -45,6 +45,9 @@ class AccountListAdapter : RecyclerView.Adapter<AccountListAdapter.AccountListVi
             layout.apply {
                 textViewAccountName.text = account.name
                 textViewAccountValue.text = account.startedBalance.formatCurrencyToBr()
+                cardViewAccountListItem.setOnClickListener {
+                    onClickItem.invoke(account)
+                }
             }
         }
     }

@@ -4,20 +4,44 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.advancedfinance.account_finance.R
 import com.advancedfinance.account_finance.databinding.AccountFinanceFragmentAccountBinding
 import com.advancedfinance.account_finance.presentation.model.AccountModel
 import com.advancedfinance.core.platform.BaseFragment
+import kotlinx.coroutines.launch
 
 class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, AccountViewModel>(
     AccountFinanceFragmentAccountBinding::inflate,
     AccountViewModel::class
 ) {
 
+    private val args: AccountFragmentArgs by navArgs()
+
     override fun prepareView(savedInstanceState: Bundle?) {
-        setAdapterAccountCategories()
+        onObservable()
         setNavigationIconsToolBar()
+        setArgumentAccount()
+        setAdapterAccountCategories()
+        setListeners()
+    }
+
+    private fun onObservable() {
+        lifecycleScope.launch {
+            viewModel.listViewState.collect {
+                when (it) {
+                    is AccountViewState.ViewUpdate -> {
+                        preparedViewUpdate(it.account)
+                    }
+                    is AccountViewState.ViewInsert -> {
+                        preparedViewInsert()
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 
     private fun setNavigationIconsToolBar() {
@@ -26,21 +50,12 @@ class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, Accou
                 setNavigationOnClickListener {
                     findNavController().popBackStack()
                 }
-                setOnMenuItemClickListener { menuItem ->
-                    when (menuItem.itemId) {
-                        R.id.menu_item_save -> {
-                            saveNewAccount()
-                            Toast.makeText(requireContext(),
-                                getString(R.string.account_finance_text_toast_add_success),
-                                Toast.LENGTH_SHORT).show()
-                            findNavController().navigate(R.id.account_finance_action_account_finance_accountfragment_to_account_finance_accountlistfragment)
-                            true
-                        }
-                        else -> false
-                    }
-                }
             }
         }
+    }
+
+    private fun setArgumentAccount() {
+        viewModel.dispatchViewAction(AccountViewAction.PreparedViewAccount(args.account))
     }
 
     private fun setAdapterAccountCategories() {
@@ -62,17 +77,48 @@ class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, Accou
         }
     }
 
-    private fun saveNewAccount() {
-        val startedBalance = viewBinding.editTextInputNewAccountValue.text.toString().toBigDecimal()
-        val name = viewBinding.editTextInputNewAccountName.text.toString()
-        val category = viewBinding.autocompleteCategory.text.toString()
+    private fun setListeners() {
+        viewBinding.apply {
+            buttonSaveAccount.setOnClickListener {
+                if (validateFields()) {
+                    val startedBalance = editTextInputNewAccountValue.text.toString().toBigDecimal()
+                    val name = editTextInputNewAccountName.text.toString()
+                    val category = autocompleteCategory.text.toString()
 
-        val newAccount = AccountModel(
-            0,
-            name,
-            startedBalance,
-            category
-        )
-        viewModel.dispatchViewAction(AccountViewAction.AddAccount(accountModel = newAccount))
+                    viewModel.dispatchViewAction(AccountViewAction.SaveAccount(
+                        startedBalance = startedBalance,
+                        name = name,
+                        category = category))
+
+                    findNavController().navigate(AccountFragmentDirections.accountFinanceActionAccountFinanceAccountfragmentToAccountFinanceAccountlistfragment())
+                } else {
+                    Toast.makeText(context,
+                        getString(R.string.account_finance_text_toast_validate_fields),
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun preparedViewUpdate(account: AccountModel) {
+        viewBinding.apply {
+            editTextInputNewAccountValue.setText(account.startedBalance.toString())
+            editTextInputNewAccountName.setText(account.name)
+            autocompleteCategory.setText(account.accountCategory)
+            buttonSaveAccount.text = getString(R.string.account_finance_text_button_account_update)
+            toolbarNewAccount.setTitle(R.string.account_finance_text_toolbar_account_edit)
+        }
+    }
+
+    private fun preparedViewInsert() {
+        viewBinding.apply {
+            buttonSaveAccount.text = getString(R.string.account_finance_text_button_account_save)
+        }
+    }
+
+    private fun validateFields(): Boolean {
+        return (viewBinding.editTextInputNewAccountValue.text.toString().isNotEmpty()
+                && viewBinding.editTextInputNewAccountName.text.toString().isNotEmpty()
+                && viewBinding.autocompleteCategory.text.isNotEmpty())
     }
 }

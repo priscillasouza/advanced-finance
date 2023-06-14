@@ -21,10 +21,10 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
-            app:menu="@menu/account_finance_app_bar_menu_new_account"
+            app:menu="@menu/account_finance_app_bar_menu_account"
             app:navigationIcon="@drawable/account_finance_ic_arrow_back"
             app:navigationIconTint="@color/core_md_theme_light_onPrimary"
-            app:title="@string/account_finance_text_view_new_account_title"
+            app:title="@string/account_finance_text_toolbar_account"
             app:titleTextColor="@color/core_md_theme_light_onPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -97,19 +97,29 @@
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_save_account"
+        style="@style/CoreStyleButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/account_finance_text_button_account_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_new_account_description"
+        app:layout_constraintVertical_bias="0.166" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_view_new_account_description"
         style="@style/CoreStyleTextSize16Regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="304dp"
         android:text="@string/account_finance_text_view_new_account_description"
         android:textColor="@color/core_seed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_new_account_category"
-        app:layout_constraintVertical_bias="0.895" />
+        app:layout_constraintTop_toBottomOf="@id/text_input_new_account_category" />
 </androidx.constraintlayout.widget.ConstraintLayout>
