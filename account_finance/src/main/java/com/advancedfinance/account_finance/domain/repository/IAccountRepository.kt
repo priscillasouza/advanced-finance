@@ -9,6 +9,8 @@ interface IAccountRepository {
 
     suspend fun updateAccount(accountModel: AccountModel)
 
+    suspend fun deleteAccount(accountModel: AccountModel)
+
     fun getAccounts(): Flow<List<AccountModel>>
 
 }

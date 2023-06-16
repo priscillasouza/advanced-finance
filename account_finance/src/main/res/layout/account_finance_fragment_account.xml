@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_new_account"
+            android:id="@+id/toolbar_account"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary"
@@ -85,6 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:padding="8dp"
+        android:hint="@string/account_finance_text_hint_new_account_category"
         android:textColor="@color/core_seed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

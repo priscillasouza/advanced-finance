@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.advancedfinance.account_finance.databinding.AccountFinanceAccountListItemBinding
 import com.advancedfinance.account_finance.presentation.model.AccountModel
-import com.advancedfinance.core.extensions.formatCurrencyToBr
+import com.advancedfinance.core.extensions.toMoney
 
-class AccountListAdapter(val onClickItem: (AccountModel) -> Unit) : RecyclerView.Adapter<AccountListAdapter.AccountListViewHolder>() {
+class AccountListAdapter(val onClickItem: (AccountModel) -> Unit) :
+    RecyclerView.Adapter<AccountListAdapter.AccountListViewHolder>() {
 
     private var accountList = arrayListOf<AccountModel>()
 
@@ -44,7 +45,7 @@ class AccountListAdapter(val onClickItem: (AccountModel) -> Unit) : RecyclerView
         fun onBind(account: AccountModel) {
             layout.apply {
                 textViewAccountName.text = account.name
-                textViewAccountValue.text = account.startedBalance.formatCurrencyToBr()
+                textViewAccountValue.text = account.startedBalance.toString().toMoney()
                 cardViewAccountListItem.setOnClickListener {
                     onClickItem.invoke(account)
                 }

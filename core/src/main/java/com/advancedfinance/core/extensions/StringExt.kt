@@ -1,14 +1,15 @@
 package com.advancedfinance.core.extensions
 
 import android.net.Uri
+import java.math.BigDecimal
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
 
 @Throws(NumberFormatException::class)
 fun String.toMoney(): String {
-    val stringToLong = this.toLong()
-    return getNumberFormat().format(stringToLong.toFraction())
+    val stringToBigDecimal = this.toBigDecimal()
+    return getNumberFormat().format(stringToBigDecimal.toFraction())
 }
 
 fun String.removeSpecialCharacters(): String {
@@ -29,7 +30,7 @@ private fun getNumberFormat(): DecimalFormat {
         }
 }
 
-fun Long.toFraction(): Double {
+fun BigDecimal.toFraction(): Double {
     return this.toDouble() / 100.0f
 }
 

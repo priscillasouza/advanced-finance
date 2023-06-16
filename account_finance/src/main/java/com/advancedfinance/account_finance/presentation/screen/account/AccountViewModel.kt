@@ -1,6 +1,7 @@
 package com.advancedfinance.account_finance.presentation.screen.account
 
 import androidx.lifecycle.viewModelScope
+import com.advancedfinance.account_finance.R
 import com.advancedfinance.account_finance.domain.repository.IAccountRepository
 import com.advancedfinance.account_finance.presentation.model.AccountModel
 import com.advancedfinance.core.platform.BaseViewModel
@@ -26,6 +27,7 @@ class AccountViewModel(
             is AccountViewAction.SaveAccount -> {
                 addOrUpdateAccount(viewAction.name, viewAction.startedBalance, viewAction.category)
             }
+            is AccountViewAction.DeleteAccount -> deleteAccount(viewAction.accountModel)
         }
     }
 
@@ -60,9 +62,9 @@ class AccountViewModel(
         viewModelScope.launch {
             try {
                 repository.updateAccount(accountModel)
-                viewStateMutable.value = AccountViewState.Success
+                viewStateMutable.value = AccountViewState.SuccessUpdate
             } catch (e: Exception) {
-                viewStateMutable.value = AccountViewState.Error
+                viewStateMutable.value = AccountViewState.Error(R.string.account_finance_text_account_error)
             }
         }
     }
@@ -71,9 +73,20 @@ class AccountViewModel(
         viewModelScope.launch {
             try {
                 repository.saveAccount(accountModel)
-                viewStateMutable.value = AccountViewState.Success
+                viewStateMutable.value = AccountViewState.SuccessInsert
             } catch (e: Exception) {
-                viewStateMutable.value = AccountViewState.Error
+                viewStateMutable.value = AccountViewState.Error(R.string.account_finance_text_account_error)
+            }
+        }
+    }
+
+    private fun deleteAccount(accountModel: AccountModel) {
+        viewModelScope.launch {
+            try {
+                repository.deleteAccount(accountModel)
+                viewStateMutable.value = AccountViewState.SuccessDelete
+            } catch (e: Exception) {
+                viewStateMutable.value = AccountViewState.Error(R.string.account_finance_text_account_error)
             }
         }
     }
@@ -86,12 +99,16 @@ sealed class AccountViewAction {
         val startedBalance: BigDecimal,
         val category: String,
     ) : AccountViewAction()
+
+    class DeleteAccount(val accountModel: AccountModel) : AccountViewAction()
 }
 
 sealed class AccountViewState {
-    object Success : AccountViewState()
+    object SuccessInsert : AccountViewState()
+    object SuccessUpdate : AccountViewState()
+    object SuccessDelete : AccountViewState()
     object Loading : AccountViewState()
-    object Error : AccountViewState()
-    class ViewUpdate(val account: AccountModel) : AccountViewState()
+    class Error(val message: Int) : AccountViewState()
+    class ViewUpdate(val accountModel: AccountModel) : AccountViewState()
     object ViewInsert : AccountViewState()
 }

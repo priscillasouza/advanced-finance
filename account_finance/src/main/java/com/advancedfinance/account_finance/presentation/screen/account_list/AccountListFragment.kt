@@ -1,5 +1,6 @@
 package com.advancedfinance.account_finance.presentation.screen.account_list
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.advancedfinance.account_finance.databinding.AccountFinanceFragmentAccountListBinding
 import com.advancedfinance.account_finance.presentation.adapter.AccountListAdapter
 import com.advancedfinance.account_finance.presentation.model.AccountModel
-import com.advancedfinance.core.extensions.formatCurrencyToBr
+import com.advancedfinance.core.extensions.toMoney
 import com.advancedfinance.core.platform.BaseFragment
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
@@ -56,9 +57,10 @@ class AccountListFragment :
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun listAdapterAccount(list: List<AccountModel>, total: BigDecimal) {
         accountListAdapter.setList(list)
-        viewBinding.textViewValueTotalBalance.text = total.formatCurrencyToBr()
+        viewBinding.textViewValueTotalBalance.text = total.toString().toMoney()
     }
 
     private fun setClickFloatingActionAddAccount() {

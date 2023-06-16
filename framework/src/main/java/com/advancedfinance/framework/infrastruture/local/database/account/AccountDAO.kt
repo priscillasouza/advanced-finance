@@ -13,6 +13,9 @@ interface AccountDAO {
     @Update
     fun updateAccount(accountEntity: AccountEntity)
 
+    @Delete
+    fun deleteAccount(accountEntity: AccountEntity)
+
     @Query("SELECT * FROM account")
     fun getAccounts(): Flow<List<AccountEntity>>
 

@@ -26,6 +26,12 @@ class AccountRepository(
        }
     }
 
+    override suspend fun deleteAccount(accountModel: AccountModel) {
+        mapModelToEntity.transform(accountModel).also {
+            accountDAO.deleteAccount(it)
+        }
+    }
+
     override fun getAccounts(): Flow<List<AccountModel>> {
         return accountDAO.getAccounts().map {
             mapEntityToModel.transform(it)
