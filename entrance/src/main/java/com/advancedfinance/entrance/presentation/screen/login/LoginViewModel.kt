@@ -5,7 +5,9 @@ import com.advancedfinance.core.platform.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class LoginViewModel : BaseViewModel() {
+class LoginViewModel(
+    private val nomeString: String
+) : BaseViewModel() {
 
     private val stateFlowBiometricMutable = MutableStateFlow<StateBiometric>(StateBiometric.Loading)
     val stateFlowBiometric: StateFlow<StateBiometric> = stateFlowBiometricMutable

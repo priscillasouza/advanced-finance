@@ -7,8 +7,10 @@ import org.koin.dsl.module
 val entranceModule = module {
 
     viewModel {
-        LoginViewModel()
+        LoginViewModel(get())
     }
+
+    single { "Hugo" }
 
 
 
