@@ -14,7 +14,7 @@ import kotlin.reflect.KClass
 
 abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     private val inflate: Inflate<VB>,
-    viewModeClass: KClass<VM>,
+    viewModeClass: KClass<VM>
 ) : Fragment() {
 
     protected lateinit var viewBinding: VB

@@ -33,7 +33,7 @@ class OnboardingFragment : Fragment() {
             viewPagerOnboarding.adapter = OnboardingViewPagerAdapter(titleList, subtitleList, imageList)
             viewPagerOnboarding.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             buttonOnboarding.setOnClickListener {
-                findNavController().navigate(R.id.entrance_action_entrance_onboardingfragment_to_loginfragment)
+                findNavController().navigate(OnboardingFragmentDirections.entranceActionEntranceOnboardingfragmentToEntranceLoginfragment())
             }
         }
     }

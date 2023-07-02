@@ -1,0 +1,30 @@
+<resources>
+    <string name="account_finance_text_toolbar_account">Nova conta</string>
+    <string name="account_finance_text_toolbar_account_list">Contas</string>
+    <string name="account_finance_text_toolbar_account_edit">Editar conta</string>
+    <string name="account_finance_text_view_new_account_value">Valor</string>
+    <string name="account_finance_text_hint_new_account_value">R$ 0,00</string>
+    <string name="account_finance_text_hint_new_account_name">Nome da conta</string>
+    <string name="account_finance_text_hint_new_account_category">Selecione o tipo de conta</string>
+    <string name="account_finance_text_view_new_account_description">Conta é todo lugar que você guarda seu dinheiro (carteira, banco, porquinho)</string>
+    <string name="account_finance_text_view_new_account_title">Nova conta</string>
+    <string name="account_finance_text_category_money">Dinheiro</string>
+    <string name="account_finance_text_category_current_account">Conta Corrente</string>
+    <string name="account_finance_text_category_savings">Poupança</string>
+    <string name="account_finance_text_category_others">Outros</string>
+    <string name="account_finance_text_toast_add_success">Conta adicionada com sucesso</string>
+    <string name="account_finance_text_toast_update_success">Conta atualizada com sucesso</string>
+    <string name="account_finance_text_toast_delete_success">Conta removida com sucesso</string>
+    <string name="account_finance_text_toast_validate_fields">Informe todos os campos</string>
+    <string name="account_finance_text_total_balance">Saldo total</string>
+    <string name="account_finance_text_description_float_action_button">Adicionar</string>
+    <string name="account_finance_text_button_account_save">Salvar</string>
+    <string name="account_finance_text_button_account_update">Atualizar</string>
+    <string name="account_finance_text_menu_item_delete">Deletar</string>
+    <string name="account_finance_text_account_list_error">Ocorreu uma falha ao listar as contas</string>
+    <string name="account_finance_text_account_error">Ocorreu um erro</string>
+    <string name="account_finance_text_yes_dialog_delete">Sim</string>
+    <string name="account_finance_text_no_dialog_delete">Não</string>
+    <string name="account_finance_text_dialog_delete">Excluir a conta %s?</string>
+    <string name="account_finance_text_confirm_dialog_delete">Tem certeza de que deseja excluir a conta %s?</string>
+</resources>

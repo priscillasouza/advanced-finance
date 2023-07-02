@@ -19,15 +19,6 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
-    buildTypes {
-        release {
-            buildConfigField("String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH"])
-        }
-
-        debug {
-            buildConfigField("String", "GOOGLE_API_OAUTH", apiKeyProperties["GOOGLE_API_OAUTH_DEBUG"])
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11

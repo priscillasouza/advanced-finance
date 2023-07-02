@@ -55,6 +55,7 @@ dependencies {
     implementation(project(path: ':core'))
     implementation(project(path: ':entrance'))
     implementation(project(path: ':framework'))
+    implementation(project(path: ':account_finance'))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test

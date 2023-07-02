@@ -1,10 +1,11 @@
 package com.advancedfinance.core.platform
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.StateFlow
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel<T, A> : ViewModel() {
 
-    val TAG = javaClass.simpleName
+    abstract val listViewState: StateFlow<T>
 
-    open fun onDestroyView(){}
+    abstract fun dispatchViewAction(viewAction: A)
 }

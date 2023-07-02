@@ -1,6 +1,7 @@
 plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
+    id("kotlin-kapt")
 }
 
 def remotePropertiesFile = rootProject.file("remote.properties")
@@ -52,6 +53,7 @@ dependencies {
     implementation libs.koin.android
     implementation libs.bundles.networking
     implementation libs.bundles.room
+    kapt libs.androidx.room.compiler
 
     implementation libs.androidx.paging
     implementation libs.androidx.recycler.selection
