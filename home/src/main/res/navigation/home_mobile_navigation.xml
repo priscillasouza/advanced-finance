@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_overview">
+
+    <fragment
+        android:id="@+id/nav_overview"
+        android:name="com.advancedfinance.home.presentation.screen.HomeFragment"
+        android:label="@string/home_text_label_nav_overview"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.advancedfinance.account_finance.presentation.screen.account_list.AccountListFragment"
+        android:label="@string/home_text_label_nav_account"
+        tools:layout="@layout/account_finance_fragment_account_list" />
+
+</navigation>

@@ -64,4 +64,13 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="android:paddingTop">12dp</item>
     </style>
+
+    <style name="CoreTheme.AdvancedFinance.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CoreTheme.AdvancedFinance.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="CoreTheme.AdvancedFinance.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

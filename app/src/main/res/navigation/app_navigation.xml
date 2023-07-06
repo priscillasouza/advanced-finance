@@ -5,5 +5,8 @@
     app:startDestination="@id/navigation_entrance">
 
     <include app:graph="@navigation/entrance_navigation" />
-
+    <include app:graph="@navigation/app_mobile_navigation" />
+    <action
+        android:id="@+id/app_entrance"
+        app:destination="@id/mobile_navigation" />
 </navigation>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="home_text_view_nav_header">Advanced Finance</string>
+    <string name="home_text_menu_overview">Visão geral</string>
+    <string name="home_text_menu_account">Contas</string>
+    <string name="home_text_menu_transactions">Transações</string>
+    <string name="home_text_title_menu_preferences">Preferências</string>
+    <string name="home_text_menu_category">Categoria</string>
+    <string name="home_text_menu_profile">Perfil</string>
+    <string name="home_text_label_nav_overview">Advanced Finance</string>
+    <string name="home_text_label_nav_account">Contas</string>
+</resources>

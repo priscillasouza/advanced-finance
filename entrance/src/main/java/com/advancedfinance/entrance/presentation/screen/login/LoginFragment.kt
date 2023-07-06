@@ -263,6 +263,6 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
     }
 
     private fun fromLoginToAccountList() {
-        findNavController().navigate(LoginFragmentDirections.entranceActionEntranceLoginfragmentToAccountFinanceNavigation())
+        findNavController().navigate(LoginFragmentDirections.entranceActionEntranceLoginfragmentToEntranceDraweractivity())
     }
 }

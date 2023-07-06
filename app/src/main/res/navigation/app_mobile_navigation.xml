@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_overview">
+
+    <fragment
+        android:id="@+id/nav_overview"
+        android:name="com.advancedfinance.overview.presentation.screen.OverviewFragment"
+        android:label="Advanced Finance"
+        tools:layout="@layout/fragment_overview" >
+        <action
+            android:id="@+id/home_action_nav_overview_to_home_transactionfragment"
+            app:destination="@id/home_transactionfragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+</navigation>
