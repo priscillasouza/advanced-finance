@@ -1,34 +1,30 @@
 plugins {
-    alias libs.plugins.android.application
+    alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
+    alias libs.plugins.navigation.safeargs.kotlin
+    alias libs.plugins.kotlin.parcelize
 }
+
+def apiKeyPropertiesFile = rootProject.file("apikey.properties")
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+
 android {
+    namespace 'com.advancedfinance.overview'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.advancedfinance"
         minSdk 23
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
-            debuggable false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-
-        debug {
-            versionNameSuffix '-Dev'
-            applicationIdSuffix '.dev'
             minifyEnabled false
-            shrinkResources false
-            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -36,7 +32,7 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = '1.8'
     }
     buildFeatures {
         viewBinding true
@@ -52,11 +48,8 @@ android {
 
 dependencies {
 
-    implementation(project(path: ':core'))
-    implementation(project(path: ':entrance'))
-    implementation(project(path: ':framework'))
-    implementation(project(path: ':account_finance'))
-    implementation(project(path: ':overview'))
+    implementation(project(":core"))
+    implementation(project(":framework"))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test
@@ -67,7 +60,11 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.android.material
     implementation libs.androidx.constraintlayout
+    implementation libs.bundles.coroutines
+    implementation libs.bundles.lifecycle
     implementation libs.koin.android
+    implementation libs.bundles.networking
+    implementation libs.bundles.room
 }
 
 configurations.implementation {

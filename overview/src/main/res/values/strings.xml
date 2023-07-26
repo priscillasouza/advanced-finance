@@ -1,0 +1,11 @@
+<resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="overview_text_view_card_account_balance">Saldo de contas</string>
+    <string name="overview_text_view_card_expenses_of_the_day">Gastos do dia</string>
+    <string name="overview_text_view_card_overview">Visão geral</string>
+    <string name="overview_text_view_card_revenues">Receitas</string>
+    <string name="overview_text_view_card_expenses">Despesas</string>
+    <string name="overview_text_view_add_revenues">Receitas</string>
+    <string name="overview_text_description_add_revenues">Adicionar receita</string>
+    <string name="overview_text_description_add">Adicionar</string>
+</resources>
