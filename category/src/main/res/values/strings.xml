@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="category_hello_blank_fragment">Hello blank fragment</string>
+    <string name="category_text_hint_name_category">Nome</string>
+    <string name="category_text_radio_group_revenue">Receita</string>
+    <string name="category_text_radio_group_expense">Despesa</string>
+    <string name="category_text_content_description">Adicionar categoria</string>
+    <string name="category_text_tab_layout_revenues">Receitas</string>
+    <string name="category_text_tab_layout_expenses">Despesas</string>
+    <string name="category_text_toast_category_successfully_saved">Categoria salva com sucesso</string>
+    <string name="category_text_toast_category_successfully_updated">Categoria atualizada com sucesso</string>
+    <string name="category_text_button_save_category">Salvar</string>
+    <string name="category_text_button_update_category">Atualizar</string>
+</resources>

@@ -1,6 +1,7 @@
 package com.advancedfinance
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.Navigation
@@ -39,7 +40,7 @@ class DrawerActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_overview
+                R.id.category_navigation
             ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
