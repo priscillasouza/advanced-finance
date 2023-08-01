@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transaction_text_hint_value">0,00</string>
+    <string name="transaction_text_hint_description">Descrição</string>
+    <string name="transaction_text_hint_date">Data</string>
+    <string name="transaction_text_hint_category">Categoria</string>
+    <string name="transaction_text_hint_account">Conta</string>
+    <string name="transaction_text_hint_observation">Observação</string>
+    <string name="transaction_text_check_box_received">Recebido</string>
+    <string name="transaction_text_check_box_installment">Parcelar</string>
+    <string name="transaction_text_radio_button_fixed_value">Valor fixo</string>
+    <string name="transaction_text_radio_button_pay_in_installments">Parcelar valor</string>
+    <string name="transaction_text_hint_repetitions">Repetições</string>
+    <string name="transaction_text_hint_period_option">Período</string>
+</resources>

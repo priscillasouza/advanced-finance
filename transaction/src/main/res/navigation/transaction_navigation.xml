@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/transaction_navigation"
+    app:startDestination="@id/transaction_transactionfragment">
+
+    <fragment
+        android:id="@+id/transaction_transactionfragment"
+        android:name="com.advancedfinance.transaction.presentation.screen.TransactionFragment"
+        android:label="transaction_fragment_transaction"
+        tools:layout="@layout/transaction_fragment_transaction" />
+</navigation>

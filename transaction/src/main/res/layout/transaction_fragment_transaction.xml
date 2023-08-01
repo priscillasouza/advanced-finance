@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screen.TransactionFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/entrance_image_view_add_photo"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/transaction_ic_add_a_photo" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/entrance_image_view_add_photo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_input_value"
+            style="@style/CoreStyleTextSize16Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/transaction_text_hint_value"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_value"
+        app:startIconDrawable="@drawable/transaction_ic_description"
+        app:startIconTint="@color/core_seed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/transaction_text_hint_description"
+            android:inputType="textAutoComplete" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_description"
+        app:startIconDrawable="@drawable/transaction_ic_calendar"
+        app:startIconTint="@color/core_seed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/transaction_text_hint_date"
+            android:inputType="textAutoComplete" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_category"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/core_seed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_date"
+        app:startIconDrawable="@drawable/transaction_ic_category"
+        app:startIconTint="@color/core_seed">
+
+        <AutoCompleteTextView
+            android:id="@+id/autocomplete_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/transaction_text_hint_category"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_account"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/core_seed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_category"
+        app:startIconDrawable="@drawable/transaction_ic_account_balance"
+        app:startIconTint="@color/core_seed">
+
+        <AutoCompleteTextView
+            android:id="@+id/autocomplete_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/transaction_text_hint_account"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_observation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_account"
+        app:startIconDrawable="@drawable/transaction_ic_add_observation"
+        app:startIconTint="@color/core_seed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_input_observation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/transaction_text_hint_observation"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/checkbox_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_observation">
+
+        <CheckBox
+            android:id="@+id/checkbox_received"
+            style="@style/CoreStyleTextSize12Bold"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/transaction_text_check_box_received" />
+
+        <CheckBox
+            android:id="@+id/checkbox_installment"
+            style="@style/CoreStyleTextSize12Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transaction_text_check_box_installment" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_container">
+
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/radio_button_fixed_value"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/transaction_text_radio_button_fixed_value" />
+
+            <RadioButton
+                android:id="@+id/radio_button_pay_in_installments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transaction_text_radio_button_pay_in_installments" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_repetitions"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_radiogroup">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_input_repetitions"
+            style="@style/CoreStyleTextSize16Bold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/transaction_text_hint_repetitions"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_period_option"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/text_input_repetitions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_input_repetitions"
+        app:layout_constraintTop_toTopOf="@id/text_input_repetitions">
+
+        <AutoCompleteTextView
+            android:id="@+id/autocomplete_period_option"
+            style="@style/CoreStyleTextSize16Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/transaction_text_hint_period_option"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
