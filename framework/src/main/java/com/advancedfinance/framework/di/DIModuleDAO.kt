@@ -11,8 +11,10 @@ val daoModule = module {
             get(),
             AdvancedFinanceDatabase::class.java,
             DB_NAME
-        ).allowMainThreadQueries()
+        ).createFromAsset("database/pre_populate_db.db")
+            .allowMainThreadQueries()
             .build()
     }
     single { get<AdvancedFinanceDatabase>().accountDao() }
+    single { get<AdvancedFinanceDatabase>().categoryDao() }
 }

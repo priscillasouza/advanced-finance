@@ -2,6 +2,7 @@ package com.advancedfinance
 
 import android.app.Application
 import com.advancedfinance.account_finance.di.accountModule
+import com.advancedfinance.category.di.categoryModule
 import com.advancedfinance.entrance.di.entranceModule
 import com.advancedfinance.framework.di.apiModule
 import com.advancedfinance.framework.di.daoModule
@@ -24,7 +25,8 @@ class AdvancedFinanceApplication: Application() {
                 apiModule,
                 frameworkModule,
                 entranceModule,
-                accountModule
+                accountModule,
+                categoryModule
             )
         }
     }

@@ -9,6 +9,8 @@
     <string name="category_text_tab_layout_expenses">Despesas</string>
     <string name="category_text_toast_category_successfully_saved">Categoria salva com sucesso</string>
     <string name="category_text_toast_category_successfully_updated">Categoria atualizada com sucesso</string>
+    <string name="category_text_error_listing_categories">Erro ao listar categorias</string>
+    <string name="category_text_error_adding_categories">Erro ao adicionar categorias</string>
     <string name="category_text_button_save_category">Salvar</string>
     <string name="category_text_button_update_category">Atualizar</string>
 </resources>

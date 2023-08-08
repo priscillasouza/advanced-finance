@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.advancedfinance.category.R
 import com.advancedfinance.category.databinding.CategoryFragmentCategoryBinding
 import com.advancedfinance.category.presentation.model.CategoryModel
@@ -53,29 +54,26 @@ class CategoryFragment : BaseFragment<CategoryFragmentCategoryBinding, CategoryV
         viewBinding.apply {
             buttonSaveCategory.setOnClickListener {
                 val name = editTextNameCategory.text.toString()
-
-                var type: TransactionType = TransactionType(id = 1, name = "Receita")
-                rgTransactionType.setOnCheckedChangeListener { radioGroup, checkedId ->
-                    type = when (checkedId) {
-                        R.id.radio_button_revenue -> {
-                            TransactionType(id = 1,
-                                name = getString(R.string.category_text_radio_group_revenue))
-                        }
-                        R.id.radio_button_expense -> {
-                            TransactionType(id = 2,
-                                name = getString(R.string.category_text_radio_group_expense))
-                        }
-                        else -> {
-                            TransactionType(id = 1,
-                                name = getString(R.string.category_text_radio_group_revenue))
-                        }
-                    }
+                val type = if (viewBinding.radioButtonRevenue.isChecked) {
+                    TransactionType(
+                        id = 1,
+                        name = getString(R.string.category_text_radio_group_revenue))
+                } else {
+                    TransactionType(
+                        id = 2,
+                        name = getString(R.string.category_text_radio_group_expense))
                 }
 
-                viewModel.dispatchViewAction(CategoryViewAction.SaveCategory(
-                    categoryName = name,
-                    typeTransaction = type
-                ))
+                viewModel.dispatchViewAction(
+                    CategoryViewAction.SaveCategory(
+                        typeTransaction = type,
+                        name = name
+                    ))
+
+                Toast.makeText(context,
+                    getString(R.string.category_text_toast_category_successfully_saved),
+                    Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.category_action_category_categoryfragment_to_category_categorylistfragment)
             }
         }
     }

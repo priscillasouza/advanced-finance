@@ -18,5 +18,14 @@
         android:id="@+id/category_categoryfragment"
         android:name="com.advancedfinance.category.presentation.screen.category.CategoryFragment"
         android:label="Nova categoria"
-        tools:layout="@layout/category_fragment_category" />
+        tools:layout="@layout/category_fragment_category">
+        <action
+            android:id="@+id/category_action_category_categoryfragment_to_category_categorylistfragment"
+            app:destination="@id/category_categorylistfragment" />
+        <argument
+            android:name="category"
+            android:defaultValue="@null"
+            app:argType="com.advancedfinance.category.presentation.model.CategoryModel"
+            app:nullable="true" />
+    </fragment>
 </navigation>
