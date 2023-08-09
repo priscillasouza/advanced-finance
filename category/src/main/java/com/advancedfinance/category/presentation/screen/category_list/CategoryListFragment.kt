@@ -35,8 +35,12 @@ class CategoryListFragment :
 
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {
-                0 -> tab.text = getString(R.string.category_text_tab_layout_revenues)
-                1 -> tab.text = getString(R.string.category_text_tab_layout_expenses)
+                0 -> {
+                    tab.text = getString(R.string.category_text_tab_layout_revenues)
+                }
+                1 -> {
+                    tab.text = getString(R.string.category_text_tab_layout_expenses)
+                }
             }
         }.attach()
     }

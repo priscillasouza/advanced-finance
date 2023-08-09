@@ -14,9 +14,8 @@ class ViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> RevenueListFragment()
-            1 -> ExpenseListFragment()
-            else -> RevenueListFragment()
+            0 -> CategoryListDetailFragment(categoryType = 1)
+            else -> CategoryListDetailFragment(categoryType = 2)
         }
     }
 }

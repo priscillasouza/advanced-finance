@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.advancedfinance.category.R
 import com.advancedfinance.category.databinding.CategoryFragmentCategoryBinding
 import com.advancedfinance.category.presentation.model.CategoryModel
@@ -16,8 +17,12 @@ class CategoryFragment : BaseFragment<CategoryFragmentCategoryBinding, CategoryV
     CategoryFragmentCategoryBinding::inflate,
     CategoryViewModel::class
 ) {
+
+    private val args: CategoryFragmentArgs by navArgs()
+
     override fun prepareView(savedInstanceState: Bundle?) {
         onObservable()
+        setArgumentCategory()
         setListeners()
     }
 
@@ -50,6 +55,10 @@ class CategoryFragment : BaseFragment<CategoryFragmentCategoryBinding, CategoryV
         }
     }
 
+    private fun setArgumentCategory() {
+        viewModel.dispatchViewAction(CategoryViewAction.PreparedViewCategory(args.category))
+    }
+
     private fun setListeners() {
         viewBinding.apply {
             buttonSaveCategory.setOnClickListener {
@@ -69,7 +78,6 @@ class CategoryFragment : BaseFragment<CategoryFragmentCategoryBinding, CategoryV
                         typeTransaction = type,
                         name = name
                     ))
-
                 Toast.makeText(context,
                     getString(R.string.category_text_toast_category_successfully_saved),
                     Toast.LENGTH_SHORT).show()
@@ -83,7 +91,6 @@ class CategoryFragment : BaseFragment<CategoryFragmentCategoryBinding, CategoryV
         viewBinding.apply {
             editTextNameCategory.setText(category.name)
             buttonSaveCategory.text = getString(R.string.category_text_button_update_category)
-            buttonSaveCategory.setTextColor(com.advancedfinance.core.R.color.core_md_theme_light_onPrimary)
         }
     }
 

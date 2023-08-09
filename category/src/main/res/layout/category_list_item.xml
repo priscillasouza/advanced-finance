@@ -21,14 +21,14 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_view_category_name"
-            style="@style/CoreStyleTextSize24Bold"
+            style="@style/CoreStyleTextSize16Bold"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="24dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/core_md_theme_light_scrim"
+            android:textColor="@color/core_seed"
             tools:text="Dinheiro" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </com.google.android.material.card.MaterialCardView>
