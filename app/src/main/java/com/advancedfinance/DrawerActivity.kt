@@ -40,8 +40,24 @@ class DrawerActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.category_navigation
+                com.advancedfinance.overview.R.id.overview_navigation,
+                com.advancedfinance.account_finance.R.id.account_finance_navigation,
+                com.advancedfinance.category.R.id.category_navigation
             ), drawerLayout)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                com.advancedfinance.account_finance.R.id.account_finance_accountfragment -> {
+                    binding.appBarDrawer.toolbar.visibility = View.GONE
+                }
+                com.advancedfinance.category.R.id.category_categoryfragment -> {
+                    binding.appBarDrawer.toolbar.visibility = View.GONE
+                }
+                com.advancedfinance.category.R.id.category_categorylistfragment -> {
+                    binding.appBarDrawer.toolbar.visibility = View.VISIBLE
+                }
+            }
+        }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

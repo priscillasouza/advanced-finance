@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/category_categorylistfragment"
         android:name="com.advancedfinance.category.presentation.screen.category_list.CategoryListFragment"
-        android:label="Categorias"
+        android:label="@string/category_text_label_navigation_category"
         tools:layout="@layout/category_fragment_category_list">
         <action
             android:id="@+id/category_action_category_categorylistfragment_to_category_categoryfragment"
@@ -17,7 +17,6 @@
     <fragment
         android:id="@+id/category_categoryfragment"
         android:name="com.advancedfinance.category.presentation.screen.category.CategoryFragment"
-        android:label="Nova categoria"
         tools:layout="@layout/category_fragment_category">
         <action
             android:id="@+id/category_action_category_categoryfragment_to_category_categorylistfragment"

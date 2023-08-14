@@ -14,10 +14,10 @@ class CategoryViewModel(
     private val repository: ICategoryRepository,
 ) : BaseViewModel<CategoryViewState, CategoryViewAction>() {
 
+    private var category: CategoryModel? = null
+
     private val viewStateMutable = MutableStateFlow<CategoryViewState>(CategoryViewState.Loading)
     override val listViewState: StateFlow<CategoryViewState> = viewStateMutable
-
-    private var category: CategoryModel? = null
 
     override fun dispatchViewAction(viewAction: CategoryViewAction) {
         when (viewAction) {
@@ -26,6 +26,9 @@ class CategoryViewModel(
             }
             is CategoryViewAction.SaveCategory -> {
                 addOrUpdateAccount(viewAction.name, viewAction.typeTransaction)
+            }
+            is CategoryViewAction.DeleteCategory -> {
+                deleteCategory(viewAction.categoryModel)
             }
         }
     }
@@ -79,6 +82,18 @@ class CategoryViewModel(
             }
         }
     }
+
+    private fun deleteCategory(categoryModel: CategoryModel) {
+        viewModelScope.launch {
+            try {
+                repository.deleteCategory(categoryModel)
+                viewStateMutable.value = CategoryViewState.SuccessDelete
+            } catch (e: Exception) {
+                viewStateMutable.value =
+                    CategoryViewState.Error(R.string.category_text_error_delete_categories)
+            }
+        }
+    }
 }
 
 sealed class CategoryViewAction {
@@ -87,11 +102,13 @@ sealed class CategoryViewAction {
         val name: String,
         val typeTransaction: TransactionType,
     ) : CategoryViewAction()
+    class DeleteCategory(val categoryModel: CategoryModel) : CategoryViewAction()
 }
 
 sealed class CategoryViewState {
     object SuccessInsert : CategoryViewState()
     object SuccessUpdate : CategoryViewState()
+    object SuccessDelete : CategoryViewState()
     object Loading : CategoryViewState()
     class Error(val message: Int) : CategoryViewState()
     class ViewUpdate(val categoryModel: CategoryModel) : CategoryViewState()

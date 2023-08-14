@@ -13,6 +13,9 @@ interface CategoryDAO {
     @Update
     fun updateCategory(categoryEntity: CategoryEntity)
 
+    @Delete
+    fun deleteCategory(categoryEntity: CategoryEntity)
+
     @Query("SELECT * FROM category WHERE fk_transaction_type_id = :categoryType")
     fun getCategoryType(categoryType: Int): Flow<List<CategoryEntity>>
 }

@@ -9,5 +9,7 @@ interface ICategoryRepository {
 
     suspend fun updateCategory(categoryModel: CategoryModel)
 
+    suspend fun deleteCategory(categoryModel: CategoryModel)
+
     fun getCategoryType(categoryType: Int): Flow<List<CategoryModel>>
 }

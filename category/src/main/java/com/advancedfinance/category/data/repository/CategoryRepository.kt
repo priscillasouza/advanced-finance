@@ -26,6 +26,12 @@ class CategoryRepository(
         }
     }
 
+    override suspend fun deleteCategory(categoryModel: CategoryModel) {
+        mapModelToEntity.transform(categoryModel).also {
+            categoryDAO.deleteCategory(it)
+        }
+    }
+
     override fun getCategoryType(categoryType: Int): Flow<List<CategoryModel>> {
         return categoryDAO.getCategoryType(categoryType).map {
             mapEntityToModel.transform(it)
