@@ -9,5 +9,5 @@ data class CategoryWithTransactionType(
         parentColumn = "id",
         entityColumn = "id"
     )
-    val transactionType: TransactionTypeEntity
+    val transactionType: List<TransactionTypeEntity>
 )

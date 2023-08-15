@@ -59,13 +59,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
+            <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/radio_button_revenue"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/category_text_radio_group_revenue" />
 
-            <RadioButton
+            <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/radio_button_expense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

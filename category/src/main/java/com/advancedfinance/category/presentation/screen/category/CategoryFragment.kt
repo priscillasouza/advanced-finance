@@ -113,6 +113,11 @@ class CategoryFragment : BaseFragment<CategoryFragmentCategoryBinding, CategoryV
     private fun preparedViewUpdate(category: CategoryModel) {
         viewBinding.apply {
             editTextNameCategory.setText(category.name)
+            if (category.transactionType.id == 1) {
+                radioButtonRevenue.isChecked = true
+            } else {
+                radioButtonExpense.isChecked = true
+            }
             buttonSaveCategory.text = getString(R.string.category_text_button_update_category)
             toolbarCategory.title = getString(R.string.category_text_toolbar_update_category)
         }
