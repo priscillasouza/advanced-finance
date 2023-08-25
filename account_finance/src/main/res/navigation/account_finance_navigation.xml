@@ -8,32 +8,23 @@
     <fragment
         android:id="@+id/account_finance_accountlistfragment"
         android:name="com.advancedfinance.account_finance.presentation.screen.account_list.AccountListFragment"
-        android:label="account_finance_fragment_account_list"
+        android:label="@string/account_finance_text_toolbar_account_list"
         tools:layout="@layout/account_finance_fragment_account_list">
         <action
             android:id="@+id/account_finance_action_account_finance_accountlistfragment_to_account_finance_accountfragment"
-            app:destination="@id/account_finance_accountfragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/account_finance_accountfragment" />
     </fragment>
     <fragment
         android:id="@+id/account_finance_accountfragment"
         android:name="com.advancedfinance.account_finance.presentation.screen.account.AccountFragment"
-        android:label="account_finance_fragment_account"
         tools:layout="@layout/account_finance_fragment_account">
         <action
             android:id="@+id/account_finance_action_account_finance_accountfragment_to_account_finance_accountlistfragment"
-            app:destination="@id/account_finance_accountlistfragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left" />
+            app:destination="@id/account_finance_accountlistfragment" />
         <argument
             android:name="account"
-            app:argType="com.advancedfinance.account_finance.presentation.model.AccountModel"
             android:defaultValue="@null"
+            app:argType="com.advancedfinance.account_finance.presentation.model.AccountModel"
             app:nullable="true" />
     </fragment>
 

@@ -9,5 +9,5 @@ data class AccountModel(
     val id: Int?,
     val name: String,
     val startedBalance: BigDecimal,
-    val accountCategory: String
-): Parcelable
+    val accountType: AccountTypeModel
+):Parcelable

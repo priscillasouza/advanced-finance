@@ -6,19 +6,19 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.ThemedSpinnerAdapter
-import com.advancedfinance.account_finance.presentation.model.AccountCategoryModel
+import com.advancedfinance.account_finance.presentation.model.AccountTypeModel
 
-class AdapterAccountCategory(
+class AdapterAccountType(
     context: Context,
-    private val listCategories: List<AccountCategoryModel>
-): ArrayAdapter<AccountCategoryModel>(
+    private val listAccountTypes: List<AccountTypeModel> = arrayListOf()
+): ArrayAdapter<AccountTypeModel>(
     context,
     android.R.layout.simple_spinner_dropdown_item,
-    listCategories
+    listAccountTypes
 ), ThemedSpinnerAdapter {
 
-    override fun getItem(position: Int): AccountCategoryModel? {
-        return listCategories[position]
+    override fun getItem(position: Int): AccountTypeModel {
+        return listAccountTypes[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -26,14 +26,14 @@ class AdapterAccountCategory(
     }
 
     override fun getCount(): Int {
-        return listCategories.size
+        return listAccountTypes.size
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         super.getView(position, convertView, parent)
         val view = super.getView(position, convertView, parent)
-        val textViewNameCategories = view.findViewById<TextView>(android.R.id.text1)
-        textViewNameCategories.setText(listCategories[position].name)
+        val textViewNameAccountType = view.findViewById<TextView>(android.R.id.text1)
+        textViewNameAccountType.text = listAccountTypes[position].name
         return view
     }
 }

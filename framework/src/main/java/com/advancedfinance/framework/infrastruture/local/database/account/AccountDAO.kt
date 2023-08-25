@@ -2,6 +2,8 @@ package com.advancedfinance.framework.infrastruture.local.database.account
 
 import androidx.room.*
 import com.advancedfinance.framework.infrastruture.local.database.account.entity.AccountEntity
+import com.advancedfinance.framework.infrastruture.local.database.account.entity.AccountTypeEntity
+import com.advancedfinance.framework.infrastruture.local.database.account.entity.AccountWithAccountType
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,6 +19,8 @@ interface AccountDAO {
     fun deleteAccount(accountEntity: AccountEntity)
 
     @Query("SELECT * FROM account")
-    fun getAccounts(): Flow<List<AccountEntity>>
+    fun getAccounts(): Flow<List<AccountWithAccountType>>
 
+    @Query("SELECT * FROM category_account_type")
+    fun getAllAccountType(): Flow<List<AccountTypeEntity>>
 }

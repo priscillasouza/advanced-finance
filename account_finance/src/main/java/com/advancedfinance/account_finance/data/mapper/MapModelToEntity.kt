@@ -8,10 +8,10 @@ class MapModelToEntity : IMapper<AccountModel, AccountEntity> {
 
     override fun transform(account: AccountModel): AccountEntity {
         return AccountEntity(
-            id = account.id?: 0,
+            id = account.id ?: 0,
             name = account.name,
             startedBalance = account.startedBalance,
-            accountCategory = account.accountCategory
+            accountType = account.accountType.name
         )
     }
 }

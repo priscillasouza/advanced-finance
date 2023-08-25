@@ -1,6 +1,7 @@
 package com.advancedfinance.account_finance.domain.repository
 
 import com.advancedfinance.account_finance.presentation.model.AccountModel
+import com.advancedfinance.account_finance.presentation.model.AccountTypeModel
 import kotlinx.coroutines.flow.Flow
 
 interface IAccountRepository {
@@ -13,4 +14,5 @@ interface IAccountRepository {
 
     fun getAccounts(): Flow<List<AccountModel>>
 
+    fun getAllAccountType(): Flow<List<AccountTypeModel>>
 }

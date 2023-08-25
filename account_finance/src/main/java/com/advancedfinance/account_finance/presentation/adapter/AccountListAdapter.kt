@@ -42,10 +42,11 @@ class AccountListAdapter(val onClickItem: (AccountModel) -> Unit) :
         private val layout: AccountFinanceAccountListItemBinding,
     ) :
         RecyclerView.ViewHolder(layout.root) {
+        @SuppressLint("SetTextI18n")
         fun onBind(account: AccountModel) {
             layout.apply {
                 textViewAccountName.text = account.name
-                textViewAccountValue.text = account.startedBalance.toString().toMoney()
+                textViewAccountItemValue.text = account.startedBalance.toString().toMoney()
                 cardViewAccountListItem.setOnClickListener {
                     onClickItem.invoke(account)
                 }

@@ -7,29 +7,22 @@
     tools:context=".presentation.screen.account.AccountFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_new_account"
+        android:id="@+id/app_bar_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/core_md_theme_light_primary"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_account"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
+            android:layout_height="wrap_content"
             app:menu="@menu/account_finance_app_bar_menu_account"
-            app:navigationIcon="@drawable/account_finance_ic_arrow_back"
-            app:navigationIconTint="@color/core_md_theme_light_onPrimary"
-            app:title="@string/account_finance_text_toolbar_account"
-            app:titleTextColor="@color/core_md_theme_light_onPrimary" />
+            app:titleTextColor="@color/design_default_color_on_primary" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_view_new_account_value"
+        android:id="@+id/text_view_account_value"
         style="@style/CoreStyleTextSize24Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,21 +31,21 @@
         android:text="@string/account_finance_text_view_new_account_value"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_new_account" />
+        app:layout_constraintTop_toBottomOf="@id/app_bar_account" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_new_account_value"
-        style="?attr/textInputFilledStyle"
+        android:id="@+id/text_input_account_value"
+        style="?attr/textInputOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_new_account_value">
+        app:layout_constraintTop_toBottomOf="@id/text_view_account_value">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_text_input_new_account_value"
+            android:id="@+id/edit_text_input_account_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/account_finance_text_hint_new_account_value"
@@ -60,18 +53,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_new_account_name"
-        style="?attr/textInputFilledStyle"
+        android:id="@+id/text_input_account_name"
+        style="?attr/textInputOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_new_account_value">
+        app:layout_constraintTop_toBottomOf="@id/text_input_account_value">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_text_input_new_account_name"
+            android:id="@+id/edit_text_input_account_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/account_finance_text_hint_new_account_name"
@@ -79,20 +72,20 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_new_account_category"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+        android:id="@+id/text_input_account_type"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:padding="8dp"
         android:hint="@string/account_finance_text_hint_new_account_category"
+        android:padding="8dp"
         android:textColor="@color/core_seed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_new_account_name">
+        app:layout_constraintTop_toBottomOf="@id/text_input_account_name">
 
         <AutoCompleteTextView
-            android:id="@+id/autocomplete_category"
+            android:id="@+id/autocomplete_account_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
@@ -108,11 +101,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_new_account_description"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_account_description"
         app:layout_constraintVertical_bias="0.166" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_view_new_account_description"
+        android:id="@+id/text_view_account_description"
         style="@style/CoreStyleTextSize16Regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -122,5 +115,5 @@
         android:textColor="@color/core_seed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_new_account_category" />
+        app:layout_constraintTop_toBottomOf="@id/text_input_account_type" />
 </androidx.constraintlayout.widget.ConstraintLayout>

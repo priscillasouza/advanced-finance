@@ -11,7 +11,8 @@
     android:focusable="true"
     android:longClickable="false"
     app:cardBackgroundColor="@color/cardview_light_background"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    app:strokeColor="@color/core_md_theme_light_primary">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             tools:text="Dinheiro" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_view_account_value"
+            android:id="@+id/text_view_account_item_value"
             style="@style/CoreStyleTextSize16Bold"
             android:layout_width="140dp"
             android:layout_height="wrap_content"

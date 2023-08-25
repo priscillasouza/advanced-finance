@@ -32,7 +32,7 @@ class AccountListViewModel(
                 .catch { exception ->
                     exception.printStackTrace()
                     listViewStateMutable.value =
-                        AccountListViewState.Error(R.string.account_finance_text_account_list_error.toString())
+                        AccountListViewState.Error(R.string.account_finance_text_account_list_error)
                 }.collect {
                     if (it.isEmpty()) {
                         listViewStateMutable.value = AccountListViewState.Empty
@@ -50,10 +50,8 @@ sealed class AccountListViewAction {
 }
 
 sealed class AccountListViewState {
-    class Success(val listAccount: List<AccountModel>, val total: BigDecimal) :
-        AccountListViewState()
-
-    class Error(val message: String) : AccountListViewState()
+    class Success(val listAccount: List<AccountModel>, val total: BigDecimal) : AccountListViewState()
+    class Error(val message: Int) : AccountListViewState()
     object Loading : AccountListViewState()
     object Empty : AccountListViewState()
 }

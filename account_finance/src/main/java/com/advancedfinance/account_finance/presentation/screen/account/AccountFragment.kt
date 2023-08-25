@@ -2,7 +2,7 @@ package com.advancedfinance.account_finance.presentation.screen.account
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.widget.ArrayAdapter
+import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -10,25 +10,29 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.advancedfinance.account_finance.R
 import com.advancedfinance.account_finance.databinding.AccountFinanceFragmentAccountBinding
+import com.advancedfinance.account_finance.presentation.adapter.AdapterAccountType
 import com.advancedfinance.account_finance.presentation.model.AccountModel
+import com.advancedfinance.account_finance.presentation.model.AccountTypeModel
 import com.advancedfinance.core.extensions.addCurrencyFormatter
 import com.advancedfinance.core.extensions.removeSpecialCharacters
 import com.advancedfinance.core.extensions.toMoney
 import com.advancedfinance.core.platform.BaseFragment
 import kotlinx.coroutines.launch
 
-class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, AccountViewModel>(
-    AccountFinanceFragmentAccountBinding::inflate,
-    AccountViewModel::class
-) {
+class AccountFragment :
+    BaseFragment<AccountFinanceFragmentAccountBinding, AccountViewModel>(
+        AccountFinanceFragmentAccountBinding::inflate,
+        AccountViewModel::class
+    ) {
 
     private val args: AccountFragmentArgs by navArgs()
+    private var accountTypeSelected: AccountTypeModel? = null
 
     override fun prepareView(savedInstanceState: Bundle?) {
-        onObservable()
-        setArgumentAccount()
-        setAdapterAccountCategories()
+        viewModel.dispatchViewAction(AccountViewAction.GetListAccountType)
         setListeners()
+        setArgumentAccount()
+        onObservable()
     }
 
     private fun onObservable() {
@@ -59,6 +63,18 @@ class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, Accou
                     is AccountViewState.Error -> {
                         it.message
                     }
+                    is AccountViewState.SuccessAccountType -> {
+                        setAdapterAccountType(
+                            viewBinding.autocompleteAccountType,
+                            onItemClickListener = { adapter, _, position, _ ->
+                                val type = adapter.getItemAtPosition(position) as AccountTypeModel
+                                accountTypeSelected = type
+                                viewBinding.autocompleteAccountType.setText(accountTypeSelected?.name)
+                            },
+                            it.listAccountType
+                        )
+                        viewBinding.autocompleteAccountType.setText(accountTypeSelected?.name)
+                    }
                     else -> {}
                 }
             }
@@ -69,44 +85,24 @@ class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, Accou
         viewModel.dispatchViewAction(AccountViewAction.PreparedViewAccount(args.account))
     }
 
-    private fun setAdapterAccountCategories() {
-        val accountCategory: AutoCompleteTextView = viewBinding.autocompleteCategory
-        val listCategory = ArrayList<String>()
-
-        listCategory.add(getString(R.string.account_finance_text_category_money))
-        listCategory.add(getString(R.string.account_finance_text_category_current_account))
-        listCategory.add(getString(R.string.account_finance_text_category_savings))
-        listCategory.add(getString(R.string.account_finance_text_category_others))
-
-        val categoryAdapter = ArrayAdapter(requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            listCategory)
-
-        accountCategory.apply {
-            setAdapter(categoryAdapter)
-            accountCategory.setOnItemClickListener { adapterView, view, i, l ->
-                adapterView.getItemAtPosition(i).toString()
-            }
-        }
-    }
-
     private fun setListeners() {
         viewBinding.apply {
 
-            editTextInputNewAccountValue.addCurrencyFormatter()
+            editTextInputAccountValue.addCurrencyFormatter()
 
             buttonSaveAccount.setOnClickListener {
                 if (validateFields()) {
                     val startedBalance =
-                        editTextInputNewAccountValue.text.toString().removeSpecialCharacters()
+                        editTextInputAccountValue.text.toString().removeSpecialCharacters()
                             .toBigDecimal()
-                    val name = editTextInputNewAccountName.text.toString()
-                    val category = autocompleteCategory.text.toString()
+                    val name = editTextInputAccountName.text.toString()
+                    val type = accountTypeSelected
 
                     viewModel.dispatchViewAction(AccountViewAction.SaveAccount(
                         startedBalance = startedBalance,
                         name = name,
-                        category = category))
+                        accountType = type
+                    ))
 
                     findNavController().navigate(AccountFragmentDirections.accountFinanceActionAccountFinanceAccountfragmentToAccountFinanceAccountlistfragment())
                 } else {
@@ -117,9 +113,8 @@ class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, Accou
             }
 
             toolbarAccount.apply {
-                setNavigationOnClickListener {
-                    findNavController().popBackStack()
-                }
+                setNavigationOnClickListener { findNavController().popBackStack() }
+                setNavigationIcon(R.drawable.account_finance_ic_arrow_back)
                 setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         R.id.menu_item_delete -> {
@@ -135,19 +130,39 @@ class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, Accou
 
     private fun preparedViewUpdate(account: AccountModel) {
         viewBinding.apply {
-            editTextInputNewAccountValue.setText(account.startedBalance.toString().toMoney())
-            editTextInputNewAccountName.setText(account.name)
-            autocompleteCategory.setText(account.accountCategory)
+            editTextInputAccountValue.setText(String.format(account.startedBalance.toString()
+                .toMoney()))
+            editTextInputAccountName.setText(account.name)
+            autocompleteAccountType.setText(account.accountType.name)
             buttonSaveAccount.text = getString(R.string.account_finance_text_button_account_update)
-            toolbarAccount.setTitle(R.string.account_finance_text_toolbar_account_edit)
+            toolbarAccount.title = getString(R.string.account_finance_text_toolbar_account_update)
         }
     }
 
     private fun preparedViewInsert() {
         viewBinding.apply {
             buttonSaveAccount.text = getString(R.string.account_finance_text_button_account_save)
-            toolbarAccount.menu.removeItem(R.id.menu_item_delete)
+            toolbarAccount.apply {
+                setTitle(R.string.account_finance_text_toolbar_account_save)
+                menu.removeItem(R.id.menu_item_delete)
+            }
         }
+    }
+
+    private fun setAdapterAccountType(
+        autoCompleteTextView: AutoCompleteTextView,
+        onItemClickListener: AdapterView.OnItemClickListener,
+        types: List<AccountTypeModel>,
+    ) {
+        val adapter = AdapterAccountType(
+            requireContext(),
+            types
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        autoCompleteTextView.apply {
+            setOnItemClickListener(onItemClickListener)
+        }
+        autoCompleteTextView.setAdapter(adapter)
     }
 
     private fun setDeleteAccount() {
@@ -166,8 +181,8 @@ class AccountFragment : BaseFragment<AccountFinanceFragmentAccountBinding, Accou
     }
 
     private fun validateFields(): Boolean {
-        return (viewBinding.editTextInputNewAccountValue.text.toString().isNotEmpty()
-                && viewBinding.editTextInputNewAccountName.text.toString().isNotEmpty()
-                && viewBinding.autocompleteCategory.text.isNotEmpty())
+        return (viewBinding.editTextInputAccountValue.text.toString().isNotEmpty()
+                && viewBinding.editTextInputAccountName.text.toString().isNotEmpty()
+                && viewBinding.autocompleteAccountType.text.isNotEmpty())
     }
 }
