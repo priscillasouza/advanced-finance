@@ -8,7 +8,7 @@ class MapModelToEntity : IMapper<CategoryModel, CategoryEntity> {
 
     override fun transform(category: CategoryModel): CategoryEntity {
         return CategoryEntity(
-            id = category.id ?: 0,
+            id = category.id,
             name = category.name,
             fkTransactionTypeId = category.transactionType.id
         )

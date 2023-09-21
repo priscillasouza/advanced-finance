@@ -7,9 +7,21 @@
     <string name="transaction_text_hint_account">Conta</string>
     <string name="transaction_text_hint_observation">Observação</string>
     <string name="transaction_text_check_box_received">Recebido</string>
+    <string name="transaction_text_check_box_pay">Pago</string>
     <string name="transaction_text_check_box_installment">Parcelar</string>
     <string name="transaction_text_radio_button_fixed_value">Valor fixo</string>
     <string name="transaction_text_radio_button_pay_in_installments">Parcelar valor</string>
     <string name="transaction_text_hint_repetitions">Repetições</string>
+    <string name="transaction_text_hint_installments">Parcelas</string>
     <string name="transaction_text_hint_period_option">Período</string>
+    <string name="transaction_text_menu_item_transaction_save">Salvar</string>
+    <string name="transaction_text_error_transaction_save">Erro ao salvar a transação</string>
+    <string name="transaction_text_toast_success_transaction_save">Transação salva com sucesso</string>
+    <string name="transaction_text_error_transaction_get_category_list">Erro ao pegar a lista de categorias</string>
+    <string name="transaction_text_error_transaction_get_account_list">Erro ao pegar a lista de contas</string>
+    <string name="transaction_text_error_transaction_get_period_type_list">Erro ao pegar a lista de período</string>
+    <string name="transaction_text_toolbar_new_revenue">Nova receita</string>
+    <string name="transaction_text_toolbar_new_expense">Nova despesa</string>
+    <string name="transaction_text_toast_validate_fields">Informe todos os campos</string>
+    <string name="transaction_text_button_transaction_save">Salvar</string>
 </resources>

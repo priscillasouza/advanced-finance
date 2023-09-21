@@ -7,6 +7,6 @@
     <include app:graph="@navigation/entrance_navigation" />
     <include app:graph="@navigation/app_mobile_navigation" />
     <action
-        android:id="@+id/app_entrance"
-        app:destination="@id/mobile_navigation" />
+        android:id="@+id/navigation_entrance"
+        app:destination="@id/app_mobile_navigation" />
 </navigation>

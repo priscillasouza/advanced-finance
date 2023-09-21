@@ -2,7 +2,7 @@ plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
     alias libs.plugins.navigation.safeargs.kotlin
-    id("kotlin-parcelize")
+    alias libs.plugins.kotlin.parcelize
 }
 
 def apiKeyPropertiesFile = rootProject.file("apikey.properties")
@@ -32,7 +32,7 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = '1.8'
     }
     buildFeatures {
         viewBinding true
@@ -50,7 +50,6 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":framework"))
-    implementation(project(":account_finance"))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test

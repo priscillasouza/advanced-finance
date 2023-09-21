@@ -22,7 +22,7 @@ recycler-selection = "1.1.0"
 biometric = "1.2.0-alpha05"
 viewpager2 = "1.0.0"
 circleindicator = "2.1.6"
-parcelize="1.7.10"
+parcelize = "1.7.10"
 
 [libraries]
 androidx-corektx = { module = "androidx.core:core-ktx", version.ref = "corektx" }

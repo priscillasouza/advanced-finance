@@ -1,6 +1,7 @@
 plugins {
     alias libs.plugins.android.application
     alias libs.plugins.kotlin.android
+    alias libs.plugins.navigation.safeargs.kotlin
 }
 android {
     compileSdk 33
@@ -58,11 +59,11 @@ dependencies {
     implementation(project(path: ':account_finance'))
     implementation(project(path: ':overview'))
     implementation(project(path: ':category'))
+    implementation(project(path: ':transaction'))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test
     androidTestImplementation libs.androidx.room.testing
-
     implementation libs.androidx.corektx
     implementation libs.bundles.navigation
     implementation libs.androidx.appcompat

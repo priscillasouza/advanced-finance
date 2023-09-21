@@ -17,7 +17,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.advancedfinance.core.platform.BaseFragment
 import com.advancedfinance.entrance.BuildConfig.GOOGLE_API_OAUTH
@@ -263,6 +262,6 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
     }
 
     private fun fromLoginToAccountList() {
-        findNavController().navigate(LoginFragmentDirections.entranceActionEntranceLoginfragmentToEntranceDraweractivity())
+        findNavController().navigate(R.id.entrance_action_entrance_loginfragment_to_entrance_draweractivity)
     }
 }

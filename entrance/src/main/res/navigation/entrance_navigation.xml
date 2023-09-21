@@ -24,14 +24,9 @@
         tools:layout="@layout/entrance_fragment_login">
         <action
             android:id="@+id/entrance_action_entrance_loginfragment_to_entrance_draweractivity"
-            app:destination="@id/entrance_draweractivity"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/entrance_draweractivity" />
     </fragment>
     <activity
         android:id="@+id/entrance_draweractivity"
-        android:name="com.advancedfinance.home.presentation.DrawerActivity"
-        android:label="DrawerActivity" />
+        android:name="com.advancedfinance.DrawerActivity" />
 </navigation>

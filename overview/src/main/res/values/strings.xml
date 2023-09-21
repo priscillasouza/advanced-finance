@@ -6,6 +6,8 @@
     <string name="overview_text_view_card_revenues">Receitas</string>
     <string name="overview_text_view_card_expenses">Despesas</string>
     <string name="overview_text_view_add_revenues">Receitas</string>
+    <string name="overview_text_view_add_expenses">Despesas</string>
     <string name="overview_text_description_add_revenues">Adicionar receita</string>
+    <string name="overview_text_description_add_expenses">Adicionar despesa</string>
     <string name="overview_text_description_add">Adicionar</string>
 </resources>

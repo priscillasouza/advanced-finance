@@ -54,7 +54,7 @@ class CategoryViewModel(
                     transactionType = typeTransaction))
             }
         } ?: addCategory(CategoryModel(
-            id = null,
+            id = 0,
             name = name,
             transactionType = typeTransaction))
     }

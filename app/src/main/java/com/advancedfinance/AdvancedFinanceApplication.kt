@@ -7,6 +7,8 @@ import com.advancedfinance.entrance.di.entranceModule
 import com.advancedfinance.framework.di.apiModule
 import com.advancedfinance.framework.di.daoModule
 import com.advancedfinance.framework.di.frameworkModule
+import com.advancedfinance.overview.di.overviewModule
+import com.advancedfinance.transaction.di.transactionModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -26,7 +28,9 @@ class AdvancedFinanceApplication: Application() {
                 frameworkModule,
                 entranceModule,
                 accountModule,
-                categoryModule
+                categoryModule,
+                transactionModule,
+                overviewModule
             )
         }
     }

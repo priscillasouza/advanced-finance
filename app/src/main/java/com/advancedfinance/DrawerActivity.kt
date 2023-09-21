@@ -3,6 +3,7 @@ package com.advancedfinance
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
@@ -47,18 +48,26 @@ class DrawerActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                com.advancedfinance.account_finance.R.id.account_finance_accountfragment -> {
-                    binding.appBarDrawer.toolbar.visibility = View.GONE
-                }
-                com.advancedfinance.category.R.id.category_categoryfragment -> {
-                    binding.appBarDrawer.toolbar.visibility = View.GONE
-                }
-                com.advancedfinance.category.R.id.category_categorylistfragment -> {
-                    binding.appBarDrawer.toolbar.visibility = View.VISIBLE
+                com.advancedfinance.account_finance.R.id.account_finance_accountfragment -> hideAppBarDrawer()
+                com.advancedfinance.account_finance.R.id.account_finance_accountlistfragment -> showAppBarDrawer()
+                com.advancedfinance.category.R.id.category_categoryfragment -> hideAppBarDrawer()
+                com.advancedfinance.category.R.id.category_categorylistfragment -> showAppBarDrawer()
+                com.advancedfinance.transaction.R.id.transaction_transactionfragment -> hideAppBarDrawer()
+                com.advancedfinance.overview.R.id.overview_overviewfragment -> {
+                    showAppBarDrawer()
+                    window.statusBarColor = ContextCompat.getColor(this, com.advancedfinance.core.R.color.core_md_theme_light_primary)
                 }
             }
         }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    private fun showAppBarDrawer() {
+        binding.appBarDrawer.toolbar.visibility = View.VISIBLE
+    }
+
+    private fun hideAppBarDrawer() {
+        binding.appBarDrawer.toolbar.visibility = View.GONE
     }
 }

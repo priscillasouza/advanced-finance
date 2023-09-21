@@ -51,7 +51,6 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":account_finance"))
-    implementation(project(":home"))
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test

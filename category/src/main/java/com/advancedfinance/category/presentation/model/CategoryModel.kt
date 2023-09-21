@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CategoryModel(
-    val id: Int?,
+    val id: Int,
     val name: String,
     var transactionType : TransactionType
 ):Parcelable

@@ -4,10 +4,10 @@
 
     <application>
         <activity
-            android:name=".presentation.DrawerActivity"
+            android:name="com.advancedfinance.DrawerActivity"
             android:exported="false"
-            android:label="Advanced Finance"
-            android:theme="@style/CoreTheme.AdvancedFinance" />
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/CoreTheme.AdvancedFinance.NoActionBar" />
     </application>
 
 </manifest>

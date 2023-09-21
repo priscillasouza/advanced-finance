@@ -10,19 +10,19 @@ import com.advancedfinance.framework.infrastruture.local.database.category.Categ
 import com.advancedfinance.framework.infrastruture.local.database.category.entity.CategoryEntity
 import com.advancedfinance.framework.infrastruture.local.database.category.entity.TransactionTypeEntity
 import com.advancedfinance.framework.infrastruture.local.database.periodtype.entity.PeriodTypeEntity
-import com.advancedfinance.framework.infrastruture.local.database.transactions.TransactionDAO
-import com.advancedfinance.framework.infrastruture.local.database.transactions.entity.TransactionEntity
+import com.advancedfinance.framework.infrastruture.local.database.transaction.TransactionDAO
+import com.advancedfinance.framework.infrastruture.local.database.transaction.entity.TransactionEntity
 
 const val DB_NAME = "account_db"
 
 @Database(
     entities = [
         AccountEntity::class,
+        AccountTypeEntity::class,
         CategoryEntity::class,
         PeriodTypeEntity::class,
-        TransactionTypeEntity::class,
         TransactionEntity::class,
-        AccountTypeEntity::class
+        TransactionTypeEntity::class
     ],
     version = 1,
     exportSchema = false

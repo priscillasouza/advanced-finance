@@ -72,4 +72,13 @@
     <style name="CoreTheme.AdvancedFinance.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="CoreTheme.AdvancedFinance.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CoreStyleDatePickerRevenue" parent="ThemeOverlay.Material3.Dialog" >
+        <item name="colorAccent">@color/core_md_theme_light_tertiary</item>
+    </style>
+
+    <style name="CoreStyleDatePickerExpense" parent="ThemeOverlay.Material3.Dialog" >
+        <item name="colorAccent">@color/core_md_theme_light_error</item>
+    </style>
+
 </resources>

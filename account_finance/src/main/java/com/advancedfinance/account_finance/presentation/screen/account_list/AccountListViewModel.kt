@@ -15,17 +15,16 @@ class AccountListViewModel(
     private val repository: IAccountRepository,
 ) : BaseViewModel<AccountListViewState, AccountListViewAction>() {
 
-    private val listViewStateMutable =
-        MutableStateFlow<AccountListViewState>(AccountListViewState.Loading)
+    private val listViewStateMutable = MutableStateFlow<AccountListViewState>(AccountListViewState.Loading)
     override val listViewState: StateFlow<AccountListViewState> = listViewStateMutable
 
     override fun dispatchViewAction(viewAction: AccountListViewAction) {
         when (viewAction) {
-            is AccountListViewAction.GetListAccount -> getListAccount()
+            is AccountListViewAction.GetListAccount -> getAccountList()
         }
     }
 
-    private fun getListAccount() {
+    private fun getAccountList() {
         viewModelScope.launch {
             listViewStateMutable.value = AccountListViewState.Loading
             repository.getAccounts()
@@ -50,7 +49,7 @@ sealed class AccountListViewAction {
 }
 
 sealed class AccountListViewState {
-    class Success(val listAccount: List<AccountModel>, val total: BigDecimal) : AccountListViewState()
+    class Success(val accountList: List<AccountModel>, val total: BigDecimal) : AccountListViewState()
     class Error(val message: Int) : AccountListViewState()
     object Loading : AccountListViewState()
     object Empty : AccountListViewState()

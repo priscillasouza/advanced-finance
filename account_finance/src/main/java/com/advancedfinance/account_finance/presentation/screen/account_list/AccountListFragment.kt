@@ -36,7 +36,7 @@ class AccountListFragment :
                 when (it) {
                     is AccountListViewState.Loading -> showLoading()
                     is AccountListViewState.Error -> showError(it.message)
-                    is AccountListViewState.Success -> listAdapterAccount(it.listAccount, it.total)
+                    is AccountListViewState.Success -> listAdapterAccount(it.accountList, it.total)
                     else -> {}
                 }
             }

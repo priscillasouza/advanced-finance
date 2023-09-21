@@ -54,11 +54,11 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="16dp"
-                android:text="R$ 8.000,00"
                 android:textColor="@color/core_md_theme_light_primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_title_card_account_balance" />
+                app:layout_constraintTop_toBottomOf="@id/text_view_title_card_account_balance"
+                tools:text="R$ 8.000,00" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -100,13 +100,13 @@
                 android:layout_marginStart="84dp"
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
-                android:text="R$ 8.000,00"
                 android:textColor="@color/core_seed"
                 app:layout_constraintBottom_toBottomOf="@id/text_view_title_card_expenses_of_the_day"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/text_view_title_card_expenses_of_the_day"
                 app:layout_constraintTop_toTopOf="@id/text_view_title_card_expenses_of_the_day"
-                app:maxLines="1" />
+                app:maxLines="1"
+                tools:text="R$ 8.000,00" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -146,11 +146,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="94dp"
                 android:layout_marginEnd="16dp"
-                android:text="Jan 2023"
                 app:layout_constraintBottom_toBottomOf="@id/text_view_title_card_overview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/text_view_title_card_overview"
-                app:layout_constraintTop_toTopOf="@id/text_view_title_card_overview" />
+                app:layout_constraintTop_toTopOf="@id/text_view_title_card_overview"
+                tools:text="Jan 2023" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_title_card_overview_revenues"
@@ -171,7 +171,6 @@
                 android:layout_marginStart="94dp"
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
-                android:text="R$ 8.000,00"
                 android:textColor="@color/core_seed"
                 app:layout_constraintBottom_toBottomOf="@id/text_view_title_card_overview_revenues"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -179,7 +178,8 @@
                 app:layout_constraintStart_toEndOf="@id/text_view_title_card_overview_revenues"
                 app:layout_constraintTop_toTopOf="@id/text_view_title_card_overview_revenues"
                 app:layout_constraintVertical_bias="0.0"
-                app:maxLines="1" />
+                app:maxLines="1"
+                tools:text="R$ 8.000,00" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_title_card_overview_expenses"
@@ -202,13 +202,13 @@
                 android:layout_marginStart="94dp"
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
-                android:text="R$ 12.000,00"
                 android:textColor="@color/core_md_theme_light_error"
                 app:layout_constraintBottom_toBottomOf="@id/text_view_title_card_overview_expenses"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/text_view_title_card_overview_expenses"
                 app:layout_constraintTop_toTopOf="@id/text_view_title_card_overview_expenses"
-                app:maxLines="1" />
+                app:maxLines="1"
+                tools:text="R$ 12.000,00" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -248,9 +248,36 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:text="@string/overview_text_view_add_revenues"
+        android:textColor="@color/core_md_theme_light_tertiary"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/floating_action_button_revenues"
         app:layout_constraintEnd_toStartOf="@id/floating_action_button_revenues"
         app:layout_constraintTop_toTopOf="@id/floating_action_button_revenues" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button_expenses"
+        style="?attr/floatingActionButtonSmallStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:focusable="true"
+        android:src="@drawable/overview_ic_trending_down"
+        android:visibility="invisible"
+        app:contentDescription="@string/overview_text_description_add_expenses"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toTopOf="@id/floating_action_button_revenues"
+        app:layout_constraintEnd_toEndOf="@id/floating_action_button_revenues" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_view_floating_action_button_expenses"
+        style="@style/CoreStyleTextSize12Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/overview_text_view_add_expenses"
+        android:textColor="@color/core_md_theme_light_error"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/floating_action_button_expenses"
+        app:layout_constraintEnd_toStartOf="@id/floating_action_button_expenses"
+        app:layout_constraintTop_toTopOf="@id/floating_action_button_expenses" />
 </androidx.constraintlayout.widget.ConstraintLayout>
