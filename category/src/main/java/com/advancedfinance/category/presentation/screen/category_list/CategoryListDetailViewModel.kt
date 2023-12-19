@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class CategoryListDetailViewModel(
-    private val repository: ICategoryRepository,
+    private val repository: ICategoryRepository
 ) : BaseViewModel<CategoryListDetailViewState, CategoryListDetailViewAction>() {
 
     private val listViewStateMutable =

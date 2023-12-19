@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import java.math.BigDecimal
 
 class AccountListViewModel(
-    private val repository: IAccountRepository,
+    private val repository: IAccountRepository
 ) : BaseViewModel<AccountListViewState, AccountListViewAction>() {
 
     private val listViewStateMutable = MutableStateFlow<AccountListViewState>(AccountListViewState.Loading)

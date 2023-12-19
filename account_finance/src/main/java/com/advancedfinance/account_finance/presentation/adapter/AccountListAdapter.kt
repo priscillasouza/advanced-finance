@@ -15,7 +15,8 @@ class AccountListAdapter(val onClickItem: (AccountModel) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountListViewHolder {
         val binding =
-            AccountFinanceAccountListItemBinding.inflate(LayoutInflater.from(parent.context),
+            AccountFinanceAccountListItemBinding.inflate(
+                LayoutInflater.from(parent.context),
                 parent,
                 false)
         return AccountListViewHolder(binding)

@@ -43,12 +43,12 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding, OverviewViewModel
             }
 
             floatingActionButtonRevenues.setOnClickListener {
-                findNavController().navigate(OverviewFragmentDirections.overviewActionToTransactionNavigation(
+                findNavController().navigate(OverviewFragmentDirections.overviewActionOverviewOverviewfragmentToOverviewTransactionfragment(
                     argTransactionType = ArgTransactionType.Revenue))
             }
 
             floatingActionButtonExpenses.setOnClickListener {
-                findNavController().navigate(OverviewFragmentDirections.overviewActionToTransactionNavigation(
+                findNavController().navigate(OverviewFragmentDirections.overviewActionOverviewOverviewfragmentToOverviewTransactionfragment(
                     argTransactionType = ArgTransactionType.Expense))
             }
         }

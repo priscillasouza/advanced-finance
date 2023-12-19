@@ -15,7 +15,7 @@ data class TransactionWithAllRelations(
         parentColumn = "id",
         entityColumn = "id"
     )
-    val transactionTypeEntity: TransactionTypeEntity,
+    val transactionTypeEntity: List<TransactionTypeEntity>,
 
     @Relation(
         parentColumn = "id",

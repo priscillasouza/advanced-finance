@@ -24,6 +24,10 @@ abstract class BaseUseCase<in Params, out TypeReturn> constructor(
         data class Success<out T>(val result: T): Result<T>()
         object Empty: Result<Nothing>()
         data class Error(val throwable: Throwable): Result<Nothing>()
+        sealed class State: Result<Nothing>() {
+            object Loading: State()
+            object Loaded: State()
+        }
     }
 
 }

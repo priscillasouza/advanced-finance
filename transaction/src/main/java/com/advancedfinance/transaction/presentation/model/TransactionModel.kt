@@ -9,7 +9,7 @@ import java.math.BigDecimal
 
 @Parcelize
 data class TransactionModel(
-    val id: Int? = null,
+    val id: Int?,
     val transactionType: TransactionType,
     val value: BigDecimal,
     val description: String,
@@ -17,10 +17,10 @@ data class TransactionModel(
     val category: CategoryModel?,
     val account: AccountModel?,
     val observation: String,
-    var isReceived: Boolean = false,
-    val isInstallments: Boolean = false,
-    val isFixedValue: Boolean = false,
-    val isPayInInstallments: Boolean = false,
+    var isReceived: Boolean,
+    val isInstallments: Boolean,
+    val isFixedValue: Boolean,
+    val isPayInInstallments: Boolean,
     val repetitions: String,
     val period: PeriodTypeModel?
 ) : Parcelable

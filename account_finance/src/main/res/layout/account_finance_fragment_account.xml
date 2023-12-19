@@ -47,6 +47,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_text_input_account_value"
             android:layout_width="match_parent"
+            android:minHeight="48dp"
             android:layout_height="wrap_content"
             android:hint="@string/account_finance_text_hint_new_account_value"
             android:inputType="numberDecimal" />
@@ -67,6 +68,7 @@
             android:id="@+id/edit_text_input_account_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:hint="@string/account_finance_text_hint_new_account_name"
             android:inputType="textAutoComplete" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -110,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="200dp"
         android:text="@string/account_finance_text_view_new_account_description"
         android:textColor="@color/core_seed"
         app:layout_constraintEnd_toEndOf="parent"

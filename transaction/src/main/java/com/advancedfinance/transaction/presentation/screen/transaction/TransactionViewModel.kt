@@ -1,4 +1,4 @@
-package com.advancedfinance.transaction.presentation.screen
+package com.advancedfinance.transaction.presentation.screen.transaction
 
 import androidx.lifecycle.viewModelScope
 import com.advancedfinance.account_finance.domain.repository.IAccountRepository
@@ -11,6 +11,7 @@ import com.advancedfinance.transaction.R
 import com.advancedfinance.transaction.domain.repository.ITransactionRepository
 import com.advancedfinance.transaction.presentation.model.PeriodTypeModel
 import com.advancedfinance.transaction.presentation.model.TransactionModel
+import com.advancedfinance.transaction.presentation.screen.ArgTransactionType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -31,10 +32,11 @@ class TransactionViewModel(
 
     override fun dispatchViewAction(viewAction: TransactionViewAction) {
         when (viewAction) {
-            is TransactionViewAction.PreparedViewTransaction -> preparedView(viewAction.transactionModel,
-                viewAction.type)
+            is TransactionViewAction.PreparedViewTransaction -> preparedView(
+                viewAction.transactionModel,
+                viewAction.type
+            )
             is TransactionViewAction.SaveTransaction -> addOrUpdateTransaction(
-                viewAction.id,
                 viewAction.value,
                 viewAction.description,
                 viewAction.date,
@@ -49,7 +51,7 @@ class TransactionViewModel(
                 viewAction.period,
                 viewAction.transactionTypeId
             )
-            is TransactionViewAction.GetCategoryList -> getCategoryList(viewAction.categoryType)
+            is TransactionViewAction.GetCategoryList -> getCategoryList(viewAction.categoryType!!)
             is TransactionViewAction.GetAccountList -> getAccountList()
             is TransactionViewAction.GetPeriodTypeList -> getPeriodTypeList()
         }
@@ -60,7 +62,7 @@ class TransactionViewModel(
             this.transaction = transactionModel
             viewStateMutable.value =
                 TransactionViewState.ViewUpdate(transactionModel = transactionModel,
-                    isRevenue = true)
+                    isRevenue = type == ArgTransactionType.Revenue)
         } else {
             viewStateMutable.value =
                 TransactionViewState.ViewInsert(isRevenue = type == ArgTransactionType.Revenue)
@@ -68,7 +70,6 @@ class TransactionViewModel(
     }
 
     private fun addOrUpdateTransaction(
-        id: Int?,
         value: BigDecimal,
         description: String,
         date: String,
@@ -81,7 +82,7 @@ class TransactionViewModel(
         isPayInInstallments: Boolean,
         repetitions: String,
         period: PeriodTypeModel?,
-        transactionTypeId: Int,
+        transactionTypeId: Int
     ) {
         transaction?.id?.let { id ->
             if (id > 0) {
@@ -103,7 +104,7 @@ class TransactionViewModel(
                 ))
             }
         } ?: addTransaction(TransactionModel(
-            id = id,
+            id = null,
             value = value,
             description = description,
             date = date,
@@ -137,10 +138,10 @@ class TransactionViewModel(
         viewModelScope.launch {
             try {
                 repository.updateTransaction(transactionModel)
-                viewStateMutable.value = TransactionViewState.SuccessInsert
+                viewStateMutable.value = TransactionViewState.SuccessUpdate
             } catch (e: Exception) {
                 viewStateMutable.value =
-                    TransactionViewState.Error(R.string.transaction_text_error_transaction_save)
+                    TransactionViewState.Error(R.string.transaction_text_error_transaction_update)
             }
         }
     }
@@ -151,7 +152,7 @@ class TransactionViewModel(
         } catch (e: Exception) {
             viewStateMutable.value =
                 TransactionViewState.Error(R.string.transaction_text_error_transaction_save)
-            TransactionType(-1, "")
+            TransactionType(0, "")
         }
     }
 
@@ -208,7 +209,6 @@ sealed class TransactionViewAction {
     ) : TransactionViewAction()
 
     class SaveTransaction(
-        val id: Int? = null,
         val value: BigDecimal,
         val description: String,
         val date: String,
@@ -224,7 +224,7 @@ sealed class TransactionViewAction {
         val transactionTypeId: Int
     ) : TransactionViewAction()
 
-    class GetCategoryList(val categoryType: Int) : TransactionViewAction()
+    class GetCategoryList(val categoryType: Int?) : TransactionViewAction()
     object GetAccountList : TransactionViewAction()
     object GetPeriodTypeList : TransactionViewAction()
 }
@@ -232,6 +232,7 @@ sealed class TransactionViewAction {
 sealed class TransactionViewState {
     object Loading : TransactionViewState()
     object SuccessInsert : TransactionViewState()
+    object SuccessUpdate : TransactionViewState()
     object Empty : TransactionViewState()
     class SuccessCategoryList(val categoryList: List<CategoryModel>) : TransactionViewState()
     class SuccessAccountList(val accountList: List<AccountModel>) : TransactionViewState()

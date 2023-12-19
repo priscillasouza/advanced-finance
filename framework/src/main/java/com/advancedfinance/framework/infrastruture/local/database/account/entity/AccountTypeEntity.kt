@@ -1,5 +1,6 @@
 package com.advancedfinance.framework.infrastruture.local.database.account.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

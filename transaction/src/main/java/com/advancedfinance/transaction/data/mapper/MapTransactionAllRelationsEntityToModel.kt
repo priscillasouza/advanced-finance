@@ -8,8 +8,10 @@ import com.advancedfinance.core.data.IMapper
 import com.advancedfinance.framework.infrastruture.local.database.transaction.entity.TransactionWithAllRelations
 import com.advancedfinance.transaction.presentation.model.PeriodTypeModel
 import com.advancedfinance.transaction.presentation.model.TransactionModel
+import java.math.BigDecimal
 
-class MapTransactionAllRelationsEntityToModel : IMapper<TransactionWithAllRelations, TransactionModel> {
+class MapTransactionAllRelationsEntityToModel :
+    IMapper<TransactionWithAllRelations, TransactionModel> {
 
     override fun transform(entity: TransactionWithAllRelations): TransactionModel {
         return TransactionModel(
@@ -19,26 +21,24 @@ class MapTransactionAllRelationsEntityToModel : IMapper<TransactionWithAllRelati
             date = entity.transactionEntity.date,
             category = entity.categoryEntity.run {
                 CategoryModel(
-                    id = entity.categoryEntity.first().id,
-                    name = entity.categoryEntity.first().name,
-                    transactionType = entity.transactionTypeEntity.run {
-                        TransactionType(
-                            id = entity.transactionTypeEntity.id,
-                            name = entity.transactionTypeEntity.name
-                        )
-                    })
+                    id = entity.categoryEntity?.id ?: 0,
+                    name = entity.categoryEntity?.name ?: "",
+                    transactionType = TransactionType(
+                        id = entity.transactionTypeEntity?.id ?: 0,
+                        name = entity.transactionTypeEntity?.name ?: ""
+                    )
+                )
             },
             account = entity.accountEntity.run {
                 AccountModel(
-                    id = entity.accountEntity.first().id,
-                    name = entity.accountEntity.first().name,
-                    startedBalance = entity.accountEntity.first().startedBalance,
-                    accountType = entity.accountEntity.first().accountType.run {
-                        AccountTypeModel(
-                            id = entity.accountTypeEntity.first().id,
-                            name = entity.accountTypeEntity.first().name
-                        )
-                    }
+                    id = entity.accountEntity?.id ?: 0,
+                    name = entity.accountEntity?.name ?: "",
+                    startedBalance = entity.accountEntity?.startedBalance
+                        ?: BigDecimal.ZERO,
+                    accountType = AccountTypeModel(
+                        id = entity.accountTypeEntity?.id ?: 0,
+                        name = entity.accountTypeEntity?.name ?: ""
+                    )
                 )
             },
             observation = entity.transactionEntity.observation,
@@ -49,8 +49,8 @@ class MapTransactionAllRelationsEntityToModel : IMapper<TransactionWithAllRelati
             repetitions = entity.transactionEntity.repetitions,
             period = entity.periodTypeEntity.run {
                 PeriodTypeModel(
-                    id = entity.periodTypeEntity.first().id,
-                    name = entity.periodTypeEntity.first().name
+                    id = entity.periodTypeEntity.id ?: 0,
+                    name = entity.periodTypeEntity.name ?: ""
                 )
             },
             transactionType = entity.transactionTypeEntity.run {

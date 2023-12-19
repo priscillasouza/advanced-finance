@@ -37,7 +37,7 @@ class AccountViewModel(
     private fun preparedView(accountModel: AccountModel?) {
         if (accountModel != null && accountModel.id!! > 0) {
             this.account = accountModel
-            viewStateMutable.value = AccountViewState.ViewUpdate(accountModel)
+            viewStateMutable.value = AccountViewState.ViewUpdate(accountModel = accountModel)
         } else {
             viewStateMutable.value = AccountViewState.ViewInsert
         }

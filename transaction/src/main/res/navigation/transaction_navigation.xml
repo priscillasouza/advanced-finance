@@ -3,20 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/transaction_navigation"
-    app:startDestination="@id/transaction_transactionfragment">
+    app:startDestination="@id/transaction_transactionlistfragment">
 
     <fragment
         android:id="@+id/transaction_transactionfragment"
-        android:name="com.advancedfinance.transaction.presentation.screen.TransactionFragment"
+        android:name="com.advancedfinance.transaction.presentation.screen.transaction.TransactionFragment"
         tools:layout="@layout/transaction_fragment_transaction">
         <argument
             android:name="arg_transaction_type"
             app:argType="com.advancedfinance.transaction.presentation.screen.ArgTransactionType"
-            app:nullable="false" />
+            app:nullable="false"
+            android:defaultValue="Revenue"/>
         <argument
             android:name="arg_transaction_model"
             app:argType="com.advancedfinance.transaction.presentation.model.TransactionModel"
             app:nullable="true"
             android:defaultValue="@null"/>
+    </fragment>
+    <fragment
+        android:id="@+id/transaction_transactionlistfragment"
+        android:name="com.advancedfinance.transaction.presentation.screen.transaction_list.TransactionListFragment"
+        android:label="Transações"
+        tools:layout="@layout/transaction_fragment_transaction_list" >
+        <action
+            android:id="@+id/transactionlistfragment_to_transactionfragment"
+            app:destination="@id/transaction_transactionfragment" />
     </fragment>
 </navigation>

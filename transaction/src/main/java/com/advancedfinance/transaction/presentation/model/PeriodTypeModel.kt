@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class PeriodTypeModel(
     val id: Int,
-    val name: String,
+    val name: String
 ): Parcelable

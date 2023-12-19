@@ -15,10 +15,22 @@
             app:destination="@id/transaction_navigation">
             <argument
                 android:name="arg_transaction_type"
+                android:defaultValue="Revenue"
+                app:argType="com.advancedfinance.transaction.presentation.screen.ArgTransactionType"
+                app:nullable="false" />
+        </action>
+        <action
+            android:id="@+id/overview_action_overview_overviewfragment_to_overview_transactionfragment"
+            app:destination="@id/overview_transactionfragment">
+            <argument
+                android:name="arg_transaction_type"
+                android:defaultValue="Revenue"
                 app:argType="com.advancedfinance.transaction.presentation.screen.ArgTransactionType"
                 app:nullable="false" />
         </action>
     </fragment>
-    <include app:graph="@navigation/transaction_navigation" />
-
+    <fragment
+        android:id="@+id/overview_transactionfragment"
+        android:name="com.advancedfinance.transaction.presentation.screen.transaction.TransactionFragment"
+        tools:layout="@layout/transaction_fragment_transaction" />
 </navigation>

@@ -1,6 +1,7 @@
 package com.advancedfinance.transaction.domain.repository
 
 import com.advancedfinance.category.presentation.model.TransactionType
+import com.advancedfinance.framework.infrastruture.local.database.transaction.entity.TransactionWithAllRelations
 import com.advancedfinance.transaction.presentation.model.PeriodTypeModel
 import com.advancedfinance.transaction.presentation.model.TransactionModel
 import kotlinx.coroutines.flow.Flow
@@ -14,4 +15,6 @@ interface ITransactionRepository {
     fun getAllPeriodType(): Flow<List<PeriodTypeModel>>
 
     fun getTransactionTypeById(id: Int): TransactionType
+
+    fun getAllTransaction(id: Int): Flow<List<TransactionModel>>
 }

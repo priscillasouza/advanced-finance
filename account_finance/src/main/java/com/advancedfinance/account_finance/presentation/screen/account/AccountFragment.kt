@@ -92,9 +92,7 @@ class AccountFragment :
 
             buttonSaveAccount.setOnClickListener {
                 if (validateFields()) {
-                    val startedBalance =
-                        editTextInputAccountValue.text.toString().removeSpecialCharacters()
-                            .toBigDecimal()
+                    val startedBalance = editTextInputAccountValue.text.toString().removeSpecialCharacters().toBigDecimal()
                     val name = editTextInputAccountName.text.toString()
                     val type = accountTypeSelected
 
