@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.advancedfinance.account_finance.R
 import com.advancedfinance.account_finance.databinding.AccountFinanceFragmentAccountListBinding
 import com.advancedfinance.account_finance.presentation.adapter.AccountListAdapter
 import com.advancedfinance.account_finance.presentation.model.AccountModel
@@ -36,7 +36,7 @@ class AccountListFragment :
                 when (it) {
                     is AccountListViewState.Loading -> showLoading()
                     is AccountListViewState.Error -> showError(it.message)
-                    is AccountListViewState.Success -> listAdapterAccount(it.listAccount, it.total)
+                    is AccountListViewState.Success -> listAdapterAccount(it.accountList, it.total)
                     else -> {}
                 }
             }
@@ -65,18 +65,15 @@ class AccountListFragment :
 
     private fun setClickFloatingActionAddAccount() {
         viewBinding.accountFinanceFloatingActionButton.setOnClickListener {
-            val action =
-                AccountListFragmentDirections.accountFinanceActionAccountFinanceAccountlistfragmentToAccountFinanceAccountfragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.account_finance_action_account_finance_accountlistfragment_to_account_finance_accountfragment)
         }
     }
 
-    private fun showError(message: String) {
+    private fun showError(message: Int) {
         Toast.makeText(requireContext(), message,
             Toast.LENGTH_SHORT)
             .show()
     }
 
     private fun showLoading() {}
-
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/category_navigation"
+    app:startDestination="@id/category_categorylistfragment">
+
+    <fragment
+        android:id="@+id/category_categorylistfragment"
+        android:name="com.advancedfinance.category.presentation.screen.category_list.CategoryListFragment"
+        android:label="@string/category_text_label_navigation_category"
+        tools:layout="@layout/category_fragment_category_list">
+        <action
+            android:id="@+id/category_action_category_categorylistfragment_to_category_categoryfragment"
+            app:destination="@id/category_categoryfragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/category_categoryfragment"
+        android:name="com.advancedfinance.category.presentation.screen.category.CategoryFragment"
+        tools:layout="@layout/category_fragment_category">
+        <action
+            android:id="@+id/category_action_category_categoryfragment_to_category_categorylistfragment"
+            app:destination="@id/category_categorylistfragment" />
+        <argument
+            android:name="category"
+            android:defaultValue="@null"
+            app:argType="com.advancedfinance.category.presentation.model.CategoryModel"
+            app:nullable="true" />
+    </fragment>
+</navigation>

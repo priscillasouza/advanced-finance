@@ -12,27 +12,26 @@ import kotlinx.coroutines.launch
 import java.math.BigDecimal
 
 class AccountListViewModel(
-    private val repository: IAccountRepository,
+    private val repository: IAccountRepository
 ) : BaseViewModel<AccountListViewState, AccountListViewAction>() {
 
-    private val listViewStateMutable =
-        MutableStateFlow<AccountListViewState>(AccountListViewState.Loading)
+    private val listViewStateMutable = MutableStateFlow<AccountListViewState>(AccountListViewState.Loading)
     override val listViewState: StateFlow<AccountListViewState> = listViewStateMutable
 
     override fun dispatchViewAction(viewAction: AccountListViewAction) {
         when (viewAction) {
-            is AccountListViewAction.GetListAccount -> getListAccount()
+            is AccountListViewAction.GetListAccount -> getAccountList()
         }
     }
 
-    private fun getListAccount() {
+    private fun getAccountList() {
         viewModelScope.launch {
             listViewStateMutable.value = AccountListViewState.Loading
             repository.getAccounts()
                 .catch { exception ->
                     exception.printStackTrace()
                     listViewStateMutable.value =
-                        AccountListViewState.Error(R.string.account_finance_text_account_list_error.toString())
+                        AccountListViewState.Error(R.string.account_finance_text_account_list_error)
                 }.collect {
                     if (it.isEmpty()) {
                         listViewStateMutable.value = AccountListViewState.Empty
@@ -50,10 +49,8 @@ sealed class AccountListViewAction {
 }
 
 sealed class AccountListViewState {
-    class Success(val listAccount: List<AccountModel>, val total: BigDecimal) :
-        AccountListViewState()
-
-    class Error(val message: String) : AccountListViewState()
+    class Success(val accountList: List<AccountModel>, val total: BigDecimal) : AccountListViewState()
+    class Error(val message: Int) : AccountListViewState()
     object Loading : AccountListViewState()
     object Empty : AccountListViewState()
 }

@@ -6,7 +6,6 @@ pluginManagement {
     }
 }
 
-enableFeaturePreview("VERSION_CATALOGS")
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -22,3 +21,6 @@ include ':core'
 include ':framework'
 include ':entrance'
 include ':account_finance'
+include ':category'
+include ':transaction'
+include ':overview'

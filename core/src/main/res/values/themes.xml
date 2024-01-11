@@ -44,7 +44,6 @@
     </style>
 
     <style name="CoreStyleTextSize12Bold" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/core_md_theme_light_primary</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -64,4 +63,22 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="android:paddingTop">12dp</item>
     </style>
+
+    <style name="CoreTheme.AdvancedFinance.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CoreTheme.AdvancedFinance.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="CoreTheme.AdvancedFinance.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CoreStyleDatePickerRevenue" parent="ThemeOverlay.Material3.Dialog" >
+        <item name="colorAccent">@color/core_md_theme_light_tertiary</item>
+    </style>
+
+    <style name="CoreStyleDatePickerExpense" parent="ThemeOverlay.Material3.Dialog" >
+        <item name="colorAccent">@color/core_md_theme_light_error</item>
+    </style>
+
 </resources>

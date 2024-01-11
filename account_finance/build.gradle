@@ -2,7 +2,7 @@ plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
     alias libs.plugins.navigation.safeargs.kotlin
-    id("kotlin-parcelize")
+    alias libs.plugins.kotlin.parcelize
 }
 
 def apiKeyPropertiesFile = rootProject.file("apikey.properties")
@@ -11,11 +11,11 @@ apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
 
 android {
     namespace 'com.advancedfinance.account_finance'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 23
-        targetSdk 33
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -28,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding true
@@ -52,6 +52,11 @@ dependencies {
     implementation(project(":framework"))
 
     testImplementation libs.test.junit
+    testImplementation libs.test.kluent
+    testImplementation libs.test.mockk
+    testImplementation libs.test.coroutines
+
+
     androidTestImplementation libs.bundles.android.test
     androidTestImplementation libs.androidx.room.testing
 

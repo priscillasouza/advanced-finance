@@ -1,5 +1,6 @@
 package com.advancedfinance.account_finance.di
 
+import com.advancedfinance.account_finance.data.mapper.MapAccountTypeEntityToModel
 import com.advancedfinance.account_finance.data.mapper.MapEntityToModel
 import com.advancedfinance.account_finance.data.mapper.MapModelToEntity
 import com.advancedfinance.account_finance.data.repository.AccountRepository
@@ -18,14 +19,16 @@ val accountModule = module {
     }
 
     viewModel {
-       AccountListViewModel(get(named("AccountRepository")))
+        AccountListViewModel(get(named("AccountRepository")))
     }
 
     single<IAccountRepository>(named("AccountRepository")) {
-        AccountRepository(get<AccountDAO>(), get(), get())
+        AccountRepository(get<AccountDAO>(), get(), get(), get())
     }
 
     single { MapModelToEntity() }
 
     single { MapEntityToModel() }
+
+    single { MapAccountTypeEntityToModel() }
 }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="entrance_action_loginfragment_to_account_finance_accountlistfragment" type="id" />
+    <item name="app_action_entrance_onboardingfragment_to_entrance_loginfragment" type="id" />
+    <item name="entrance_app_action_app_loginfragment_to_app_navigationdraweractivity" type="id" />
 </resources>

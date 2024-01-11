@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/overview_navigation"
+    app:startDestination="@id/overview_overviewfragment">
+
+    <fragment
+        android:id="@+id/overview_overviewfragment"
+        android:name="com.advancedfinance.overview.presentation.screen.OverviewFragment"
+        android:label="Advanced Finance"
+        tools:layout="@layout/fragment_overview">
+        <action
+            android:id="@+id/overview_action_to_transaction_navigation"
+            app:destination="@id/transaction_navigation">
+            <argument
+                android:name="arg_transaction_type"
+                android:defaultValue="Revenue"
+                app:argType="com.advancedfinance.transaction.presentation.screen.ArgTransactionType"
+                app:nullable="false" />
+        </action>
+        <action
+            android:id="@+id/overview_action_overview_overviewfragment_to_overview_transactionfragment"
+            app:destination="@id/overview_transactionfragment">
+            <argument
+                android:name="arg_transaction_type"
+                android:defaultValue="Revenue"
+                app:argType="com.advancedfinance.transaction.presentation.screen.ArgTransactionType"
+                app:nullable="false" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/overview_transactionfragment"
+        android:name="com.advancedfinance.transaction.presentation.screen.transaction.TransactionFragment"
+        tools:layout="@layout/transaction_fragment_transaction" />
+</navigation>

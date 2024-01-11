@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.advancedfinance.home">
+
+    <application>
+        <activity
+            android:name="com.advancedfinance.DrawerActivity"
+            android:exported="false"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/CoreTheme.AdvancedFinance.NoActionBar" />
+    </application>
+
+</manifest>

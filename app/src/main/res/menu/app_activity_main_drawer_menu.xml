@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/overview_navigation"
+            android:icon="@drawable/app_ic_overview"
+            android:title="@string/app_text_menu_overview" />
+        <item
+            android:id="@+id/account_finance_navigation"
+            android:icon="@drawable/app_ic_account_balance"
+            android:title="@string/app_text_menu_account" />
+        <item
+            android:id="@+id/transaction_navigation"
+            android:icon="@drawable/app_ic_transactions"
+            android:title="@string/app_text_menu_transactions" />
+    </group>
+
+    <item android:title="@string/app_text_title_menu_preferences">
+        <menu>
+            <item
+                android:id="@+id/category_navigation"
+                android:icon="@drawable/app_ic_category"
+                android:title="@string/app_text_menu_category" />
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/app_ic_profile"
+                android:title="@string/app_text_menu_profile" />
+        </menu>
+    </item>
+</menu>

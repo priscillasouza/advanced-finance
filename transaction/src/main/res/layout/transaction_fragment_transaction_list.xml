@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screen.transaction_list.TransactionListFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_transaction_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/transaction_list_item" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linear_layout_total_revenue_and_expense"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/core_md_theme_light_onPrimary"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="24dp"
+            app:srcCompat="@drawable/core_ic_trending_up" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_view_total_revenue"
+            style="@style/CoreStyleTextSize16Bold"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="3dp"
+            android:text="R$ 3.000,00"
+            android:textColor="@color/core_md_theme_light_tertiary" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="42dp"
+            app:srcCompat="@drawable/core_ic_trending_down" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_view_total_expense"
+            style="@style/CoreStyleTextSize16Bold"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"
+            android:text="R$ 80.000,00"
+            android:textColor="@color/core_md_theme_light_error" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        style="?attr/floatingActionButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="72dp"
+        android:contentDescription="Adicionar"
+        android:focusable="true"
+        android:src="@drawable/core_ic_add"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button_revenues"
+        style="?attr/floatingActionButtonSmallStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:focusable="true"
+        android:src="@drawable/core_ic_trending_up"
+        android:visibility="invisible"
+        app:contentDescription="Button revenue"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toTopOf="@id/floating_action_button"
+        app:layout_constraintEnd_toEndOf="@id/floating_action_button" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_view_floating_action_button_revenues"
+        style="@style/CoreStyleTextSize12Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="Receita"
+        android:textColor="@color/core_md_theme_light_tertiary"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/floating_action_button_revenues"
+        app:layout_constraintEnd_toStartOf="@id/floating_action_button_revenues"
+        app:layout_constraintTop_toTopOf="@id/floating_action_button_revenues" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button_expenses"
+        style="?attr/floatingActionButtonSmallStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:focusable="true"
+        android:src="@drawable/core_ic_trending_down"
+        android:visibility="invisible"
+        app:contentDescription="Add Expense"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toTopOf="@id/floating_action_button_revenues"
+        app:layout_constraintEnd_toEndOf="@id/floating_action_button_revenues" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_view_floating_action_button_expenses"
+        style="@style/CoreStyleTextSize12Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="Despesa"
+        android:textColor="@color/core_md_theme_light_error"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/floating_action_button_expenses"
+        app:layout_constraintEnd_toStartOf="@id/floating_action_button_expenses"
+        app:layout_constraintTop_toTopOf="@id/floating_action_button_expenses" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

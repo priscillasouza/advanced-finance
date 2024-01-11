@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="category_hello_blank_fragment">Hello blank fragment</string>
+    <string name="category_text_hint_name_category">Nome</string>
+    <string name="category_text_radio_group_revenue">Receita</string>
+    <string name="category_text_radio_group_expense">Despesa</string>
+    <string name="category_text_content_description">Adicionar categoria</string>
+    <string name="category_text_tab_layout_revenues">Receitas</string>
+    <string name="category_text_tab_layout_expenses">Despesas</string>
+    <string name="category_text_toast_category_successfully_saved">Categoria salva com sucesso</string>
+    <string name="category_text_toast_category_successfully_updated">Categoria atualizada com sucesso</string>
+    <string name="category_text_toast_category_successfully_deleted">Categoria excluída com sucesso</string>
+    <string name="category_text_error_listing_categories">Erro ao listar categorias</string>
+    <string name="category_text_error_adding_categories">Erro ao adicionar a categoria</string>
+    <string name="category_text_error_delete_categories">Erro ao deletar a categoria</string>
+    <string name="category_text_button_save_category">Salvar</string>
+    <string name="category_text_button_update_category">Atualizar</string>
+    <string name="category_text_button_delete_category">Excluir</string>
+    <string name="category_text_menu_item_delete">Deletar</string>
+    <string name="category_text_label_navigation_category">Categorias</string>
+    <string name="category_text_toolbar_update_category">Editar categoria</string>
+    <string name="category_text_toolbar_save_category">Nova categoria</string>
+    <string name="category_text_toast_validate_fields">Informe todos os campos</string>
+    <string name="category_text_set_negative_button_dialog">Não</string>
+    <string name="category_text_set_positive_button_dialog">Sim</string>
+    <string name="category_text_set_title_dialog">Excluir categoria</string>
+    <string name="category_text_set_message_dialog">Deseja excluir a categoria %s?</string>
+</resources>

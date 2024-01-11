@@ -1,0 +1,74 @@
+plugins {
+    alias libs.plugins.android.library
+    alias libs.plugins.kotlin.android
+    alias libs.plugins.navigation.safeargs.kotlin
+    alias libs.plugins.kotlin.parcelize
+}
+
+def apiKeyPropertiesFile = rootProject.file("apikey.properties")
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+
+android {
+    namespace 'com.advancedfinance.transaction'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 34
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+    lint {
+        quiet false
+        abortOnError true
+        checkDependencies true
+    }
+    resourcePrefix "${project.name.replace("-", "_")}_"
+}
+
+dependencies {
+
+    implementation(project(":core"))
+    implementation(project(":framework"))
+    implementation(project(":category"))
+    implementation(project(":account_finance"))
+
+    testImplementation libs.test.junit
+    androidTestImplementation libs.bundles.android.test
+    androidTestImplementation libs.androidx.room.testing
+
+    implementation libs.androidx.corektx
+    implementation libs.bundles.navigation
+    implementation libs.androidx.appcompat
+    implementation libs.android.material
+    implementation libs.androidx.constraintlayout
+    implementation libs.bundles.coroutines
+    implementation libs.bundles.lifecycle
+    implementation libs.koin.android
+    implementation libs.bundles.networking
+    implementation libs.bundles.room
+}
+
+configurations.implementation {
+    exclude group: 'com.intellij', module: 'annotations'
+}

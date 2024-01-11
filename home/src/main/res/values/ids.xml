@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="home_entrance_action_entrance_loginfragment_to_entrance_navigation_drawer_activity" type="id" />
+    <item name="home_entrance_navigationdraweractivity" type="id" />
+</resources>
