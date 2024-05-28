@@ -46,8 +46,8 @@ class TransactionRepository(
         }
     }
 
-    override fun getAllTransaction(id: Int): Flow<List<TransactionModel>> {
-        return transactionDAO.getAllTransaction(id).map {
+    override fun getAllTransaction(): Flow<List<TransactionModel>> {
+        return transactionDAO.getAllTransaction().map {
             mapTransactionAllRelationsEntityToModel.transform(it)
         }
     }

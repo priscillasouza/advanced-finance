@@ -1,6 +1,7 @@
 package com.advancedfinance.framework.infrastruture.local.database.transaction
 
 import androidx.room.*
+import com.advancedfinance.core.extensions.orNegative
 import com.advancedfinance.framework.infrastruture.local.database.account.entity.AccountEntity
 import com.advancedfinance.framework.infrastruture.local.database.category.entity.CategoryEntity
 import com.advancedfinance.framework.infrastruture.local.database.category.entity.TransactionTypeEntity
@@ -18,11 +19,12 @@ interface TransactionDAO {
         accountEntity: AccountEntity,
         periodTypeEntity: PeriodTypeEntity
 
-        ) {
+    ) {
         transactionEntity.copy(
-            fkCategoryId = categoryEntity.id,
-            fkAccountId = accountEntity.id,
-            fkPeriodTypeId = periodTypeEntity.id).let {
+            fkCategoryId = categoryEntity.id.orNegative(),
+            fkAccountId = accountEntity.id.orNegative(),
+            fkPeriodTypeId = periodTypeEntity.id.orNegative()
+        ).let {
             addTransaction(it)
         }
     }
@@ -34,21 +36,25 @@ interface TransactionDAO {
         periodTypeEntity: PeriodTypeEntity
     ) {
         transactionEntity.copy(
-            fkCategoryId = categoryEntity.id,
-            fkAccountId = accountEntity.id,
-            fkPeriodTypeId = periodTypeEntity.id).let {
+            fkCategoryId = categoryEntity.id.orNegative(),
+            fkAccountId = accountEntity.id.orNegative(),
+            fkPeriodTypeId = periodTypeEntity.id.orNegative()
+        ).let {
             updateTransaction(it)
         }
     }
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addTransaction(transactionEntity: TransactionEntity)
 
     @Update
     fun updateTransaction(transactionEntity: TransactionEntity)
 
+    @Transaction
     @Query("SELECT * FROM period_type")
-   fun getAllPeriodType(): Flow<List<PeriodTypeEntity>>
+    fun getAllPeriodType(): Flow<List<PeriodTypeEntity>>
 
+    @Transaction
     @Query("SELECT * FROM transaction_type WHERE id = :id")
     fun getTransactionTypeById(id: Int): TransactionTypeEntity
 
@@ -64,7 +70,7 @@ interface TransactionDAO {
     fun getAllTransaction(): Flow<List<TransactionEntity>>*/
 
     @Transaction
-    @Query("SELECT * FROM `transaction` WHERE id_transaction = :id")
-    fun getAllTransaction(id: Int): Flow<List<TransactionWithAllRelations>>
+    @Query("SELECT * FROM `transaction`")
+    fun getAllTransaction(): Flow<List<TransactionWithAllRelations>>
 
 }

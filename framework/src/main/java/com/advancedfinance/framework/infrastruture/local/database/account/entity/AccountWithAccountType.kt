@@ -4,10 +4,11 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class AccountWithAccountType(
-    @Embedded val account: AccountEntity,
+    @Embedded val account: AccountEntity?,
     @Relation(
-        parentColumn = "id",
-        entityColumn = "id"
+        parentColumn = "fk_account_type_id",
+        entityColumn = "id",
+        entity = AccountTypeEntity::class
     )
-    val accountType: List<AccountTypeEntity>
+    val accountType: AccountTypeEntity?
 )

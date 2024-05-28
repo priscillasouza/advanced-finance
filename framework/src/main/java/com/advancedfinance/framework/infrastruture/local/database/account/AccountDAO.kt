@@ -18,9 +18,11 @@ interface AccountDAO {
     @Delete
     fun deleteAccount(accountEntity: AccountEntity)
 
+    @Transaction
     @Query("SELECT * FROM account")
     fun getAccounts(): Flow<List<AccountWithAccountType>>
 
+    @Transaction
     @Query("SELECT * FROM category_account_type")
     fun getAllAccountType(): Flow<List<AccountTypeEntity>>
 }
