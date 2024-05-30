@@ -22,14 +22,14 @@ class TransactionListViewModel(
 
     override fun dispatchViewAction(viewAction: TransactionListViewAction) {
         when (viewAction) {
-            is TransactionListViewAction.GetListTransaction -> getTransactionList(id = )
+            is TransactionListViewAction.GetListTransaction -> getTransactionList()
         }
     }
 
-    private fun getTransactionList(id: Int) {
+    private fun getTransactionList() {
         viewModelScope.launch {
             listViewStateMutable.value = TransactionListViewState.Loading
-            repository.getAllTransaction(id)
+            repository.getAllTransaction()
                 .catch { exception ->
                     exception.printStackTrace()
                     listViewStateMutable.value = TransactionListViewState.Error(R.string.transaction_text_error_transaction_list)

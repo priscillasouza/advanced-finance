@@ -40,6 +40,8 @@ android {
 
 dependencies {
 
+    implementation(project(":core"))
+
     testImplementation libs.test.junit
     androidTestImplementation libs.androidx.room.testing
 

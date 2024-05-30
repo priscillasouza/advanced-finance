@@ -16,5 +16,5 @@ interface ITransactionRepository {
 
     fun getTransactionTypeById(id: Int): TransactionType
 
-    fun getAllTransaction(id: Int): Flow<List<TransactionModel>>
+    fun getAllTransaction(): Flow<List<TransactionModel>>
 }

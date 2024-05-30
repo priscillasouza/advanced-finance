@@ -3,41 +3,38 @@ package com.advancedfinance.framework.infrastruture.local.database.transaction.e
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.advancedfinance.framework.infrastruture.local.database.account.entity.AccountEntity
-import com.advancedfinance.framework.infrastruture.local.database.account.entity.AccountTypeEntity
 import com.advancedfinance.framework.infrastruture.local.database.category.entity.CategoryEntity
+import com.advancedfinance.framework.infrastruture.local.database.category.entity.CategoryWithTransactionType
 import com.advancedfinance.framework.infrastruture.local.database.category.entity.TransactionTypeEntity
 import com.advancedfinance.framework.infrastruture.local.database.periodtype.entity.PeriodTypeEntity
 
 data class TransactionWithAllRelations(
     @Embedded val transactionEntity: TransactionEntity,
+    @Relation(
+        parentColumn = "transaction_type",
+        entityColumn = "id",
+        entity = TransactionTypeEntity::class
+    )
+    val transactionTypeEntity: TransactionTypeEntity?,
 
     @Relation(
-        parentColumn = "id",
-        entityColumn = "id"
+        parentColumn = "fk_category_id",
+        entityColumn = "id",
+        entity = CategoryEntity::class
     )
-    val transactionTypeEntity: List<TransactionTypeEntity>,
+    val categoryEntity: CategoryWithTransactionType?,
 
     @Relation(
-        parentColumn = "id",
-        entityColumn = "id"
+        parentColumn = "fk_account_id",
+        entityColumn = "id",
+        entity = AccountEntity::class
     )
-    val categoryEntity: List<CategoryEntity>,
+    val accountEntity: AccountEntity?,
 
     @Relation(
-        parentColumn = "id",
-        entityColumn = "id"
+        parentColumn = "fk_period_type_id",
+        entityColumn = "id",
+        entity = PeriodTypeEntity::class
     )
-    val accountEntity: List<AccountEntity>,
-
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "id"
-    )
-    val accountTypeEntity: List<AccountTypeEntity>,
-
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "id"
-    )
-    val periodTypeEntity: List<PeriodTypeEntity>,
+    val periodTypeEntity: PeriodTypeEntity?
 )

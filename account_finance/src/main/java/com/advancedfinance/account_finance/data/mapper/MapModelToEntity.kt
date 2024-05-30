@@ -11,7 +11,7 @@ class MapModelToEntity : IMapper<AccountModel, AccountEntity> {
             id = account.id ?: 0,
             name = account.name,
             startedBalance = account.startedBalance,
-            accountType = account.accountType.name
+            accountType = account.accountType.id
         )
     }
 }

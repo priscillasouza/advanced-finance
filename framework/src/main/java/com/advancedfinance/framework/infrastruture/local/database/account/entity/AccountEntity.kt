@@ -8,10 +8,10 @@ import java.math.BigDecimal
 @Entity(tableName = "account")
 data class AccountEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int? = null,
     val name: String,
     @ColumnInfo(name = "started_balance")
     val startedBalance: BigDecimal,
-    @ColumnInfo(name = "account_type")
-    val accountType: String
+    @ColumnInfo(name = "fk_account_type_id")
+    val accountType: Int
 )

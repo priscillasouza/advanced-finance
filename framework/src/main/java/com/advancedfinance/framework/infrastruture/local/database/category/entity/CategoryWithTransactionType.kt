@@ -4,10 +4,11 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class CategoryWithTransactionType(
-    @Embedded val category: CategoryEntity,
+    @Embedded val category: CategoryEntity?,
     @Relation(
-        parentColumn = "id",
-        entityColumn = "id"
+        parentColumn = "fk_transaction_type_id",
+        entityColumn = "id",
+        entity = TransactionTypeEntity::class
     )
-    val transactionType: List<TransactionTypeEntity>
+    val transactionType: TransactionTypeEntity?
 )
