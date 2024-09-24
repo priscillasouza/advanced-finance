@@ -1,9 +1,12 @@
 package com.advancedfinance.overview.presentation.screen
 
+import com.advancedfinance.account_finance.domain.repository.IAccountRepository
 import com.advancedfinance.core.platform.BaseViewModel
 import kotlinx.coroutines.flow.StateFlow
 
-class OverviewViewModel: BaseViewModel<OverviewViewState, OverviewViewAction>() {
+class OverviewViewModel(
+    private val repository: IAccountRepository
+): BaseViewModel<OverviewViewState, OverviewViewAction>() {
 
     override val listViewState: StateFlow<OverviewViewState>
         get() {

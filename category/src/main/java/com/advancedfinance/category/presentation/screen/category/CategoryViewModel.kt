@@ -5,6 +5,7 @@ import com.advancedfinance.category.R
 import com.advancedfinance.category.domain.ICategoryRepository
 import com.advancedfinance.category.presentation.model.CategoryModel
 import com.advancedfinance.category.presentation.model.TransactionType
+import com.advancedfinance.core.extensions.orZero
 import com.advancedfinance.core.platform.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,7 +26,7 @@ class CategoryViewModel(
                 preparedView(viewAction.categoryModel)
             }
             is CategoryViewAction.SaveCategory -> {
-                addOrUpdateAccount(viewAction.name, viewAction.typeTransaction)
+                addOrUpdateCategory(viewAction.name, viewAction.typeTransaction)
             }
             is CategoryViewAction.DeleteCategory -> {
                 deleteCategory(viewAction.categoryModel)
@@ -42,7 +43,7 @@ class CategoryViewModel(
         }
     }
 
-    private fun addOrUpdateAccount(
+    private fun addOrUpdateCategory(
         name: String,
         typeTransaction: TransactionType,
     ) {
@@ -54,7 +55,7 @@ class CategoryViewModel(
                     transactionType = typeTransaction))
             }
         } ?: addCategory(CategoryModel(
-            id = 0,
+            id = null,
             name = name,
             transactionType = typeTransaction))
     }
@@ -109,7 +110,7 @@ sealed class CategoryViewState {
     object SuccessInsert : CategoryViewState()
     object SuccessUpdate : CategoryViewState()
     object SuccessDelete : CategoryViewState()
-    object Loading : CategoryViewState()
+    data object Loading : CategoryViewState()
     class Error(val message: Int) : CategoryViewState()
     class ViewUpdate(val categoryModel: CategoryModel) : CategoryViewState()
     object ViewInsert : CategoryViewState()

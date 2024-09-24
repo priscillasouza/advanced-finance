@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":framework"))
     implementation(project(":transaction"))
     implementation(project(":category"))
+    implementation project(':account_finance')
 
     testImplementation libs.test.junit
     androidTestImplementation libs.bundles.android.test

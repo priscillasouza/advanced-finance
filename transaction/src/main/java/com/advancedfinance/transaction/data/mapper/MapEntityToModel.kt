@@ -20,8 +20,8 @@ class MapEntityToModel : IMapper<TransactionEntity, TransactionModel> {
             date = entity.date,
             category = CategoryModel(
                 id = entity.fkCategoryId,
-                name = "",
-                transactionType = TransactionType(id = 0, name = "")
+                name = entity.description,
+                transactionType = TransactionType(id = 0, name = "Nao sei")
             ),
             observation = entity.observation,
             isReceived = entity.isReceived,
