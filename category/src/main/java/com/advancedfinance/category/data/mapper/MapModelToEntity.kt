@@ -6,11 +6,11 @@ import com.advancedfinance.framework.infrastruture.local.database.category.entit
 
 class MapModelToEntity : IMapper<CategoryModel, CategoryEntity> {
 
-    override fun transform(category: CategoryModel): CategoryEntity {
+    override fun transform(entity: CategoryModel): CategoryEntity {
         return CategoryEntity(
-            id = category.id,
-            name = category.name,
-            fkTransactionTypeId = category.transactionType.id
+            id = entity.id,
+            name = entity.name,
+            fkTransactionTypeId = entity.transactionType.id
         )
     }
 }

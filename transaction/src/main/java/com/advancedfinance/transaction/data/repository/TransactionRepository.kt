@@ -2,6 +2,7 @@ package com.advancedfinance.transaction.data.repository
 
 import com.advancedfinance.category.presentation.model.TransactionType
 import com.advancedfinance.framework.infrastruture.local.database.transaction.TransactionDAO
+import com.advancedfinance.framework.infrastruture.local.database.transaction.entity.TransactionWithAllRelations
 import com.advancedfinance.transaction.data.mapper.MapEntityToModel
 import com.advancedfinance.transaction.data.mapper.MapModelToEntity
 import com.advancedfinance.transaction.data.mapper.MapPeriodTypeEntityToModel
@@ -19,7 +20,7 @@ class TransactionRepository(
     private var mapEntityToModel: MapEntityToModel,
     private var mapPeriodTypeEntityToModel: MapPeriodTypeEntityToModel,
     private var mapTransactionTypeEntityToModel: MapTransactionTypeEntityToModel,
-    private var mapTransactionAllRelationsEntityToModel: MapTransactionAllRelationsEntityToModel
+    private var mapTransactionAllRelationsEntityToModel: MapTransactionAllRelationsEntityToModel,
 ) : ITransactionRepository {
 
     override suspend fun saveTransaction(transactionModel: TransactionModel) {

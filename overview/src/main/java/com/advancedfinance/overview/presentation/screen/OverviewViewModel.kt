@@ -1,9 +1,12 @@
 package com.advancedfinance.overview.presentation.screen
 
 import com.advancedfinance.core.platform.BaseViewModel
+import com.advancedfinance.overview.domain.usecase.InitOverviewUseCase
 import kotlinx.coroutines.flow.StateFlow
 
-class OverviewViewModel: BaseViewModel<OverviewViewState, OverviewViewAction>() {
+class OverviewViewModel(
+    private val repository: InitOverviewUseCase
+): BaseViewModel<OverviewViewState, OverviewViewAction>() {
 
     override val listViewState: StateFlow<OverviewViewState>
         get() {
@@ -11,11 +14,17 @@ class OverviewViewModel: BaseViewModel<OverviewViewState, OverviewViewAction>() 
         }
 
     override fun dispatchViewAction(viewAction: OverviewViewAction) {
-        TODO("Not yet implemented")
+        when(viewAction) {
+           is OverviewViewAction.Init -> {
+               //bater no usecase chamar o que precisa para enviar para a view
+           }
+        }
     }
 }
 
-sealed class OverviewViewAction {}
+sealed class OverviewViewAction {
+    object Init:OverviewViewAction()
+}
 
 sealed class OverviewViewState {
     object Success : OverviewViewState()

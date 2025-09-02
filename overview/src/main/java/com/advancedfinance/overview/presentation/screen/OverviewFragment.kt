@@ -16,6 +16,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding, OverviewViewModel
 
     override fun prepareView(savedInstanceState: Bundle?) {
         setListeners()
+        viewModel.dispatchViewAction(OverviewViewAction.Init)
     }
 
     private fun setListeners() {
