@@ -50,7 +50,7 @@ class TransactionFragment :
     private var isFixedValue = false
     private var isPayInInstallments = false
     private val args by navArgs<TransactionFragmentArgs>()
-    private val type by lazy { args.argTransactionType}
+    private val type by lazy { args.argTransactionType }
     private val transactionModel by lazy { args.argTransactionModel }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -59,8 +59,8 @@ class TransactionFragment :
         viewModel.dispatchViewAction(TransactionViewAction.GetPeriodTypeList)
 
         viewModel.dispatchViewAction(TransactionViewAction.PreparedViewTransaction(
-            transactionModel = transactionModel,
-            type = type))
+                transactionModel = transactionModel,
+                type = type))
         setListeners()
         onObservable()
         setDataPickerDialog()
@@ -111,7 +111,7 @@ class TransactionFragment :
                         preparedViewTransactionInsert(it.isRevenue)
                     }
                     is TransactionViewState.ViewUpdate -> {
-                        preparedViewTransactionUpdate(it.transactionModel, it.isRevenue )
+                        preparedViewTransactionUpdate(it.transactionModel, it.isRevenue)
                     }
                     is TransactionViewState.SuccessInsert -> {
                         Toast.makeText(requireContext(),
@@ -325,10 +325,9 @@ class TransactionFragment :
                     datePicker.show()
                     datePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE)
                         .setTextColor(ContextCompat.getColor(requireContext(),
-                            com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
+                                com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
                     datePicker.getButton(DatePickerDialog.BUTTON_POSITIVE)
-                        .setTextColor(ContextCompat.getColor(requireContext(),
-                            com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
+                        .setTextColor(ContextCompat.getColor(requireContext(),                             com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
                 } else {
                     resources.configuration.setLocale(Locale("pt", "BR"))
                     val getDate = GregorianCalendar.getInstance()
@@ -349,10 +348,10 @@ class TransactionFragment :
                     datePicker.show()
                     datePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE)
                         .setTextColor(ContextCompat.getColor(requireContext(),
-                            com.advancedfinance.core.R.color.core_md_theme_light_error))
+                                com.advancedfinance.core.R.color.core_md_theme_light_error))
                     datePicker.getButton(DatePickerDialog.BUTTON_POSITIVE)
                         .setTextColor(ContextCompat.getColor(requireContext(),
-                            com.advancedfinance.core.R.color.core_md_theme_light_error))
+                                com.advancedfinance.core.R.color.core_md_theme_light_error))
                 }
             }
         }
@@ -416,19 +415,19 @@ class TransactionFragment :
 
     private fun transactionSave() {
         viewBinding.apply {
-                editTextInputValue.addCurrencyFormatter()
-                /*     if (validateFields()) {*/
-                val value = editTextInputValue.text.toString().removeSpecialCharacters().toBigDecimal()
-                val description = editTextDescription.text.toString()
-                val date = editTextDate.text.toString()
-                val category = categorySelected
-                val account = accountSelected
-                val observation = editTextInputObservation.text.toString()
-                val repetitions = editTextInputRepetitions.text.toString()
-                val period = periodTypeSelected
-                val transactionTypeId = transactionModel?.transactionType?.id ?: type.value
+            editTextInputValue.addCurrencyFormatter()
+            /*     if (validateFields()) {*/
+            val value = editTextInputValue.text.toString().removeSpecialCharacters().toBigDecimal()
+            val description = editTextDescription.text.toString()
+            val date = editTextDate.text.toString()
+            val category = categorySelected
+            val account = accountSelected
+            val observation = editTextInputObservation.text.toString()
+            val repetitions = editTextInputRepetitions.text.toString()
+            val period = periodTypeSelected
+            val transactionTypeId = transactionModel?.transactionType?.id ?: type.value
 
-                viewModel.dispatchViewAction(TransactionViewAction.SaveTransaction(
+            viewModel.dispatchViewAction(TransactionViewAction.SaveTransaction(
                     value = value,
                     description = description,
                     date = date,
@@ -441,15 +440,15 @@ class TransactionFragment :
                     isPayInInstallments = isPayInInstallments,
                     repetitions = repetitions,
                     period = period,
-                    transactionTypeId = transactionTypeId
-                ))
-                this@TransactionFragment.findNavController().popBackStack()
-                /* } else {Des
-                     Toast.makeText(requireContext(),
-                         getString(R.string.transaction_text_toast_validate_fields),
-                         Toast.LENGTH_SHORT)
-                         .show()
-                 }*/
+                    transactionTypeId = transactionTypeId)
+            )
+            this@TransactionFragment.findNavController().popBackStack()
+            /* } else {Des
+                 Toast.makeText(requireContext(),
+                     getString(R.string.transaction_text_toast_validate_fields),
+                     Toast.LENGTH_SHORT)
+                     .show()
+             }*/
         }
     }
 }

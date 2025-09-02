@@ -1,12 +1,9 @@
 package com.advancedfinance.account_finance.domain.usecase
 
-import com.advancedfinance.account_finance.data.repository.AccountRepository
 import com.advancedfinance.account_finance.domain.repository.IAccountRepository
 import com.advancedfinance.account_finance.presentation.model.AccountModel
 import com.advancedfinance.core.domain.usecase.BaseUseCase
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
 class GetAccountsUseCase(
@@ -22,12 +19,11 @@ class GetAccountsUseCase(
                     } ?: emit(Result.Empty)
                 }
             } catch (e: Throwable) {
+                e.printStackTrace()
                 emit(Result.Error(e))
             } finally {
                 emit(Result.State.Loaded)
             }
         }
     }
-
-
 }

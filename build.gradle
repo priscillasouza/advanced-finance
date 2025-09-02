@@ -1,8 +1,30 @@
+import io.gitlab.arturbosch.detekt.Detekt
 
+buildscript {
+    dependencies {
+        classpath(libs.androidx.navigation.safe.args.gradle.plugin)
+    }
+}
 plugins {
     alias libs.plugins.android.application apply false
     alias libs.plugins.android.library apply false
+    id("io.gitlab.arturbosch.detekt") version("1.23.8")
+    alias(libs.plugins.kotlin.android) apply false
+    id "com.google.devtools.ksp" version "2.2.0-2.0.2" apply false
 }
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+tasks.withType(Detekt).configureEach {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        txt.required.set(true)
+        sarif.required.set(true)
+        md.required.set(true)
+    }
+    doLast {
+        println("Detekt report avaliable at:")
+        println(" - html: ${project.getBuildDir()}/reports/detekt/detekt.html")
+    }
 }
