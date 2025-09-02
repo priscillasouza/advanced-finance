@@ -1,9 +1,14 @@
 plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
-    alias libs.plugins.navigation.safeargs.kotlin
-    alias libs.plugins.kotlin.parcelize
+    id("org.jetbrains.kotlin.plugin.parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 }
+
+apply {
+    from("../config/detekt/detekt.gradle")
+}
+
 
 def apiKeyPropertiesFile = rootProject.file("apikey.properties")
 def apiKeyProperties = new Properties()

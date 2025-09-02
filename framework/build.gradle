@@ -1,7 +1,11 @@
 plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
-    alias libs.plugins.kotlin.kapt
+    id "com.google.devtools.ksp"
+}
+
+apply {
+    from("../config/detekt/detekt.gradle")
 }
 
 def remotePropertiesFile = rootProject.file("remote.properties")
@@ -55,12 +59,13 @@ dependencies {
     implementation libs.koin.android
     implementation libs.bundles.networking
     implementation libs.bundles.room
-    kapt libs.androidx.room.compiler
+    /*kapt libs.androidx.room.compiler*/
 
     implementation libs.androidx.paging
     implementation libs.androidx.recycler.selection
     implementation libs.bundles.coroutines
     implementation libs.bundles.lifecycle
+    ksp "androidx.room:room-compiler:2.6.1"
 }
 
 configurations.implementation {
