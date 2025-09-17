@@ -8,46 +8,48 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_account_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linear_layout_compat_total_balance"
         app:layout_constraintEnd_toEndOf="parent"
-        android:clipToPadding="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/account_finance_account_list_item" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linear_layout_compat_total_balance"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="4dp"
         android:background="@color/core_md_theme_light_onPrimary"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingStart="36dp"
+        android:paddingEnd="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_view_total_balance"
             style="@style/CoreStyleTextSize16Bold"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="36dp"
             android:text="@string/account_finance_text_total_balance"
             android:textColor="@color/core_md_theme_light_scrim" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_view_value_total_balance"
             style="@style/CoreStyleTextSize16Bold"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="32dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="R$ 3.000.000,00"
+            android:text="R$ 3.000.000"
             android:textColor="@color/core_seed" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
