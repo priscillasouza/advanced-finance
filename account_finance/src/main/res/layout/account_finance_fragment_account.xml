@@ -90,8 +90,24 @@
             android:id="@+id/autocomplete_account_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:inputType="none"
+            tools:ignore="LabelFor" />
+
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_view_account_description"
+        style="@style/CoreStyleTextSize16Regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="160dp"
+        android:text="@string/account_finance_text_view_new_account_description"
+        android:textColor="@color/core_seed"
+        app:layout_constraintBottom_toTopOf="@+id/button_save_account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_account_type" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_save_account"
@@ -103,19 +119,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_account_description"
-        app:layout_constraintVertical_bias="0.166" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_view_account_description"
-        style="@style/CoreStyleTextSize16Regular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="200dp"
-        android:text="@string/account_finance_text_view_new_account_description"
-        android:textColor="@color/core_seed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_account_type" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_account_description" />
 </androidx.constraintlayout.widget.ConstraintLayout>

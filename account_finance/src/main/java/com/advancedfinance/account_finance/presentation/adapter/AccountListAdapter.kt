@@ -48,6 +48,7 @@ class AccountListAdapter(val onClickItem: (AccountModel) -> Unit) :
             layout.apply {
                 textViewAccountName.text = account.name
                 textViewAccountItemValue.text = account.startedBalance.toString().toMoney()
+
                 cardViewAccountListItem.setOnClickListener {
                     onClickItem.invoke(account)
                 }

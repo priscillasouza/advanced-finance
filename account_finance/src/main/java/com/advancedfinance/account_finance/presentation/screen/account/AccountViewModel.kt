@@ -24,7 +24,7 @@ class AccountViewModel(
     override fun dispatchViewAction(viewAction: AccountViewAction) {
         when (viewAction) {
             is AccountViewAction.PreparedViewAccount -> {
-                preparedView(viewAction.accountModel)
+                preparedView(viewAction.accountModel, viewAction.accountModel?.accountType)
             }
             is AccountViewAction.SaveAccount -> {
                 addOrUpdateAccount(viewAction.name, viewAction.startedBalance, viewAction.accountType)
@@ -34,7 +34,7 @@ class AccountViewModel(
         }
     }
 
-    private fun preparedView(accountModel: AccountModel?) {
+    private fun preparedView(accountModel: AccountModel?, accountType: AccountTypeModel?) {
         if (accountModel != null && accountModel.id!! > 0) {
             this.account = accountModel
             viewStateMutable.value = AccountViewState.ViewUpdate(accountModel = accountModel)
@@ -53,7 +53,8 @@ class AccountViewModel(
         } else {
             account?.id?.let { id ->
                 if (id > 0) {
-                    updateAccount(AccountModel(id = id,
+                    updateAccount(AccountModel(
+                        id = id,
                         name = name,
                         accountType = accountType,
                         startedBalance = startedBalance))
