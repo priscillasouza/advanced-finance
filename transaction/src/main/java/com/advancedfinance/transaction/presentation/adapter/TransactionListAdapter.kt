@@ -53,12 +53,9 @@ class TransactionListAdapter(val onClickItem: (TransactionModel) -> Unit) :
                 textViewTansactionDescription.text = transaction.description
                 textViewTransactionDate.text = transaction.date
                 textViewTansactionCategory.text = transaction.category?.name
-                textViewTansactionAccount.text = transaction.account?.name
+                textViewTansactionAccount.text = transaction.account?.accountType?.name
                 cardViewTransactionListItem.setOnClickListener {
                     onClickItem.invoke(transaction)
-                    /*val action =
-                       TransactionListFragmentDirections.transactionActionTransactionTransactionlistfragmentToTransactionTransactionfragment()
-                    cardViewTransactionListItem.findNavController().navigate(action)*/
                 }
             }
         }

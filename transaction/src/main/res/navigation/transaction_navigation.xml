@@ -13,7 +13,7 @@
             android:name="arg_transaction_type"
             app:argType="com.advancedfinance.transaction.presentation.screen.ArgTransactionType"
             app:nullable="false"
-            android:defaultValue="Revenue"/>
+           />
         <argument
             android:name="arg_transaction_model"
             app:argType="com.advancedfinance.transaction.presentation.model.TransactionModel"

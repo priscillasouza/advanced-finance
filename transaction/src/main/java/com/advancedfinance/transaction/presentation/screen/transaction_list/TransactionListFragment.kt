@@ -85,7 +85,11 @@ class TransactionListFragment :
             transactionListAdapter = TransactionListAdapter() { transaction ->
                     val action = ArgTransactionType.fromInt(transaction.transactionType.id)?.let {
                         TransactionListFragmentDirections.transactionlistfragmentToTransactionfragment(
-                            argTransactionModel = transaction)
+                            argTransactionModel = transaction, argTransactionType = when(transaction.transactionType.id) {
+                                1 -> { ArgTransactionType.Revenue }
+                                2 -> { ArgTransactionType.Expense }
+                                else -> { ArgTransactionType.Revenue}
+                            })
                     }
                     action?.let {
                         findNavController().navigate(it)
