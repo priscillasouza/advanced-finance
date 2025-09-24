@@ -257,7 +257,7 @@ class TransactionFragment :
                 editTextDescription.setText(transaction.description)
                 editTextDate.setText(transaction.date)
                 autocompleteCategory.setText(transaction.category?.name)
-                autocompleteAccount.setText(transaction.account?.name)
+                autocompleteAccount.setText(transaction.account?.accountType.toString())
                 editTextInputObservation.setText(transaction.observation)
                 checkboxReceivedOrPay.isChecked
                 checkboxReceivedOrPay.setText(R.string.transaction_text_check_box_received)
@@ -273,6 +273,7 @@ class TransactionFragment :
                 textInputCategory.setStartIconTintList(setColorScreenRevenue())
                 textInputAccount.setStartIconTintList(setColorScreenRevenue())
                 textInputObservation.setStartIconTintList(setColorScreenRevenue())
+
             } else {
                 toolbarTransaction.title = getString(R.string.transaction_text_toolbar_edit_expense)
                 toolbarTransaction.setBackgroundColor(
