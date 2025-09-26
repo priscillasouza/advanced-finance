@@ -57,12 +57,8 @@ class TransactionFragment :
 
         viewModel.dispatchViewAction(
             TransactionViewAction.PreparedViewTransaction(
-                transactionModel = transactionModel,
-                type = when (transactionModel?.transactionType?.id) {
-                    1 -> { ArgTransactionType.Revenue }
-                    2 -> { ArgTransactionType.Expense }
-                    else -> { ArgTransactionType.Revenue }
-                }
+                transactionModel = args.argTransactionModel,
+                type = type
             )
         )
         setListeners()
@@ -115,11 +111,9 @@ class TransactionFragment :
                     is TransactionViewState.ViewInsert -> {
                         preparedViewTransactionInsert(it.isRevenue)
                     }
-
                     is TransactionViewState.ViewUpdate -> {
                         preparedViewTransactionUpdate(it.transactionModel, it.isRevenue)
                     }
-
                     is TransactionViewState.SuccessInsert -> {
                         Toast.makeText(
                             requireContext(),
@@ -128,7 +122,6 @@ class TransactionFragment :
                         )
                             .show()
                     }
-
                     is TransactionViewState.SuccessUpdate -> {
                         Toast.makeText(
                             requireContext(),
@@ -137,11 +130,9 @@ class TransactionFragment :
                         )
                             .show()
                     }
-
                     is TransactionViewState.Error -> {
                         it.message
                     }
-
                     is TransactionViewState.SuccessCategoryList -> {
                         setAdapterCategoryList(
                             viewBinding.autocompleteCategory,
@@ -154,7 +145,6 @@ class TransactionFragment :
                         )
                         viewBinding.autocompleteCategory.setText(categorySelected?.name)
                     }
-
                     is TransactionViewState.SuccessAccountList -> {
                         setAdapterAccountList(
                             viewBinding.autocompleteAccount,
@@ -167,7 +157,6 @@ class TransactionFragment :
                         )
                         viewBinding.autocompleteAccount.setText(accountSelected?.name)
                     }
-
                     is TransactionViewState.SuccessPeriodTypeList -> {
                         setAdapterPeriodTypeList(
                             viewBinding.autocompletePeriodOption,
@@ -193,7 +182,12 @@ class TransactionFragment :
                 viewModel.dispatchViewAction(TransactionViewAction.GetCategoryList(categoryType = 1))
                 toolbarTransaction.apply {
                     title = getString(R.string.transaction_text_toolbar_new_revenue)
-                    toolbarTransaction.setBackgroundColor(resources.getColor(com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
+                    toolbarTransaction.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            com.advancedfinance.core.R.color.core_md_theme_light_tertiary
+                        )
+                    )
                 }
                 val window = activity?.window
                 window?.statusBarColor = ContextCompat.getColor(
@@ -206,15 +200,22 @@ class TransactionFragment :
                 radioButtonFixedValue.buttonTintList = setColorScreenRevenue()
                 radioButtonPayInInstallments.buttonTintList = setColorScreenRevenue()
                 textInputValue.setStartIconTintList(setColorScreenRevenue())
+                editTextInputValue.addCurrencyFormatter()
                 textInputDescription.setStartIconTintList(setColorScreenRevenue())
                 textInputDate.setStartIconTintList(setColorScreenRevenue())
                 textInputCategory.setStartIconTintList(setColorScreenRevenue())
                 textInputAccount.setStartIconTintList(setColorScreenRevenue())
                 textInputObservation.setStartIconTintList(setColorScreenRevenue())
             } else {
+                viewModel.dispatchViewAction(TransactionViewAction.GetCategoryList(categoryType = 2))
                 toolbarTransaction.apply {
                     title = getString(R.string.transaction_text_toolbar_new_expense)
-                    toolbarTransaction.setBackgroundColor(resources.getColor(com.advancedfinance.core.R.color.core_md_theme_light_error))
+                    toolbarTransaction.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            com.advancedfinance.core.R.color.core_md_theme_light_error
+                        )
+                    )
                 }
                 val window = activity?.window
                 window?.statusBarColor = ContextCompat.getColor(
@@ -227,11 +228,13 @@ class TransactionFragment :
                 radioButtonFixedValue.buttonTintList = setColorScreenExpense()
                 radioButtonPayInInstallments.buttonTintList = setColorScreenExpense()
                 textInputValue.setStartIconTintList(setColorScreenExpense())
+                editTextInputValue.addCurrencyFormatter()
                 textInputDescription.setStartIconTintList(setColorScreenExpense())
                 textInputDate.setStartIconTintList(setColorScreenExpense())
                 textInputCategory.setStartIconTintList(setColorScreenExpense())
                 textInputAccount.setStartIconTintList(setColorScreenExpense())
                 textInputObservation.setStartIconTintList(setColorScreenExpense())
+
             }
         }
     }
@@ -239,6 +242,7 @@ class TransactionFragment :
     private fun preparedViewTransactionUpdate(transaction: TransactionModel, isRevenue: Boolean) {
         viewBinding.apply {
             if (isRevenue) {
+                viewModel.dispatchViewAction(TransactionViewAction.GetCategoryList(categoryType = 1))
                 toolbarTransaction.title = getString(R.string.transaction_text_toolbar_edit_revenue)
                 toolbarTransaction.setBackgroundColor(
                     ContextCompat.getColor(
@@ -252,12 +256,14 @@ class TransactionFragment :
                     requireContext(),
                     com.advancedfinance.core.R.color.core_md_theme_dark_onSecondary
                 )
-
+                editTextInputValue.addCurrencyFormatter()
                 editTextInputValue.setText(String.format(transaction.value.toString().toMoney()))
                 editTextDescription.setText(transaction.description)
                 editTextDate.setText(transaction.date)
-                autocompleteCategory.setText(transaction.category?.name)
-                autocompleteAccount.setText(transaction.account?.accountType.toString())
+                autocompleteCategory.setText(transaction.category?.name, false)
+                categorySelected = transaction.category
+                autocompleteAccount.setText(transaction.account?.name, false)
+                accountSelected = transaction.account
                 editTextInputObservation.setText(transaction.observation)
                 checkboxReceivedOrPay.isChecked
                 checkboxReceivedOrPay.setText(R.string.transaction_text_check_box_received)
@@ -267,6 +273,7 @@ class TransactionFragment :
                 radioButtonPayInInstallments.buttonTintList = setColorScreenRevenue()
                 editTextInputRepetitions.setText(transaction.repetitions)
                 autocompletePeriodOption.setText(transaction.period?.name)
+
                 textInputValue.setStartIconTintList(setColorScreenRevenue())
                 textInputDescription.setStartIconTintList(setColorScreenRevenue())
                 textInputDate.setStartIconTintList(setColorScreenRevenue())
@@ -275,6 +282,7 @@ class TransactionFragment :
                 textInputObservation.setStartIconTintList(setColorScreenRevenue())
 
             } else {
+                viewModel.dispatchViewAction(TransactionViewAction.GetCategoryList(categoryType = 2))
                 toolbarTransaction.title = getString(R.string.transaction_text_toolbar_edit_expense)
                 toolbarTransaction.setBackgroundColor(
                     ContextCompat.getColor(
@@ -288,12 +296,14 @@ class TransactionFragment :
                     requireContext(),
                     com.advancedfinance.core.R.color.core_md_theme_dark_errorContainer
                 )
-
+                editTextInputValue.addCurrencyFormatter()
                 editTextInputValue.setText(String.format(transaction.value.toString().toMoney()))
                 editTextDescription.setText(transaction.description)
                 editTextDate.setText(transaction.date)
-                autocompleteCategory.setText(transaction.category?.name)
-                autocompleteAccount.setText(transaction.account?.name)
+                autocompleteCategory.setText(transaction.category?.name, false)
+                categorySelected = transaction.category
+                autocompleteAccount.setText(transaction.account?.name, false)
+                accountSelected = transaction.account
                 editTextInputObservation.setText(transaction.observation)
                 checkboxReceivedOrPay.isChecked
                 checkboxReceivedOrPay.setText(R.string.transaction_text_check_box_received)
@@ -344,7 +354,7 @@ class TransactionFragment :
                         com.advancedfinance.core.R.style.CoreStyleDatePickerRevenue,
                         { _, mYear, mMonth, mDay ->
                             val selectDate = GregorianCalendar.getInstance()
-                            editTextDate.setText("$mDay-$mMonth-$mYear")
+                            editTextDate.setText("$mDay-${mMonth + 1}-$mYear")
                             selectDate.set(GregorianCalendar.YEAR, mYear)
                             selectDate.set(GregorianCalendar.MONTH, mMonth)
                             selectDate.set(GregorianCalendar.DAY_OF_MONTH, mDay)
@@ -376,7 +386,7 @@ class TransactionFragment :
                         com.advancedfinance.core.R.style.CoreStyleDatePickerExpense,
                         { _, mYear, mMonth, mDay ->
                             val selectDate = GregorianCalendar.getInstance()
-                            editTextDate.setText("$mDay-$mMonth-$mYear")
+                            editTextDate.setText("$mDay-${mMonth + 1}-$mYear")
                             selectDate.set(GregorianCalendar.YEAR, mYear)
                             selectDate.set(GregorianCalendar.MONTH, mMonth)
                             selectDate.set(GregorianCalendar.DAY_OF_MONTH, mDay)
@@ -415,6 +425,7 @@ class TransactionFragment :
             categories
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        categories.map { it.name }
         autoCompleteTextView.apply {
             setOnItemClickListener(onItemClickListener)
         }
@@ -431,6 +442,7 @@ class TransactionFragment :
             accounts
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        accounts.map { it.name }
         autoCompleteTextView.apply {
             setOnItemClickListener(onItemClickListener)
         }

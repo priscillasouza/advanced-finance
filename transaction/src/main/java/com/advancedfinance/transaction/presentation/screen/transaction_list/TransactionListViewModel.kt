@@ -1,13 +1,10 @@
 package com.advancedfinance.transaction.presentation.screen.transaction_list
 
 import androidx.lifecycle.viewModelScope
-import com.advancedfinance.category.presentation.model.CategoryModel
-import com.advancedfinance.category.presentation.screen.category.CategoryViewAction
 import com.advancedfinance.core.platform.BaseViewModel
 import com.advancedfinance.transaction.R
 import com.advancedfinance.transaction.domain.repository.ITransactionRepository
 import com.advancedfinance.transaction.presentation.model.TransactionModel
-import com.advancedfinance.transaction.presentation.screen.transaction.TransactionViewState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch

@@ -15,7 +15,6 @@
             app:destination="@id/transaction_navigation">
             <argument
                 android:name="arg_transaction_type"
-                android:defaultValue="Revenue"
                 app:argType="com.advancedfinance.transaction.presentation.screen.ArgTransactionType"
                 app:nullable="false" />
         </action>
@@ -24,7 +23,6 @@
             app:destination="@id/overview_transactionfragment">
             <argument
                 android:name="arg_transaction_type"
-                android:defaultValue="Revenue"
                 app:argType="com.advancedfinance.transaction.presentation.screen.ArgTransactionType"
                 app:nullable="false" />
         </action>

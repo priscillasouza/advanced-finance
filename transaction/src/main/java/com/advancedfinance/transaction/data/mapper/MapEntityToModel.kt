@@ -38,7 +38,7 @@ class MapEntityToModel : IMapper<TransactionWithAllRelations, TransactionModel> 
                 startedBalance = BigDecimal(0.0),
                 accountType = AccountTypeModel(
                     id = entity.accountEntity?.accountType,
-                    name = entity.accountEntity?.name.orEmpty()
+                    name = ""
                 )
             ),
             period = PeriodTypeModel(

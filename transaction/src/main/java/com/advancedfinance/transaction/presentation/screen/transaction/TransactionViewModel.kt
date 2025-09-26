@@ -61,8 +61,10 @@ class TransactionViewModel(
         if (transactionModel != null && transactionModel.id!! > 0) {
             this.transaction = transactionModel
             viewStateMutable.value =
-                TransactionViewState.ViewUpdate(transactionModel = transactionModel,
-                    isRevenue = type == ArgTransactionType.Revenue)
+                TransactionViewState.ViewUpdate(
+                    transactionModel = transactionModel,
+                    isRevenue = type == ArgTransactionType.Revenue
+                )
         } else {
             viewStateMutable.value =
                 TransactionViewState.ViewInsert(isRevenue = type == ArgTransactionType.Revenue)
@@ -87,38 +89,40 @@ class TransactionViewModel(
         transaction?.id?.let { id ->
             if (id > 0) {
                 updateTransaction(TransactionModel(
-                    id = id,
-                    value = value,
-                    description = description,
-                    date = date,
-                    category = category,
-                    account = account,
-                    observation = observation,
-                    isReceived = isReceived,
-                    isInstallments = isInstallments,
-                    isFixedValue = isFixedValue,
-                    isPayInInstallments = isPayInInstallments,
-                    repetitions = repetitions,
-                    period = period,
-                    transactionType = createTransactionType(transactionTypeId)
-                ))
+                        id = id,
+                        value = value,
+                        description = description,
+                        date = date,
+                        category = category,
+                        account = account,
+                        observation = observation,
+                        isReceived = isReceived,
+                        isInstallments = isInstallments,
+                        isFixedValue = isFixedValue,
+                        isPayInInstallments = isPayInInstallments,
+                        repetitions = repetitions,
+                        period = period,
+                        transactionType = createTransactionType(transactionTypeId)
+                    )
+                )
             }
         } ?: addTransaction(TransactionModel(
-            id = null,
-            value = value,
-            description = description,
-            date = date,
-            category = category,
-            account = account,
-            observation = observation,
-            isReceived = isReceived,
-            isInstallments = isInstallments,
-            isFixedValue = isFixedValue,
-            isPayInInstallments = isPayInInstallments,
-            repetitions = repetitions,
-            period = period,
-            transactionType = createTransactionType(transactionTypeId)
-        ))
+                id = null,
+                value = value,
+                description = description,
+                date = date,
+                category = category,
+                account = account,
+                observation = observation,
+                isReceived = isReceived,
+                isInstallments = isInstallments,
+                isFixedValue = isFixedValue,
+                isPayInInstallments = isPayInInstallments,
+                repetitions = repetitions,
+                period = period,
+                transactionType = createTransactionType(transactionTypeId)
+            )
+        )
     }
 
     private fun addTransaction(transactionModel: TransactionModel) {

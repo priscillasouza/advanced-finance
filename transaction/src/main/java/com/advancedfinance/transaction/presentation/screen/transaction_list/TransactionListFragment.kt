@@ -3,11 +3,8 @@ package com.advancedfinance.transaction.presentation.screen.transaction_list
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.advancedfinance.account_finance.presentation.screen.account_list.AccountListViewAction
-import com.advancedfinance.category.presentation.model.TransactionType
-import com.advancedfinance.category.presentation.screen.category_list.CategoryListFragmentDirections
 import com.advancedfinance.core.platform.BaseFragment
 import com.advancedfinance.transaction.databinding.TransactionFragmentTransactionListBinding
 import com.advancedfinance.transaction.presentation.adapter.TransactionListAdapter
@@ -85,15 +82,16 @@ class TransactionListFragment :
             transactionListAdapter = TransactionListAdapter() { transaction ->
                     val action = ArgTransactionType.fromInt(transaction.transactionType.id)?.let {
                         TransactionListFragmentDirections.transactionlistfragmentToTransactionfragment(
-                            argTransactionModel = transaction, argTransactionType = when(transaction.transactionType.id) {
+                            argTransactionModel = transaction,
+                            argTransactionType = when(transaction.transactionType.id) {
                                 1 -> { ArgTransactionType.Revenue }
-                                2 -> { ArgTransactionType.Expense }
-                                else -> { ArgTransactionType.Revenue}
+                                else -> { ArgTransactionType.Expense }
+
                             })
                     }
-                    action?.let {
-                        findNavController().navigate(it)
-                    }
+                if (action != null) {
+                    findNavController().navigate(action)
+                }
             }
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = transactionListAdapter
