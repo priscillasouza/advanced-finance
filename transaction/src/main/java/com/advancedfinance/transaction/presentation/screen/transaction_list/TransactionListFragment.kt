@@ -1,16 +1,19 @@
 package com.advancedfinance.transaction.presentation.screen.transaction_list
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.advancedfinance.core.extensions.toMoney
 import com.advancedfinance.core.platform.BaseFragment
 import com.advancedfinance.transaction.databinding.TransactionFragmentTransactionListBinding
 import com.advancedfinance.transaction.presentation.adapter.TransactionListAdapter
 import com.advancedfinance.transaction.presentation.model.TransactionModel
 import com.advancedfinance.transaction.presentation.screen.ArgTransactionType
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 
 class TransactionListFragment :
     BaseFragment<TransactionFragmentTransactionListBinding, TransactionListViewModel>(
@@ -70,7 +73,7 @@ class TransactionListFragment :
                 when (it) {
                     is TransactionListViewState.Loading -> showLoading()
                     is TransactionListViewState.Error -> showError(it.message)
-                    is TransactionListViewState.SuccessTransactionList -> listAdapterTransaction(it.transactionList)
+                    is TransactionListViewState.SuccessTransactionList -> listAdapterTransaction(it.transactionList, it.totalRevenue, it.totalExpense)
                     else -> {}
                 }
             }
@@ -98,8 +101,17 @@ class TransactionListFragment :
         }
     }
 
-    private fun listAdapterTransaction(list: List<TransactionModel>) {
+    @SuppressLint("SetTextI18n")
+    private fun listAdapterTransaction(
+        list: List<TransactionModel>,
+        totalRevenue: BigDecimal,
+        totalExpense: BigDecimal
+    ) {
         transactionListAdapter.setList(list)
+        viewBinding.apply {
+            textViewTotalRevenue.text = totalRevenue.toString().toMoney()
+            textViewTotalExpense.text = totalExpense.toString().toMoney()
+        }
     }
 
     private fun showError(message: Int) {

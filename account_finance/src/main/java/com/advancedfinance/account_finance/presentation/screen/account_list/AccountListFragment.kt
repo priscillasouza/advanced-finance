@@ -16,6 +16,7 @@ import com.advancedfinance.core.platform.BaseFragment
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
 
+const val TOP_SCROLL = 0
 class AccountListFragment :
     BaseFragment<AccountFinanceFragmentAccountListBinding, AccountListViewModel>(
         AccountFinanceFragmentAccountListBinding::inflate,
@@ -84,9 +85,9 @@ class AccountListFragment :
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if (dy > 0 && viewBinding.accountFinanceFloatingActionButton.isShown) {
+                if (dy > TOP_SCROLL && viewBinding.accountFinanceFloatingActionButton.isShown) {
                     viewBinding.accountFinanceFloatingActionButton.hide()
-                } else if (dy < 0 && !viewBinding.accountFinanceFloatingActionButton.isShown) {
+                } else if (dy < TOP_SCROLL && !viewBinding.accountFinanceFloatingActionButton.isShown) {
                     viewBinding.accountFinanceFloatingActionButton.show()
                 }
             }

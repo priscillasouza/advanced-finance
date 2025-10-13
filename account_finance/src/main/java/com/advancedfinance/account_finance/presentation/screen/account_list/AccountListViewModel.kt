@@ -23,7 +23,6 @@ class AccountListViewModel(
             is AccountListViewAction.GetListAccount -> getAccountList()
         }
     }
-
     private fun getAccountList() {
         viewModelScope.launch {
             listViewStateMutable.value = AccountListViewState.Loading

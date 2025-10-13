@@ -2,7 +2,6 @@ package com.advancedfinance.account_finance.presentation.screen.account
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -27,7 +26,6 @@ class AccountFragment :
 
     private val args: AccountFragmentArgs by navArgs()
     private var accountTypeSelected: AccountTypeModel? = null
-    private lateinit var account: AccountModel
 
     override fun prepareView(savedInstanceState: Bundle?) {
         viewModel.dispatchViewAction(AccountViewAction.GetListAccountType)
@@ -43,11 +41,9 @@ class AccountFragment :
                     is AccountViewState.ViewUpdate -> {
                         preparedViewUpdate(it.accountModel)
                     }
-
                     is AccountViewState.ViewInsert -> {
                         preparedViewInsert()
                     }
-
                     is AccountViewState.SuccessUpdate -> {
                         Toast.makeText(
                             requireContext(),
@@ -55,15 +51,14 @@ class AccountFragment :
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-
                     is AccountViewState.SuccessInsert -> {
+                        setNavigationFromAccountToAccountList()
                         Toast.makeText(
                             requireContext(),
                             getString(R.string.account_finance_text_toast_add_success),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-
                     is AccountViewState.SuccessDelete -> {
                         Toast.makeText(
                             requireContext(),
@@ -71,19 +66,12 @@ class AccountFragment :
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-
                     is AccountViewState.Error -> {
-                        it.message
+                        showErrorDialog(getString(R.string.account_finance_an_unexpected_error_occurred))
                     }
-
                     is AccountViewState.SuccessAccountType -> {
                         setAdapterAccountType(
                             viewBinding.autocompleteAccountType,
-                            onItemClickListener = { adapter, _, position, _ ->
-                                val type = adapter.getItemAtPosition(position) as AccountTypeModel
-                                accountTypeSelected = type
-                                viewBinding.autocompleteAccountType.setText(accountTypeSelected?.name)
-                            },
                             it.listAccountType
                         )
                         viewBinding.autocompleteAccountType.setText(accountTypeSelected?.name)
@@ -100,13 +88,12 @@ class AccountFragment :
 
     private fun setListeners() {
         viewBinding.apply {
-
             editTextInputAccountValue.addCurrencyFormatter()
-
             buttonSaveAccount.setOnClickListener {
-
                 if (validateFields()) {
-                    val startedBalance = editTextInputAccountValue.text.toString().removeSpecialCharacters().toBigDecimal()
+                    val startedBalance =
+                        editTextInputAccountValue.text.toString().removeSpecialCharacters()
+                            .toBigDecimal()
                     val name = editTextInputAccountName.text.toString()
                     val type = accountTypeSelected
 
@@ -117,8 +104,6 @@ class AccountFragment :
                             accountType = type
                         )
                     )
-
-                    findNavController().navigate(AccountFragmentDirections.accountFinanceActionAccountFinanceAccountfragmentToAccountFinanceAccountlistfragment())
                 } else {
                     Toast.makeText(
                         context,
@@ -127,7 +112,6 @@ class AccountFragment :
                     ).show()
                 }
             }
-
             toolbarAccount.apply {
                 setNavigationOnClickListener { findNavController().popBackStack() }
                 setNavigationIcon(R.drawable.account_finance_ic_arrow_back)
@@ -137,7 +121,6 @@ class AccountFragment :
                             setDeleteAccount()
                             true
                         }
-
                         else -> false
                     }
                 }
@@ -145,27 +128,20 @@ class AccountFragment :
         }
     }
 
+    private fun setNavigationFromAccountToAccountList() {
+        findNavController().navigate(AccountFragmentDirections.accountFinanceActionAccountFinanceAccountfragmentToAccountFinanceAccountlistfragment())
+    }
+
     private fun preparedViewUpdate(account: AccountModel) {
         viewBinding.apply {
-            editTextInputAccountValue.setText(String.format(account.startedBalance.toString().toMoney()))
+            editTextInputAccountValue.setText(
+                String.format(
+                    account.startedBalance.toString().toMoney()
+                )
+            )
             editTextInputAccountName.setText(account.name)
-            autocompleteAccountType.setText(account.accountType.name)
-            val accountTypeMoney = AccountTypeModel(1, "Dinheiro")
-            val accountTypeCurrentAccount = AccountTypeModel(2,"Conta corrente")
-            val accountTypeSavingsAccount = AccountTypeModel(3,"Conta poupança")
-            val accountTypeOther = AccountTypeModel(4,"Outro")
-            if(account.accountType.id == 1) {
-                accountTypeSelected = accountTypeMoney
-            }
-            if(account.accountType.toInt() == 2) {
-                accountTypeSelected = accountTypeCurrentAccount
-            }
-            if(account.accountType.toInt() == 3) {
-                accountTypeSelected = accountTypeSavingsAccount
-            }
-            if(account.accountType.toInt() == 4) {
-                accountTypeSelected = accountTypeOther
-            }
+            autocompleteAccountType.setText(account.accountType.name, false)
+            accountTypeSelected = account.accountType
             buttonSaveAccount.text = getString(R.string.account_finance_text_button_account_update)
             toolbarAccount.title = getString(R.string.account_finance_text_toolbar_account_update)
         }
@@ -174,7 +150,8 @@ class AccountFragment :
     private fun preparedViewInsert() {
         viewBinding.apply {
             buttonSaveAccount.text = getString(R.string.account_finance_text_button_account_save)
-            toolbarAccount.apply { setTitle(R.string.account_finance_text_toolbar_account_save)
+            toolbarAccount.apply {
+                setTitle(R.string.account_finance_text_toolbar_account_save)
                 menu.removeItem(R.id.menu_item_delete)
             }
         }
@@ -182,7 +159,6 @@ class AccountFragment :
 
     private fun setAdapterAccountType(
         autoCompleteTextView: AutoCompleteTextView,
-        onItemClickListener: AdapterView.OnItemClickListener,
         types: List<AccountTypeModel>,
     ) {
         val adapter = AdapterAccountType(
@@ -192,7 +168,11 @@ class AccountFragment :
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         types.map { it.name }
         autoCompleteTextView.apply {
-            setOnItemClickListener(onItemClickListener)
+            setOnItemClickListener { parent, view, position, id ->
+                val type = parent?.getItemAtPosition(position) as AccountTypeModel
+                accountTypeSelected = type
+                autoCompleteTextView.setText(accountTypeSelected?.name)
+            }
         }
         autoCompleteTextView.setAdapter(adapter)
     }
@@ -224,5 +204,15 @@ class AccountFragment :
         return (viewBinding.editTextInputAccountValue.text.toString().isNotEmpty()
                 && viewBinding.editTextInputAccountName.text.toString().isNotEmpty()
                 && viewBinding.autocompleteAccountType.text.isNotEmpty())
+    }
+
+    private fun showErrorDialog(message: String) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.account_finance_title_show_error_dialog))
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.account_finance_set_positive_button_show_error_dialog)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }
