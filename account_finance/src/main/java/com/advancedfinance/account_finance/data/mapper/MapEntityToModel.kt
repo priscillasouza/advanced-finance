@@ -4,6 +4,7 @@ import com.advancedfinance.account_finance.presentation.model.AccountModel
 import com.advancedfinance.account_finance.presentation.model.AccountTypeModel
 import com.advancedfinance.core.data.IMapper
 import com.advancedfinance.core.extensions.orNegative
+import com.advancedfinance.core.extensions.orZero
 import com.advancedfinance.framework.infrastruture.local.database.account.entity.AccountEntity
 import com.advancedfinance.framework.infrastruture.local.database.account.entity.AccountWithAccountType
 import java.math.BigDecimal
@@ -17,8 +18,8 @@ class MapEntityToModel : IMapper<AccountWithAccountType, AccountModel> {
             startedBalance = entity.account?.startedBalance?: BigDecimal(0),
             accountType = entity.accountType.run {
                 AccountTypeModel(
-                    id = entity.account?.id.orNegative(),
-                    name = entity.account?.name.orEmpty()
+                    id = entity.accountType?.id,
+                    name = entity.accountType?.name.orEmpty()
                 )
             }
         )

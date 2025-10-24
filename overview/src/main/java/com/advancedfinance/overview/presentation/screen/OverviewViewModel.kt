@@ -4,9 +4,7 @@ import com.advancedfinance.core.platform.BaseViewModel
 import com.advancedfinance.overview.domain.usecase.InitOverviewUseCase
 import kotlinx.coroutines.flow.StateFlow
 
-class OverviewViewModel(
-    private val repository: InitOverviewUseCase
-): BaseViewModel<OverviewViewState, OverviewViewAction>() {
+class OverviewViewModel: BaseViewModel<OverviewViewState, OverviewViewAction>() {
 
     override val listViewState: StateFlow<OverviewViewState>
         get() {

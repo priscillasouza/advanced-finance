@@ -27,4 +27,7 @@
     <string name="account_finance_text_no_dialog_delete">Não</string>
     <string name="account_finance_text_dialog_delete">Excluir a conta %s?</string>
     <string name="account_finance_text_confirm_dialog_delete">Tem certeza de que deseja excluir a conta %s?</string>
+    <string name="account_finance_an_unexpected_error_occurred">Ocorreu um erro inesperado</string>
+    <string name="account_finance_title_show_error_dialog">Erro</string>
+    <string name="account_finance_set_positive_button_show_error_dialog">OK</string>
 </resources>

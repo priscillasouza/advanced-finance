@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.advancedfinance.account_finance.R
 import com.advancedfinance.account_finance.databinding.AccountFinanceFragmentAccountListBinding
 import com.advancedfinance.account_finance.presentation.adapter.AccountListAdapter
@@ -15,6 +16,7 @@ import com.advancedfinance.core.platform.BaseFragment
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
 
+const val TOP_SCROLL = 0
 class AccountListFragment :
     BaseFragment<AccountFinanceFragmentAccountListBinding, AccountListViewModel>(
         AccountFinanceFragmentAccountListBinding::inflate,
@@ -28,6 +30,7 @@ class AccountListFragment :
         settingObservable()
         setAdapterListAccount()
         setClickFloatingActionAddAccount()
+        hideFab()
     }
 
     private fun settingObservable() {
@@ -76,4 +79,18 @@ class AccountListFragment :
     }
 
     private fun showLoading() {}
+
+    private fun hideFab() {
+        viewBinding.recyclerViewAccountList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy > TOP_SCROLL && viewBinding.accountFinanceFloatingActionButton.isShown) {
+                    viewBinding.accountFinanceFloatingActionButton.hide()
+                } else if (dy < TOP_SCROLL && !viewBinding.accountFinanceFloatingActionButton.isShown) {
+                    viewBinding.accountFinanceFloatingActionButton.show()
+                }
+            }
+        })
+    }
 }

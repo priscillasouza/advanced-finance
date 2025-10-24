@@ -5,6 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class AccountTypeModel(
-    val id: Int,
+    val id: Int? = null,
     val name: String
-):Parcelable
+):Parcelable {
+    override fun toString(): String = name
+    fun toInt(): Int? = id
+}

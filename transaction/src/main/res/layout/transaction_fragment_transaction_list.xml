@@ -8,10 +8,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_transaction_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/linear_layout_total_revenue_and_expense"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/transaction_list_item" />
@@ -21,7 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@color/core_md_theme_light_onPrimary"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -31,16 +37,17 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
             app:srcCompat="@drawable/core_ic_trending_up" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_view_total_revenue"
             style="@style/CoreStyleTextSize16Bold"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="R$ 3.000,00"
             android:textColor="@color/core_md_theme_light_tertiary" />
 
@@ -48,16 +55,17 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:layout_marginStart="42dp"
+            android:layout_marginStart="32dp"
             app:srcCompat="@drawable/core_ic_trending_down" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_view_total_expense"
             style="@style/CoreStyleTextSize16Bold"
-            android:layout_width="140dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginStart="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="R$ 80.000,00"
             android:textColor="@color/core_md_theme_light_error" />
     </androidx.appcompat.widget.LinearLayoutCompat>

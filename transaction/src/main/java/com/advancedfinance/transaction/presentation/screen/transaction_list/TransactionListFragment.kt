@@ -1,19 +1,19 @@
 package com.advancedfinance.transaction.presentation.screen.transaction_list
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.advancedfinance.account_finance.presentation.screen.account_list.AccountListViewAction
-import com.advancedfinance.category.presentation.model.TransactionType
-import com.advancedfinance.category.presentation.screen.category_list.CategoryListFragmentDirections
+import com.advancedfinance.core.extensions.toMoney
 import com.advancedfinance.core.platform.BaseFragment
 import com.advancedfinance.transaction.databinding.TransactionFragmentTransactionListBinding
 import com.advancedfinance.transaction.presentation.adapter.TransactionListAdapter
 import com.advancedfinance.transaction.presentation.model.TransactionModel
 import com.advancedfinance.transaction.presentation.screen.ArgTransactionType
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 
 class TransactionListFragment :
     BaseFragment<TransactionFragmentTransactionListBinding, TransactionListViewModel>(
@@ -73,7 +73,7 @@ class TransactionListFragment :
                 when (it) {
                     is TransactionListViewState.Loading -> showLoading()
                     is TransactionListViewState.Error -> showError(it.message)
-                    is TransactionListViewState.SuccessTransactionList -> listAdapterTransaction(it.transactionList)
+                    is TransactionListViewState.SuccessTransactionList -> listAdapterTransaction(it.transactionList, it.totalRevenue, it.totalExpense)
                     else -> {}
                 }
             }
@@ -85,19 +85,33 @@ class TransactionListFragment :
             transactionListAdapter = TransactionListAdapter() { transaction ->
                     val action = ArgTransactionType.fromInt(transaction.transactionType.id)?.let {
                         TransactionListFragmentDirections.transactionlistfragmentToTransactionfragment(
-                            argTransactionModel = transaction)
+                            argTransactionModel = transaction,
+                            argTransactionType = when(transaction.transactionType.id) {
+                                1 -> { ArgTransactionType.Revenue }
+                                else -> { ArgTransactionType.Expense }
+
+                            })
                     }
-                    action?.let {
-                        findNavController().navigate(it)
-                    }
+                if (action != null) {
+                    findNavController().navigate(action)
+                }
             }
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = transactionListAdapter
         }
     }
 
-    private fun listAdapterTransaction(list: List<TransactionModel>) {
+    @SuppressLint("SetTextI18n")
+    private fun listAdapterTransaction(
+        list: List<TransactionModel>,
+        totalRevenue: BigDecimal,
+        totalExpense: BigDecimal
+    ) {
         transactionListAdapter.setList(list)
+        viewBinding.apply {
+            textViewTotalRevenue.text = totalRevenue.toString().toMoney()
+            textViewTotalExpense.text = totalExpense.toString().toMoney()
+        }
     }
 
     private fun showError(message: Int) {

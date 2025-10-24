@@ -11,14 +11,13 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.advancedfinance.account_finance.presentation.model.AccountModel
 import com.advancedfinance.category.presentation.model.CategoryModel
-import com.advancedfinance.category.presentation.model.TransactionType
 import com.advancedfinance.core.extensions.addCurrencyFormatter
+import com.advancedfinance.core.extensions.orZero
 import com.advancedfinance.core.extensions.removeSpecialCharacters
 import com.advancedfinance.core.extensions.toMoney
 import com.advancedfinance.core.platform.BaseFragment
@@ -31,10 +30,8 @@ import com.advancedfinance.transaction.presentation.model.PeriodTypeModel
 import com.advancedfinance.transaction.presentation.model.TransactionModel
 import com.advancedfinance.transaction.presentation.screen.ArgTransactionType
 import kotlinx.coroutines.launch
-import org.koin.core.component.getScopeName
-import java.io.Serializable
-import java.math.BigDecimal
-import java.util.*
+import java.util.GregorianCalendar
+import java.util.Locale
 
 class TransactionFragment :
     BaseFragment<TransactionFragmentTransactionBinding, TransactionViewModel>(
@@ -58,9 +55,12 @@ class TransactionFragment :
         viewModel.dispatchViewAction(TransactionViewAction.GetAccountList)
         viewModel.dispatchViewAction(TransactionViewAction.GetPeriodTypeList)
 
-        viewModel.dispatchViewAction(TransactionViewAction.PreparedViewTransaction(
-                transactionModel = transactionModel,
-                type = type))
+        viewModel.dispatchViewAction(
+            TransactionViewAction.PreparedViewTransaction(
+                transactionModel = args.argTransactionModel,
+                type = type
+            )
+        )
         setListeners()
         onObservable()
         setDataPickerDialog()
@@ -77,6 +77,7 @@ class TransactionFragment :
                             transactionSave()
                             true
                         }
+
                         else -> false
                     }
                 }
@@ -114,15 +115,19 @@ class TransactionFragment :
                         preparedViewTransactionUpdate(it.transactionModel, it.isRevenue)
                     }
                     is TransactionViewState.SuccessInsert -> {
-                        Toast.makeText(requireContext(),
+                        Toast.makeText(
+                            requireContext(),
                             getString(R.string.transaction_text_toast_success_transaction_save),
-                            Toast.LENGTH_SHORT)
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                     is TransactionViewState.SuccessUpdate -> {
-                        Toast.makeText(requireContext(),
+                        Toast.makeText(
+                            requireContext(),
                             getString(R.string.transaction_text_toast_success_transaction_update),
-                            Toast.LENGTH_SHORT)
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                     is TransactionViewState.Error -> {
@@ -164,7 +169,6 @@ class TransactionFragment :
                             it.periodTypeList
                         )
                         viewBinding.autocompletePeriodOption.setText(periodTypeSelected?.name)
-
                     }
                     else -> {}
                 }
@@ -172,132 +176,195 @@ class TransactionFragment :
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun preparedViewTransactionInsert(isRevenue: Boolean) {
         viewBinding.apply {
             if (isRevenue) {
                 viewModel.dispatchViewAction(TransactionViewAction.GetCategoryList(categoryType = 1))
                 toolbarTransaction.apply {
                     title = getString(R.string.transaction_text_toolbar_new_revenue)
-                    toolbarTransaction.setBackgroundColor(resources.getColor(com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
+                    setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            com.advancedfinance.core.R.color.core_md_theme_light_tertiary
+                        )
+                    )
                 }
                 val window = activity?.window
-                window?.statusBarColor = ContextCompat.getColor(requireContext(),
-                    com.advancedfinance.core.R.color.core_md_theme_dark_onSecondary)
+                window?.statusBarColor = ContextCompat.getColor(
+                    requireContext(),
+                    com.advancedfinance.core.R.color.core_md_theme_dark_onSecondary
+                )
                 checkboxReceivedOrPay.setText(R.string.transaction_text_check_box_received)
-                checkboxReceivedOrPay.buttonTintList = setColorScreenRevenue()
-                checkboxInstallment.buttonTintList = setColorScreenRevenue()
-                radioButtonFixedValue.buttonTintList = setColorScreenRevenue()
-                radioButtonPayInInstallments.buttonTintList = setColorScreenRevenue()
-                textInputValue.setStartIconTintList(setColorScreenRevenue())
-                textInputDescription.setStartIconTintList(setColorScreenRevenue())
-                textInputDate.setStartIconTintList(setColorScreenRevenue())
-                textInputCategory.setStartIconTintList(setColorScreenRevenue())
-                textInputAccount.setStartIconTintList(setColorScreenRevenue())
-                textInputObservation.setStartIconTintList(setColorScreenRevenue())
+                setConfigureInsertRevenue()
             } else {
                 viewModel.dispatchViewAction(TransactionViewAction.GetCategoryList(categoryType = 2))
                 toolbarTransaction.apply {
                     title = getString(R.string.transaction_text_toolbar_new_expense)
-                    toolbarTransaction.setBackgroundColor(resources.getColor(com.advancedfinance.core.R.color.core_md_theme_light_error))
+                    setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            com.advancedfinance.core.R.color.core_md_theme_light_error
+                        )
+                    )
                 }
                 val window = activity?.window
-                window?.statusBarColor = ContextCompat.getColor(requireContext(),
-                    com.advancedfinance.core.R.color.core_md_theme_dark_errorContainer)
+                window?.statusBarColor = ContextCompat.getColor(
+                    requireContext(),
+                    com.advancedfinance.core.R.color.core_md_theme_dark_errorContainer
+                )
                 checkboxReceivedOrPay.setText(R.string.transaction_text_check_box_pay)
-                checkboxReceivedOrPay.buttonTintList = setColorScreenExpense()
-                checkboxInstallment.buttonTintList = setColorScreenExpense()
-                radioButtonFixedValue.buttonTintList = setColorScreenExpense()
-                radioButtonPayInInstallments.buttonTintList = setColorScreenExpense()
-                textInputValue.setStartIconTintList(setColorScreenExpense())
-                textInputDescription.setStartIconTintList(setColorScreenExpense())
-                textInputDate.setStartIconTintList(setColorScreenExpense())
-                textInputCategory.setStartIconTintList(setColorScreenExpense())
-                textInputAccount.setStartIconTintList(setColorScreenExpense())
-                textInputObservation.setStartIconTintList(setColorScreenExpense())
+                setConfigureInsertExpense()
+            }
+        }
+    }
+    private fun preparedViewTransactionUpdate(transaction: TransactionModel, isRevenue: Boolean) {
+        viewBinding.apply {
+            if (isRevenue) {
+                viewModel.dispatchViewAction(TransactionViewAction.GetCategoryList(categoryType = 1))
+                toolbarTransaction.apply {
+                    title = getString(R.string.transaction_text_toolbar_edit_revenue)
+                    setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            com.advancedfinance.core.R.color.core_md_theme_light_tertiary
+                        )
+                    )
+                }
+                val window = activity?.window
+                window?.statusBarColor = ContextCompat.getColor(
+                    requireContext(),
+                    com.advancedfinance.core.R.color.core_md_theme_dark_onSecondary
+                )
+                editTextInputValue.setText(String.format(transaction.value.toString().toMoney()))
+                editTextDescription.setText(transaction.description)
+                editTextDate.setText(transaction.date)
+                autocompleteCategory.setText(transaction.category?.name, false)
+                categorySelected = transaction.category
+                autocompleteAccount.setText(transaction.account?.name, false)
+                accountSelected = transaction.account
+                checkboxReceivedOrPay.apply {
+                    isChecked
+                    setText(R.string.transaction_text_check_box_received)
+                }
+                editTextInputRepetitions.setText(transaction.repetitions)
+                autocompletePeriodOption.setText(transaction.period?.name)
+                setConfigureUpdateRevenue()
+            } else {
+                viewModel.dispatchViewAction(TransactionViewAction.GetCategoryList(categoryType = 2))
+                toolbarTransaction.apply {
+                    title = getString(R.string.transaction_text_toolbar_edit_expense)
+                    setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            com.advancedfinance.core.R.color.core_md_theme_light_error
+                        )
+                    )
+                }
+                val window = activity?.window
+                window?.statusBarColor = ContextCompat.getColor(
+                    requireContext(),
+                    com.advancedfinance.core.R.color.core_md_theme_dark_errorContainer
+                )
+                editTextInputValue.setText(String.format(transaction.value.toString().toMoney()))
+                editTextDescription.setText(transaction.description)
+                editTextDate.setText(transaction.date)
+                autocompleteCategory.setText(transaction.category?.name, false)
+                categorySelected = transaction.category
+                autocompleteAccount.setText(transaction.account?.name, false)
+                accountSelected = transaction.account
+                editTextInputObservation.setText(transaction.observation)
+                checkboxReceivedOrPay.apply {
+                    isChecked
+                    setText(R.string.transaction_text_check_box_received)
+                }
+                editTextInputRepetitions.setText(transaction.repetitions)
+                autocompletePeriodOption.setText(transaction.period?.name)
+                setConfigureUpdateExpense()
             }
         }
     }
 
-    private fun preparedViewTransactionUpdate(transaction: TransactionModel, isRevenue: Boolean) {
+    private fun setConfigureInsertRevenue() {
         viewBinding.apply {
-            if (isRevenue) {
-                toolbarTransaction.title = getString(R.string.transaction_text_toolbar_edit_revenue)
-                toolbarTransaction.setBackgroundColor(resources.getColor(com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
+            editTextInputValue.addCurrencyFormatter()
+            textInputValue.setStartIconTintList(setColorScreenRevenue())
+            textInputDescription.setStartIconTintList(setColorScreenRevenue())
+            textInputDate.setStartIconTintList(setColorScreenRevenue())
+            textInputCategory.setStartIconTintList(setColorScreenRevenue())
+            textInputAccount.setStartIconTintList(setColorScreenRevenue())
+            textInputObservation.setStartIconTintList(setColorScreenRevenue())
+            radioButtonFixedValue.buttonTintList = setColorScreenRevenue()
+            radioButtonPayInInstallments.buttonTintList = setColorScreenRevenue()
+            checkboxReceivedOrPay.buttonTintList = setColorScreenRevenue()
+            checkboxInstallment.buttonTintList = setColorScreenRevenue()
+        }
+    }
 
-                val window = activity?.window
-                window?.statusBarColor = ContextCompat.getColor(requireContext(),
-                    com.advancedfinance.core.R.color.core_md_theme_dark_onSecondary)
+    private fun setConfigureInsertExpense() {
+        viewBinding.apply {
+            editTextInputValue.addCurrencyFormatter()
+            textInputValue.setStartIconTintList(setColorScreenExpense())
+            textInputDescription.setStartIconTintList(setColorScreenExpense())
+            textInputDate.setStartIconTintList(setColorScreenExpense())
+            textInputCategory.setStartIconTintList(setColorScreenExpense())
+            textInputAccount.setStartIconTintList(setColorScreenExpense())
+            textInputObservation.setStartIconTintList(setColorScreenExpense())
+            radioButtonFixedValue.buttonTintList = setColorScreenExpense()
+            radioButtonPayInInstallments.buttonTintList = setColorScreenExpense()
+            checkboxReceivedOrPay.buttonTintList = setColorScreenExpense()
+            checkboxInstallment.buttonTintList = setColorScreenExpense()
+        }
+    }
 
-                editTextInputValue.setText(String.format(transaction.value.toString().toMoney()))
-                editTextDescription.setText(transaction.description)
-                editTextDate.setText(transaction.date)
-                autocompleteCategory.setText(transaction.category?.name)
-                autocompleteAccount.setText(transaction.account?.name)
-                editTextInputObservation.setText(transaction.observation)
+    private fun setConfigureUpdateRevenue() {
+        viewBinding.apply {
+            editTextInputValue.addCurrencyFormatter()
+            textInputValue.setStartIconTintList(setColorScreenRevenue())
+            textInputDescription.setStartIconTintList(setColorScreenRevenue())
+            textInputDate.setStartIconTintList(setColorScreenRevenue())
+            textInputCategory.setStartIconTintList(setColorScreenRevenue())
+            textInputAccount.setStartIconTintList(setColorScreenRevenue())
+            textInputObservation.setStartIconTintList(setColorScreenRevenue())
+            radioButtonFixedValue.buttonTintList = setColorScreenRevenue()
+            radioButtonPayInInstallments.buttonTintList = setColorScreenRevenue()
+            checkboxReceivedOrPay.buttonTintList = setColorScreenRevenue()
+            checkboxInstallment.buttonTintList = setColorScreenRevenue()
+        }
+    }
 
-                checkboxReceivedOrPay.isChecked
-                checkboxReceivedOrPay.setText(R.string.transaction_text_check_box_received)
-                checkboxReceivedOrPay.buttonTintList = setColorScreenRevenue()
-
-                checkboxInstallment.buttonTintList = setColorScreenRevenue()
-
-                radioButtonFixedValue.buttonTintList = setColorScreenRevenue()
-
-                radioButtonPayInInstallments.buttonTintList = setColorScreenRevenue()
-
-                editTextInputRepetitions.setText(transaction.repetitions)
-                autocompletePeriodOption.setText(transaction.period?.name)
-
-                textInputValue.setStartIconTintList(setColorScreenRevenue())
-                textInputDescription.setStartIconTintList(setColorScreenRevenue())
-                textInputDate.setStartIconTintList(setColorScreenRevenue())
-                textInputCategory.setStartIconTintList(setColorScreenRevenue())
-                textInputAccount.setStartIconTintList(setColorScreenRevenue())
-                textInputObservation.setStartIconTintList(setColorScreenRevenue())
-            } else {
-                toolbarTransaction.title = getString(R.string.transaction_text_toolbar_edit_expense)
-                toolbarTransaction.setBackgroundColor(resources.getColor(com.advancedfinance.core.R.color.core_md_theme_light_error))
-
-                val window = activity?.window
-                window?.statusBarColor = ContextCompat.getColor(requireContext(),
-                    com.advancedfinance.core.R.color.core_md_theme_dark_errorContainer)
-
-                editTextInputValue.setText(String.format(transaction.value.toString().toMoney()))
-                editTextDescription.setText(transaction.description)
-                editTextDate.setText(transaction.date)
-                autocompleteCategory.setText(transaction.category?.name)
-                autocompleteAccount.setText(transaction.account?.name)
-                editTextInputObservation.setText(transaction.observation)
-
-                checkboxReceivedOrPay.isChecked
-                checkboxReceivedOrPay.setText(R.string.transaction_text_check_box_received)
-                checkboxReceivedOrPay.buttonTintList = setColorScreenExpense()
-
-                checkboxInstallment.buttonTintList = setColorScreenExpense()
-
-                radioButtonFixedValue.buttonTintList = setColorScreenExpense()
-
-                radioButtonPayInInstallments.buttonTintList = setColorScreenExpense()
-
-                editTextInputRepetitions.setText(transaction.repetitions)
-                autocompletePeriodOption.setText(transaction.period?.name)
-
-                textInputValue.setStartIconTintList(setColorScreenExpense())
-                textInputDescription.setStartIconTintList(setColorScreenExpense())
-                textInputDate.setStartIconTintList(setColorScreenExpense())
-                textInputCategory.setStartIconTintList(setColorScreenExpense())
-                textInputAccount.setStartIconTintList(setColorScreenExpense())
-                textInputObservation.setStartIconTintList(setColorScreenExpense())
-            }
+    private fun setConfigureUpdateExpense() {
+        viewBinding.apply {
+            editTextInputValue.addCurrencyFormatter()
+            textInputValue.setStartIconTintList(setColorScreenExpense())
+            textInputDescription.setStartIconTintList(setColorScreenExpense())
+            textInputDate.setStartIconTintList(setColorScreenExpense())
+            textInputCategory.setStartIconTintList(setColorScreenExpense())
+            textInputAccount.setStartIconTintList(setColorScreenExpense())
+            textInputObservation.setStartIconTintList(setColorScreenExpense())
+            radioButtonFixedValue.buttonTintList = setColorScreenExpense()
+            radioButtonPayInInstallments.buttonTintList = setColorScreenExpense()
+            checkboxReceivedOrPay.buttonTintList = setColorScreenExpense()
+            checkboxInstallment.buttonTintList = setColorScreenExpense()
         }
     }
 
     private fun setColorScreenRevenue(): ColorStateList {
-        return ColorStateList.valueOf(resources.getColor(com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
+        return ColorStateList.valueOf(
+            ContextCompat.getColor(
+                requireContext(),
+                com.advancedfinance.core.R.color.core_md_theme_light_tertiary
+            )
+        )
     }
 
     private fun setColorScreenExpense(): ColorStateList {
-        return ColorStateList.valueOf(resources.getColor(com.advancedfinance.core.R.color.core_md_theme_light_error))
+        return ColorStateList.valueOf(
+            ContextCompat.getColor(
+                requireContext(),
+                com.advancedfinance.core.R.color.core_md_theme_light_error
+            )
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -313,7 +380,7 @@ class TransactionFragment :
                         com.advancedfinance.core.R.style.CoreStyleDatePickerRevenue,
                         { _, mYear, mMonth, mDay ->
                             val selectDate = GregorianCalendar.getInstance()
-                            editTextDate.setText("$mDay-$mMonth-$mYear")
+                            editTextDate.setText("$mDay-${mMonth + 1}-$mYear")
                             selectDate.set(GregorianCalendar.YEAR, mYear)
                             selectDate.set(GregorianCalendar.MONTH, mMonth)
                             selectDate.set(GregorianCalendar.DAY_OF_MONTH, mDay)
@@ -324,10 +391,19 @@ class TransactionFragment :
                     )
                     datePicker.show()
                     datePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE)
-                        .setTextColor(ContextCompat.getColor(requireContext(),
-                                com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
+                        .setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                com.advancedfinance.core.R.color.core_md_theme_light_tertiary
+                            )
+                        )
                     datePicker.getButton(DatePickerDialog.BUTTON_POSITIVE)
-                        .setTextColor(ContextCompat.getColor(requireContext(),                             com.advancedfinance.core.R.color.core_md_theme_light_tertiary))
+                        .setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                com.advancedfinance.core.R.color.core_md_theme_light_tertiary
+                            )
+                        )
                 } else {
                     resources.configuration.setLocale(Locale("pt", "BR"))
                     val getDate = GregorianCalendar.getInstance()
@@ -336,7 +412,7 @@ class TransactionFragment :
                         com.advancedfinance.core.R.style.CoreStyleDatePickerExpense,
                         { _, mYear, mMonth, mDay ->
                             val selectDate = GregorianCalendar.getInstance()
-                            editTextDate.setText("$mDay-$mMonth-$mYear")
+                            editTextDate.setText("$mDay-${mMonth + 1}-$mYear")
                             selectDate.set(GregorianCalendar.YEAR, mYear)
                             selectDate.set(GregorianCalendar.MONTH, mMonth)
                             selectDate.set(GregorianCalendar.DAY_OF_MONTH, mDay)
@@ -347,11 +423,19 @@ class TransactionFragment :
                     )
                     datePicker.show()
                     datePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE)
-                        .setTextColor(ContextCompat.getColor(requireContext(),
-                                com.advancedfinance.core.R.color.core_md_theme_light_error))
+                        .setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                com.advancedfinance.core.R.color.core_md_theme_light_error
+                            )
+                        )
                     datePicker.getButton(DatePickerDialog.BUTTON_POSITIVE)
-                        .setTextColor(ContextCompat.getColor(requireContext(),
-                                com.advancedfinance.core.R.color.core_md_theme_light_error))
+                        .setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                com.advancedfinance.core.R.color.core_md_theme_light_error
+                            )
+                        )
                 }
             }
         }
@@ -367,6 +451,7 @@ class TransactionFragment :
             categories
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        categories.map { it.name }
         autoCompleteTextView.apply {
             setOnItemClickListener(onItemClickListener)
         }
@@ -383,6 +468,7 @@ class TransactionFragment :
             accounts
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        accounts.map { it.name }
         autoCompleteTextView.apply {
             setOnItemClickListener(onItemClickListener)
         }
@@ -425,9 +511,10 @@ class TransactionFragment :
             val observation = editTextInputObservation.text.toString()
             val repetitions = editTextInputRepetitions.text.toString()
             val period = periodTypeSelected
-            val transactionTypeId = transactionModel?.transactionType?.id ?: type.value
+            val transactionTypeId = transactionModel?.transactionType?.id ?: type?.value
 
-            viewModel.dispatchViewAction(TransactionViewAction.SaveTransaction(
+            viewModel.dispatchViewAction(
+                TransactionViewAction.SaveTransaction(
                     value = value,
                     description = description,
                     date = date,
@@ -440,7 +527,8 @@ class TransactionFragment :
                     isPayInInstallments = isPayInInstallments,
                     repetitions = repetitions,
                     period = period,
-                    transactionTypeId = transactionTypeId)
+                    transactionTypeId = transactionTypeId.orZero()
+                )
             )
             this@TransactionFragment.findNavController().popBackStack()
             /* } else {Des

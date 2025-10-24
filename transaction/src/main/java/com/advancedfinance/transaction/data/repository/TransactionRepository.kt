@@ -49,7 +49,7 @@ class TransactionRepository(
 
     override fun getAllTransaction(): Flow<List<TransactionModel>> {
         return transactionDAO.getAllTransaction().map {
-            mapTransactionAllRelationsEntityToModel.transform(it)
+            mapEntityToModel.transform(it)
         }
     }
 }
