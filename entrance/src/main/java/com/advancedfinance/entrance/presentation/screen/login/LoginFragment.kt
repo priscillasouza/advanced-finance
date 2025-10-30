@@ -254,13 +254,11 @@ class LoginFragment : BaseFragment<EntranceFragmentLoginBinding, LoginViewModel>
 
         }
     }
-
     private fun setButtonLogin() {
         viewBinding.entranceButtonLogin.setOnClickListener {
             fromLoginToAccountList()
         }
     }
-
     private fun fromLoginToAccountList() {
         findNavController().navigate(R.id.entrance_action_entrance_loginfragment_to_entrance_draweractivity)
     }

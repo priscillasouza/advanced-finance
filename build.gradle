@@ -11,6 +11,8 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version("1.23.8")
     alias(libs.plugins.kotlin.android) apply false
     id "com.google.devtools.ksp" version "2.2.0-2.0.2" apply false
+    id("com.google.firebase.crashlytics") version "3.0.6" apply false
+    id("com.google.gms.google-services") version "4.4.4" apply false
 }
 task clean(type: Delete) {
     delete rootProject.buildDir

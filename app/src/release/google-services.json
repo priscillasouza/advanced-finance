@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "343410099863",
+    "project_id": "advanced-finance-c94cb",
+    "storage_bucket": "advanced-finance-c94cb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343410099863:android:fb3d78aa0931ec4e0d4bd2",
+        "android_client_info": {
+          "package_name": "com.advancedfinance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdCTIBfXUyVMqJpAMYZOYqBDMWinXertY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
