@@ -3,6 +3,8 @@ plugins {
     alias libs.plugins.kotlin.android
     id("org.jetbrains.kotlin.plugin.parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.firebase.crashlytics")
+    id("com.google.gms.google-services")
 }
 
 apply {
@@ -80,6 +82,12 @@ dependencies {
     implementation libs.koin.android
     implementation libs.androidx.fragment
 
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:34.4.0"))
+
+    // Add the dependencies for the Crashlytics NDK and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-crashlytics-ndk")
 }
 
 configurations.implementation {
